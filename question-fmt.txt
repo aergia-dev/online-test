@@ -1,0 +1,14 @@
+{ "question": [
+    {:q/uuid ""
+     :q/question "항해용 간행물에 포함되지 않는 것은?"
+     :q/example ""
+     :q/choice [{q/choice/id ""
+                 q/choice/content "항해용 해도, 전자해도"}
+                {q/choice/id ""
+                 q/choice/content "조석표, 등대표, 항로지 등을 포함하는 항해서지"}
+                {q/choice/id ""
+                 q/choice/content "항해용 간행물의 변경이 필요한 사항 등으로 포함하는 항행통보"}
+                {q/choice/id "abc"
+                 q/choice/content "항해 이외의 목적으로 제작한 해양 정보 간행물"}]
+      :q/answer "abc"}
+]}
