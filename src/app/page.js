@@ -1,7 +1,6 @@
-export default function Profile() {
-  return (
-  <div>
-      online test
-  </div>
-  );
+import Link from 'next/link';
+import LoginForm  from './login/page';
+
+export default function loginPage() {
+  return <LoginForm />
 }
