@@ -1,10 +1,14 @@
 import Navbar from './navbar'
 
-export default function AdminLayout({children}) {
+export default function AdminLayout({ children }) {
   return (
     <section>
-        <Navbar/>
-      {children}
-    </section>
+      <div className="flex flex-col">
+        <Navbar />
+        <div >
+          {children}
+        </div>
+      </div>
+    </section >
   )
 }
