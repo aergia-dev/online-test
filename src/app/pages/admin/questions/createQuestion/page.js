@@ -1,30 +1,45 @@
 'use client'
 import { useRef, useState } from 'react';
 
-function previewSingleQuestion(content) {
-    //todo if checked selection then text color changed.  
-    
+function previewSingleQuestion(question, changeAnswerFn) {
+    const Qkey = question["question"];
+    const Akey = question["question"] + "-A";
+    const Ulkey = question["question"] + "-UL";
+    const answer = question["answer"];
+
+
+    const checkboxOnChange = (q, idx, value) => {
+        console.log("changed data", q);
+        console.log("idx", idx, " val:", value);
+        changeAnswerFn(q, idx, value);
+    };
+
     return (
-        <div key={content["question"]}>
-            <p>Q. {content["question"]}</p>
+        <div key={Qkey}>
+            <p>Q. {question["question"]}</p>
             <p>S.  </p>
-            <ul>
-                {content["selection"].map(({ idx, item }) => {
-                    const k = content["question"] + "-" +idx;
-                    return (
+            <ul key={Ulkey}>
+                {question["selection"].map(({ idx, item }) => {
+                    const Skey = Qkey + "-" + idx;
+                    const Ckey = Qkey + "-" + idx + "-C";
+                   return (
                         <div className="flex flex-row">
-                            <input type="checkbox" id={k}/>
-                            <li key={k}> {item} </li>
+                            <input type="checkbox" id={Ckey} onChange={(e) => {
+                                checkboxOnChange(question, idx, e.target.checked);
+                            }} />
+                            <li key={Skey} className=""> {idx}_  {item} </li>
                         </div>);
                 })}
+
+                <p id={Akey} key={Akey}>A. {question["answer"]}</p>
             </ul>
+            <br />
         </div>
     );
 }
 
-function previewQuestion(content) {
-    const preview = content.map(previewSingleQuestion);
-    console.log("preview", preview);
+function previewQuestion(content, changeAnswerFn) {
+    const preview = content.map((q) => { return previewSingleQuestion(q, changeAnswerFn) });
     return (
         <div>
             {preview}
@@ -58,7 +73,7 @@ function makeQuestion(content) {
         }
     });
 
-    const idxSelection = selection.map((itm, idx) => { return { idx: idx, item: itm }; });
+    const idxSelection = selection.map((itm, idx) => { return { idx: idx + 1, item: itm }; });
 
     const fmt = {
         uuid: crypto.randomUUID(),
@@ -66,7 +81,7 @@ function makeQuestion(content) {
         selection: [
             ...idxSelection,
         ],
-        answer: ""
+        answer: 'none', //has selction index
     };
 
     return fmt;
@@ -96,27 +111,52 @@ function parsing(content) {
     return question;
 }
 
-function makePreview(content, setContent) {
+
+function makePreview(content, setPreview) {
     const question = parsing(content);
-    setContent(previewQuestion(question));
+    const replaceQuestion = (oldItm, newItm) => {
+        console.log("replaceQuestion: ", oldItm);
+        if (oldItm.uuid === newItm.uuid) {
+            return newItm;
+        }
+        else {
+            return oldItm;
+        }
+    };
+
+    const changeAnswer = (Aquestion, answerIdx, value) => {
+        console.log("question:", Aquestion);
+        console.log("answerIdx:", answerIdx);
+        console.log("value:", value);
+        const changedQ = Aquestion;
+        changedQ["answer"] = value ? answerIdx : 'none';
+        const changedQuestion = question.map((q) => { return replaceQuestion(q, changedQ) });
+        console.log("changedQuestion:", changedQuestion);
+
+        setPreview(previewQuestion(changedQuestion, changeAnswer));
+    };
+
+    localStorage.setItem("questions", question);
+    setPreview(previewQuestion(question, changeAnswer));
+    console.log("end:", question);
 }
 
 export default function CreateQuestion() {
     const ref = useRef(null);
-    const [content, setContent] = useState("null");
+    const [preview, setPreview] = useState("null");
 
     return (
         <div className="flex flex-col w-full">
             <div className="flex justify-center space-x-4">
                 <button type="button"
                     className="bg-blue-600 text-white"
-                    onClick={() => makePreview(document.getElementById("rawQuestion").value, setContent)}>
+                    onClick={() => makePreview(document.getElementById("rawQuestion").value, setPreview)}>
                     converting
                 </button>
-              <button type="button"
+                <button type="button"
                     className="bg-blue-600 text-white"
-                    onClick={() => makePreview(document.getElementById("rawQuestion").value, setContent)}>
-                    save 
+                    onClick={() => makePreview(document.getElementById("rawQuestion").value, setPreview)}>
+                    save
                 </button>
             </div>
             <div>
@@ -128,7 +168,7 @@ export default function CreateQuestion() {
                     </div>
                     <div name="right-half w-1/2">
                         <div id="questionPreview">
-                            {content}
+                            {preview}
                         </div>
                     </div>
                 </div>
