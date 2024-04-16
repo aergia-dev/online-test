@@ -1,10 +1,9 @@
-'use client'
-import { useState } from 'react';
+// 'use client'
 import  LevelDropdown  from './init';
+import { getQuestionPool } from '@/component/db'
+// import {useState, useEffect} from 'react';
 
-export default function CreateTest() {
-    // const [questionCnt, setQuestionCnt] = useState("null");
-    // const questions = getQuestionPool();
+export default async function CreateTest({props}) {
     return (
         <div className="flex flex-col w-full">
             <div className="flex flex-row w-full">

@@ -2,8 +2,6 @@
 
 import { JSONFilePreset } from 'lowdb/node';
 
-const assert = require('assert');
-
 const dbTemplate = {
     levels: [
         { level: "beginner", desc: "초급" },
@@ -48,3 +46,11 @@ export async function getQuestionPool() {
     return db.data;
 }
 
+export async function openDb(){
+    const db = await JSONFilePreset('db.json', dbTemplate);
+    db.read();
+    const data = db.data;
+    // where is close? 
+    // should always copy? 
+    return data;
+}
