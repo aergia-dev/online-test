@@ -56,10 +56,16 @@ export async function openDb(){
 }
 
 export async function saveTest(title, question){
-
     const db = await JSONFilePreset('db.json', dbTemplate);
     db.read();
     //update test list
     db.update(({testList}) => testList.push(title));
     db.update(({test}) => test.push({title: title, question: question}))
+}
+
+export async function loadTestList() {
+    const db = await JSONFilePreset('db.json', dbTemplate);
+    db.read();
+    return db.data.testList;
+ 
 }

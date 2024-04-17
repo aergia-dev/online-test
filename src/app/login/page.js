@@ -21,6 +21,10 @@ export default function LoginForm() {
     if(name === 'admin') {
       redirect('/pages/admin')
     }
+    else
+    {
+      redirect('/pages/user')
+    }
   };
  
   return (
