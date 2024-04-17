@@ -4,8 +4,6 @@ import { openDb } from "../component/db";
 export default async function getQuestion() {
     console.log("#######################");
     const dbData = await openDb();
-
-    // res.status(200).json(dbData);
     return dbData;
 }
 
