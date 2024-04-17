@@ -14,11 +14,11 @@ const dbTemplate = {
         advanced: [],
         expert: [],
     },
-    test: [{
-        nth: 10,
-        level: "beginner",
-        question: [],  //collection of question uuid
-    }]
+    testList: [
+
+    ],
+    test: [
+   ]
 }
 
 export default async function test() {
@@ -53,4 +53,13 @@ export async function openDb(){
     // where is close? 
     // should always copy? 
     return data;
+}
+
+export async function saveTest(title, question){
+
+    const db = await JSONFilePreset('db.json', dbTemplate);
+    db.read();
+    //update test list
+    db.update(({testList}) => testList.push(title));
+    db.update(({test}) => test.push({title: title, question: question}))
 }
