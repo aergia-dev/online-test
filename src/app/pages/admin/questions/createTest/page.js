@@ -28,24 +28,24 @@ export default function CreateTest({ props }) {
     }, []);
 
     const handleOptionClick = (selectedLevel) => {
-        console.log("selected: ", selectedLevel)
+        // console.log("selected: ", selectedLevel)
         setSelectedOption(selectedLevel);
         setIsDropdownOpened(false);
         setQuestion(fullQuestion['questionPool'][selectedLevel['level']]);
-        console.log("qeustion ", question);
-        console.log("qeustion full", fullQuestion['questionPool'][selectedLevel['level']]);
+        // console.log("qeustion ", question);
+        // console.log("qeustion full", fullQuestion['questionPool'][selectedLevel['level']]);
     }
 
-    const selectQuestion = (uuid, question, selection) => {
+    const selectQuestion = (uuid, question, selection, answer) => {
         const curSelectedQ = selectedQ;
-        console.log(typeof (curSelectedQ));
+        // console.log(typeof (curSelectedQ));
         // curSelectedQ.push({ uuid: uuid, qustion: question, selection: selection });
-        setSelectedQ(curSelectedQ => { return [...curSelectedQ, { uuid: uuid, question: question, selection: selection }]; });
-        console.log('curSelectedQ', curSelectedQ);
-        selectedQ.map(({ uuid, question, selection }) => {
+        setSelectedQ(curSelectedQ => { return [...curSelectedQ, { uuid: uuid, question: question, selection: selection, answer:answer }]; });
+        // console.log('curSelectedQ', curSelectedQ);
+        // selectedQ.map(({ uuid, question, selection }) => {
 
-            console.log('selected q item', uuid, question, selection);
-        });
+        //     console.log('selected q item', uuid, question, selection);
+        // });
     };
     const saveTestOnClick = () => {
         console.log("save", nthTest, " - ", selectedQ);
@@ -106,9 +106,9 @@ export default function CreateTest({ props }) {
             </div>
             <div className='flex flex-row w-full'>
                 <div className='w-1/2 y-2 gap-2'>
-                    {question && (question.map(({ uuid, question, selection }) => (
+                    {question && (question.map(({ uuid, question, selection, answer }) => (
                         <div className='border border-gray-300 border-2 px-2 py-2'
-                            onClick={() => { selectQuestion(uuid, question, selection); }}
+                            onClick={() => { selectQuestion(uuid, question, selection, answer); }}
                             key={uuid}>
                             {/* <p>{uuid}</p> */}
                             <p key={uuid + '-question'}>{question}</p>
