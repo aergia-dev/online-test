@@ -82,10 +82,28 @@ export async function getCurrentTestDB() {
 }
 
 export async function getQuestionDB(title) {
-    console.log("getQuestionDB - title", title);
     const db = await JSONFilePreset('db.json', dbTemplate);
     db.read();
     const allTest = db.data.test;
     const test = allTest((test) => test['title'] === title);
     return test;
+}
+
+export async function getCurrentQuestion() {
+    const db = await JSONFilePreset('db.json', dbTemplate);
+    db.read();
+    const curTitle = db.data.currentTest['title'];
+    const test = await db.data['test'].find((test) => test.title === curTitle);
+    console.log("db tes: ", test);
+    return test;
+}
+
+export async function setTestResult(userInfo, question) {
+//result fmt
+// "result": [
+//      ["user": {idNum: "", affiliation: "", name: ""}
+//       [{question: uuid, answer: {idx} ... ]
+// ]
+//          
+//]
 }
