@@ -18,7 +18,7 @@ const dbTemplate = {
 
     ],
     test: [
-   ]
+    ]
 }
 
 export default async function test() {
@@ -46,7 +46,7 @@ export async function getQuestionPool() {
     return db.data;
 }
 
-export async function openDb(){
+export async function openDb() {
     const db = await JSONFilePreset('db.json', dbTemplate);
     db.read();
     const data = db.data;
@@ -55,11 +55,11 @@ export async function openDb(){
     return data;
 }
 
-export async function saveTest(title, question){
+export async function saveTest(title, question) {
     const db = await JSONFilePreset('db.json', dbTemplate);
     db.read();
-    db.update(({testList}) => testList.push(title));
-    db.update(({test}) => test.push({title: title, question: question}))
+    db.update(({ testList }) => testList.push(title));
+    db.update(({ test }) => test.push({ title: title, question: question }))
 }
 
 export async function loadTestList() {
@@ -68,15 +68,11 @@ export async function loadTestList() {
     return db.data.testList;
 }
 
-export async function setCurretnTestDB(title, onGoing)
-{
+export async function setCurretnTestDB(title, onGoing) {
     const db = await JSONFilePreset('db.json', dbTemplate);
-     db.read();
-    console.log(db.data.currentTest)
-    console.log("set current test", title, onGoing);
-     db.update(({currentTest}) => currentTest.push("asdfas"));
-    // await db.get('currentTest').push({ title: title, onGoing: onGoing }).write();
-
+    db.read();
+    db.data.currentTest = { title: title, onGoing: onGoing };
+    db.write();
 }
 
 export async function getCurrentTestDB() {
@@ -86,6 +82,7 @@ export async function getCurrentTestDB() {
 }
 
 export async function getQuestionDB(title) {
+    console.log("getQuestionDB - title", title);
     const db = await JSONFilePreset('db.json', dbTemplate);
     db.read();
     const allTest = db.data.test;
