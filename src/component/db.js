@@ -58,7 +58,6 @@ export async function openDb(){
 export async function saveTest(title, question){
     const db = await JSONFilePreset('db.json', dbTemplate);
     db.read();
-    //update test list
     db.update(({testList}) => testList.push(title));
     db.update(({test}) => test.push({title: title, question: question}))
 }
@@ -67,5 +66,29 @@ export async function loadTestList() {
     const db = await JSONFilePreset('db.json', dbTemplate);
     db.read();
     return db.data.testList;
- 
+}
+
+export async function setCurretnTestDB(title, onGoing)
+{
+    const db = await JSONFilePreset('db.json', dbTemplate);
+     db.read();
+    console.log(db.data.currentTest)
+    console.log("set current test", title, onGoing);
+     db.update(({currentTest}) => currentTest.push("asdfas"));
+    // await db.get('currentTest').push({ title: title, onGoing: onGoing }).write();
+
+}
+
+export async function getCurrentTestDB() {
+    const db = await JSONFilePreset('db.json', dbTemplate);
+    db.read();
+    return db.data.currentTest;
+}
+
+export async function getQuestionDB(title) {
+    const db = await JSONFilePreset('db.json', dbTemplate);
+    db.read();
+    const allTest = db.data.test;
+    const test = allTest((test) => test['title'] === title);
+    return test;
 }

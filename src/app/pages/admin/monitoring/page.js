@@ -1,61 +1,37 @@
 'use client'
 
-import { useEffect, useState } from 'react';
-import { loadTestList } from '@/component/db';
-
-// select test and click "start test" -> user can get a test page
-// show client status
+import SelectTest from './selectTest'
+import { useState, useEffect } from 'react'
+import {setCurretnTestDB } from '@/component/db'
 
 export default function Monitoring() {
-  const [testList, setTestList] = useState([]);
-  const [test, setTest] = useState();
-  const [isDropdownOpened, setIsDropdownOpened] = useState();
+  const [testOnGoing, setTestOnGoing] = useState();
+  const [testTitle, setTestTitle] = useState();
 
-  const getTestList = async () => {
-    const testList = await loadTestList();
-    console.log("testList", testList);
-    setTestList(testList);
-  };
-
-  const handleOptionClick = (test) => {
-    setTest(test);
+  const toggleTestOnGoing = (status) => {
+    setTestOnGoing(status);
+    setCurretnTestDB(testTitle, status);
   }
 
   useEffect(() => {
-    getTestList();
-  }, []);
+    setTestOnGoing(false);
+  }, [])
+
   return (
-    <div className="relative inline-block text-left ">
-      <div>
-        <button type="button"
-          className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          id="menu-button"
-          aria-expanded="true"
-          aria-haspopup="true"
-          onClick={() => setIsDropdownOpened(!isDropdownOpened)}>
-          {test ? test : "시험 선택"}
-          <svg className="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
-          </svg>
+    <div className='flex flex-col'>
+      <div className='flex flex-row gap-8 px-4 py-4 justify-center'>
+        <SelectTest setTestTitle={setTestTitle}> </SelectTest>
+        <p> test: {testOnGoing ? "시험 중" : "시험 종료"}</p>
+        <button className='rounded bg-blue-400'
+          onClick={() => toggleTestOnGoing(!testOnGoing)}>
+          {testOnGoing ? "stop" : "start"}
         </button>
       </div>
-      {isDropdownOpened && (
-        <div className=" right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
-          <div className="py-1" role="none">
-            {testList.map((test) => (
-              <a href="#" className="text-gray-700 block px-4 py-2 text-sm"
-                role="menuitem"
-                tabIndex="-1"
-                id={"menu" + test}
-                key={"menu" + test}
-                onClick={() => handleOptionClick(test)} >
-                {test}
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
+      <div className='flex justify-center'>
+        <p> {testTitle} 시험 현황  </p>
+      </div>
 
+    </div>
+
+  )
 }
