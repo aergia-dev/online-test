@@ -23,7 +23,6 @@ const dbTemplate = {
 
 export default async function test() {
     const db = await JSONFilePreset('db.json', dbTemplate);
-    assert.notEqual(db.data, null);
 
     if (db.data !== null) {
         db.read();
@@ -100,10 +99,9 @@ export async function getCurrentQuestion() {
 
 export async function setTestResult(userInfo, question) {
 //result fmt
-// "result": [
-//      ["user": {idNum: "", affiliation: "", name: ""}
-//       [{question: uuid, answer: {idx} ... ]
-// ]
-//          
-//]
+// "testResult": 
+//      "title: 111,
+//      "testResult: 
+//          ["user": {idNum: "", affiliation: "", name: ""}
+//           "result: {question: uuid, answer: {idx} ... ]]
 }

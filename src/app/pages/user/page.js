@@ -2,6 +2,10 @@
 
 import { getCurrentTestDB, getQuestionDB, getCurrentQuestion, setTestResult } from "@/component/db";
 import { useState, useEffect } from "react";
+import { getIronSession } from "iron-session";
+import { sessionOptions } from "@/app/login/lib";
+import { getSession, getSessionInfo } from "@/app/login/action";
+
 
 function shuffle(question)
 {
@@ -15,6 +19,7 @@ function shuffle(question)
 
 export default function testPage() {
     const [questions, setQuestions] = useState([]);
+    const [session, setSession] = useState();
 
     useEffect(() => {
         const fetchTest = async () => {
@@ -28,13 +33,14 @@ export default function testPage() {
 
             //add color for marking answer is different color
             setQuestions(test['question']);
+            const userInfo = await getSessionInfo();
+            setSession(userInfo);
         };
 
         fetchTest();
-        console.log("##", questions);
     }, []);
 
-    const markAnswer = (e, uuid, idx) => {
+   const markAnswer = (e, uuid, idx) => {
         const newQuestions = questions;
         const foundIdx  = newQuestions.findIndex(q => q.uuid === uuid);
         console.log("newQuestions ", newQuestions);
@@ -49,6 +55,8 @@ export default function testPage() {
         // setQuestions(newQuestions); -> didn't rendering
         setQuestions([...newQuestions]);
         console.log("after questions ", newQuestions);
+
+        // console.log(getSession());
     }
 
     const submitAnswer = () => {
@@ -59,7 +67,7 @@ export default function testPage() {
     return (
         <div className="flex flex-col">
             <div>
-                교번, 소속, 이름 from session
+               {session?.userName + ' ' + session?.userAffiliation}; 
             </div>
             <div className='py-4 space-y-4'>
                 {questions &&
