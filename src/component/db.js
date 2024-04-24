@@ -72,6 +72,23 @@ export async function setCurretnTestDB(title, onGoing) {
     db.read();
     db.data.currentTest = { title: title, onGoing: onGoing };
     db.write();
+
+    if (onGoing) {
+        const startTime = new Date();
+        db.data.testResult = {
+            title: title,
+            startTime: startTime,
+            endTime: undefined,
+            userResult: []
+        };
+    } else {
+        db.data.testResult = {};
+    }
+
+    db.write();
+    // const restResult = db.data.testResult.push({})
+    // await db.update(({testResult}) => testResult.push("ASdf"));
+    // console.log("testdb ", restResult);
 }
 
 export async function getCurrentTestDB() {
@@ -93,15 +110,65 @@ export async function getCurrentQuestion() {
     db.read();
     const curTitle = db.data.currentTest['title'];
     const test = await db.data['test'].find((test) => test.title === curTitle);
-    console.log("db tes: ", test);
+    console.log("test ", test);
     return test;
 }
 
-export async function setTestResult(userInfo, question) {
-//result fmt
-// "testResult": 
-//      "title: 111,
-//      "testResult: 
-//          ["user": {idNum: "", affiliation: "", name: ""}
-//           "result: {question: uuid, answer: {idx} ... ]]
+
+export async function setTestResult(userInfo, answer) {
+    //result fmt
+    // "testResult": 
+    //      "testTitle": 111,
+    //      "status: 
+    //          ["user": {idNum: "", affiliation: "", name: ""}
+    //           "result: {question: uuid, answer: {idx} ... ]]
+    const db = await JSONFilePreset('db.json', dbTemplate);
+    db.read();
+    const testTitle = db.data.currentTest['title'];
+    const result = await db.data.testResult.userResult.find((result) => result.userInfo['clientId'] === userInfo.clientId);
+
+
+    console.log("!!! answer", answer.uuid, answer.selected);
+    console.log("set test result: ", result)
+    if (result === undefined) {
+        db.data.testResult.userResult.push({
+            userInfo: userInfo, answer: [
+                { uuid: answer.uuid, answer: answer.selected }
+            ]
+        });
+    } else {
+        const alreadAnswered = await result.answer.find((a) => a.uuid === answer.uuid);
+        if(alreadAnswered === undefined) 
+        {
+
+            result.answer.push({ uuid: answer.uuid, answer: answer.selected });
+        }
+        else
+        {
+            alreadAnswered.answer = answer.selected;
+            console.log("alreadAnswered", alreadAnswered);
+
+
+        }
+
+    }
+
+    db.write();
+
+}
+
+export async function getTestOnGoin() {
+    const db = await JSONFilePreset('db.json', dbTemplate);
+    db.read();
+    const testOnGoing = db.data.currentTest.onGoing;
+
+    return testOnGoing;
+}
+
+export async function setFinishTest() {
+    const db = await JSONFilePreset('db.json', dbTemplate);
+    db.read();
+    const testTitle = db.data.currentTest['title'];
+    db.data.testResult.endTime = new Date(); 
+    db.write();
 }

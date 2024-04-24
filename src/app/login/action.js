@@ -7,70 +7,13 @@ import { redirect } from "next/navigation";
 import { DefaultSession, defaultSession, sessionOptions } from "./lib";
 
 const sessionOption = {
-    idNum: undefined,
-    name: undefined,
-    affiliation: undefined,
+    userId: undefined,
+    userName: undefined,
+    userAffiliation: undefined,
     isAdmin: undefined,
     password: "jozxoyVCab8/kWLYrRyBoaiavQ90FU+boQ/gBNevsEw=",
     cookieName: "online-test"
 }
-
-// export async function getSession() {
-//     console.log("in the getSession ", cookies());
-//     const session = await getIronSession(cookies(), sessionOption);
-//     console.log("get session: " , session);
-//     // console.log("session: " , session.cookieName);
-
-
-//     // session.idNum = undefined;
-//     // session.name = undefined;
-//     // session.affiliation = undefined;
-
-//     return session;
-// }
-
-// export async function loginAction(formData) {
-//     const session = await getIronSession(cookies(), sessionOptions);
-
-//     const input = {
-//         idNum: formData.get('userId'),
-//         name: formData.get('username'),
-//         affiliation: formData.get('userAffiliation')
-//     }
-
-//     const admin = {
-//         idNum: "",
-//         username: "admin",
-//         affiliation: ""
-//     };
-
-//     let nextPage = '/';
-
-//     if (admin === input) {
-//         session.isAdmin = true;
-//         session.userId = "admin";
-//         session.usedrname = "admin";
-//         nextPage = '/pages/admin';
-//     }
-//     else {
-//         session.isAdmin = false;
-//         session.useId = input.idNum;
-//         session.username = input.name;
-//         session.userAffiliation = input.affiliation;
-//         nextPage = '/pages/user';
-//     }
-
-//     await session.save();
-
-//     console.log("nextPage", nextPage);
-//     console.log("save session", session);
-
-//     const loadSession = await getIronSession(cookies(), sessionOptions);
-//     console.log("load session", loadSession);
-//     redirect('pages/user');
-
-// }
-
 
 export async function getSessionInfo() {
     const session = await getIronSession(cookies(), sessionOptions);
@@ -84,7 +27,8 @@ export async function getSessionInfo() {
     return {
         userName: session.userName,
         userId: session.userId,
-        userAffiliation: session.userAffiliation
+        userAffiliation: session.userAffiliation,
+        clientId: session.clientId
     };
 }
 
@@ -95,7 +39,7 @@ export async function getSession() {
     console.log("get session", session);
     if (!session.isLoggedIn) {
         session.isLoggedIn = defaultSession.isLoggedIn;
-        session.username = defaultSession.userName;
+        session.userName = defaultSession.userName;
     }
 
     return session;
@@ -110,6 +54,7 @@ export async function login(formData) {
     session.userAffiliation = formData.get('userAffiliation');
     session.isAdmin = false;
     session.isLoggedIn = true;
+    session.clientId = crypto.randomUUID();
 
     if (session.userName === 'admin')
         session.isAdmin = true;

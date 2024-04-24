@@ -2,15 +2,20 @@
 
 import SelectTest from './selectTest'
 import { useState, useEffect } from 'react'
-import {setCurretnTestDB } from '@/component/db'
+import { setCurretnTestDB } from '@/component/db'
 
 export default function Monitoring() {
   const [testOnGoing, setTestOnGoing] = useState();
-  const [testTitle, setTestTitle] = useState();
+  const [testTitle, setTestTitle] = useState(undefined);
 
   const toggleTestOnGoing = (status) => {
-    setTestOnGoing(status);
-    setCurretnTestDB(testTitle, status);
+    if (testTitle) {
+      setTestOnGoing(status);
+      setCurretnTestDB(testTitle, status);
+    }
+    else {
+      alert("should select test");
+    }
   }
 
   useEffect(() => {
