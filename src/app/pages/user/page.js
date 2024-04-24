@@ -66,9 +66,9 @@ export default function testPage() {
        setTestResult(session, answer);
     }
 
-    const setTestEnd = (e, uuid, idx) => {
+    const setTestEnd = () => {
         console.log("submit");
-        setFinishTest();
+        setFinishTest(session.clientId);
    }
     // if (!onGoing)
     //     return <div> not yet start</div>

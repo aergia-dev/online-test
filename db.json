@@ -246,7 +246,51 @@
     }
   ],
   "currentTest": {
-    "title": "222",
+    "title": "111",
     "onGoing": true
+  },
+  "testResult": {
+    "title": "111",
+    "startTime": "2024-04-24T11:35:39.874Z",
+    "userResult": [
+      {
+        "userInfo": {
+          "userName": "431",
+          "userId": "12",
+          "userAffiliation": "22",
+          "clientId": "f904746a-35fd-48ac-9ba6-64bc0f5e053b"
+        },
+        "answer": [
+          {
+            "uuid": "c50f3629-4f3e-4dd0-968b-99a1eb05e3cd",
+            "answer": 2
+          },
+          {
+            "uuid": "0b72b818-8d82-4743-a051-25de40701fc6",
+            "answer": 3
+          }
+        ],
+        "endTime": "2024-04-24T11:35:59.918Z"
+      },
+      {
+        "userInfo": {
+          "userName": "8182828",
+          "userId": "123",
+          "userAffiliation": "999",
+          "clientId": "289e87c4-ad39-4b23-8508-bacd68bc3502"
+        },
+        "answer": [
+          {
+            "uuid": "0b72b818-8d82-4743-a051-25de40701fc6",
+            "answer": 3
+          },
+          {
+            "uuid": "c50f3629-4f3e-4dd0-968b-99a1eb05e3cd",
+            "answer": 2
+          }
+        ],
+        "endTime": "2024-04-24T11:38:33.852Z"
+      }
+    ]
   }
 }

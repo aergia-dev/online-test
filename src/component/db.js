@@ -114,6 +114,14 @@ export async function getCurrentQuestion() {
     return test;
 }
 
+export async function getCurrentQuestionCnt() {
+    const db = await JSONFilePreset('db.json', dbTemplate);
+    db.read();
+    const curTitle = db.data.currentTest['title'];
+    const test = await db.data['test'].find((test) => test.title === curTitle);
+    console.log("test ", test);
+    return test.length;
+}
 
 export async function setTestResult(userInfo, answer) {
     //result fmt
@@ -125,7 +133,7 @@ export async function setTestResult(userInfo, answer) {
     const db = await JSONFilePreset('db.json', dbTemplate);
     db.read();
     const testTitle = db.data.currentTest['title'];
-    const result = await db.data.testResult.userResult.find((result) => result.userInfo['clientId'] === userInfo.clientId);
+    const result = await db.data.testResult.userResult?.find((result) => result.userInfo['clientId'] === userInfo.clientId);
 
 
     console.log("!!! answer", answer.uuid, answer.selected);
@@ -140,15 +148,12 @@ export async function setTestResult(userInfo, answer) {
         const alreadAnswered = await result.answer.find((a) => a.uuid === answer.uuid);
         if(alreadAnswered === undefined) 
         {
-
             result.answer.push({ uuid: answer.uuid, answer: answer.selected });
         }
         else
         {
             alreadAnswered.answer = answer.selected;
             console.log("alreadAnswered", alreadAnswered);
-
-
         }
 
     }
@@ -165,10 +170,19 @@ export async function getTestOnGoin() {
     return testOnGoing;
 }
 
-export async function setFinishTest() {
+export async function setFinishTest(clientId) {
     const db = await JSONFilePreset('db.json', dbTemplate);
     db.read();
-    const testTitle = db.data.currentTest['title'];
-    db.data.testResult.endTime = new Date(); 
+    const userResult =  db.data.testResult.userResult; 
+    const target = await userResult.find((result) => result.userInfo.clientId === clientId);
+    console.log("##### ", clientId, target);
+    target['endTime'] = new Date(); 
     db.write();
+}
+
+export async function getTestResult() {
+    const db = await JSONFilePreset('db.json', dbTemplate);
+    db.read();
+    
+    return db.data.testResult;
 }
