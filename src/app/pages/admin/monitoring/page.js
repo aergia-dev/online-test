@@ -2,7 +2,7 @@
 
 import SelectTest from './selectTest'
 import { useState, useEffect } from 'react'
-import { setCurretnTestDB, getTestResult, getCurrentQuestionCnt } from '@/component/db'
+import { setCurretnTestDB, getCurrentTestDB, getTestResult, getCurrentQuestionCnt, getTestOnGoing } from '@/component/db'
 
 export default function Monitoring() {
   const [testOnGoing, setTestOnGoing] = useState();
@@ -29,7 +29,21 @@ export default function Monitoring() {
   }
 
   useEffect(() => {
-    // setTestOnGoing(false);
+    const updateInitValue = async () => {
+      const onGoing = await getTestOnGoing();
+      setTestOnGoing(onGoing);
+
+      if (onGoing) {
+        const currentTest = await getCurrentTestDB();
+        console.log("currentTest", currentTest);
+        setTestTitle(currentTest.title);
+      }
+    }
+
+    updateInitValue();
+  }, []);
+
+  useEffect(() => {
     let intervalId;
     if (readingDb) {
       intervalId = setInterval(() => {
@@ -41,12 +55,12 @@ export default function Monitoring() {
 
     const questionCnt = getCurrentQuestionCnt();
     setQuestionCnt(questionCnt);
-  }, [readingDb])
+  }, [readingDb]);
 
   return (
     <div className='flex flex-col'>
       <div className='flex flex-row gap-8 px-4 py-4 justify-center'>
-        <SelectTest setTestTitle={setTestTitle}> </SelectTest>
+        <SelectTest setTestTitle={setTestTitle} defaultVal={testTitle}> </SelectTest>
         <p> test: {testOnGoing ? "시험 중" : "시험 종료"}</p>
         <button className='rounded bg-blue-400'
           onClick={() => toggleTestOnGoing(!testOnGoing)}>
@@ -73,7 +87,7 @@ export default function Monitoring() {
               <td> {result.userInfo.userId} </td>
               <td> {result.userInfo.userAffiliation} </td>
               <td> {result.answer.length}</td>
-              <td> {result.endTime === undefined ? 'not ' : 'done' }</td>
+              <td> {result.endTime === undefined ? 'not ' : 'done'}</td>
             </tr>
           ))}
         </tbody>

@@ -162,7 +162,7 @@ export async function setTestResult(userInfo, answer) {
 
 }
 
-export async function getTestOnGoin() {
+export async function getTestOnGoing() {
     const db = await JSONFilePreset('db.json', dbTemplate);
     db.read();
     const testOnGoing = db.data.currentTest.onGoing;
