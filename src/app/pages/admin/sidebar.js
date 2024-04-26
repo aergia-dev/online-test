@@ -13,6 +13,11 @@ export default function Sidebar() {
                             <span className="ms-3">시험 문제 선택</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="/pages/admin/survey" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <span className="ms-3">survey</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </aside>

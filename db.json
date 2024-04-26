@@ -290,6 +290,20 @@
           }
         ],
         "endTime": "2024-04-24T11:38:33.852Z"
+      },
+      {
+        "userInfo": {
+          "userName": "33",
+          "userId": "11",
+          "userAffiliation": "22",
+          "clientId": "fdb1175b-8f9e-4753-ba72-4a41daf1ec54"
+        },
+        "answer": [
+          {
+            "uuid": "c50f3629-4f3e-4dd0-968b-99a1eb05e3cd",
+            "answer": 1
+          }
+        ]
       }
     ]
   }

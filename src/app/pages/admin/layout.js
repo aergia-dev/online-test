@@ -1,4 +1,5 @@
 import Navbar from './navbar'
+import Sidebar from './sidebar'
 
 export default function AdminLayout({ children }) {
   return (
@@ -6,7 +7,10 @@ export default function AdminLayout({ children }) {
       <div className="flex flex-col">
         <Navbar />
         <div >
-          {children}
+          <div className="flex flex-row">
+            <Sidebar />
+            {children}
+          </div>
         </div>
       </div>
     </section >
