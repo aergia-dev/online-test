@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import toJson from './toJson';
 import { dumData } from './dummy';
 import { Saira_Extra_Condensed } from "next/font/google";
+import { setSurveyDB, getSurveyDb } from "@/component/db"
 
 export default function Survey() {
     const [preview, setPreview] = useState();
@@ -18,6 +19,7 @@ export default function Survey() {
     const [item3Col, setItem3Col] = useState();
     const [item3Row, setItem3Row] = useState();
     const [item4Desc, setItem4Desc] = useState();
+    const [wholeContent, setWholeContent] = useState();
 
     const makePreview = () => {
         const contents = {
@@ -35,6 +37,7 @@ export default function Survey() {
         };
 
         const contentsJson = toJson(contents);
+        setWholeContent(contentsJson);
         console.log("contentsJson", JSON.stringify(contentsJson));
         const newPreview = makeSurvey(contentsJson);
         setPreview(newPreview);
@@ -141,7 +144,7 @@ export default function Survey() {
         }
 
         function Item3Preview(item3Desc, item3Col, item3Row) {
-            const choiceCommon = item3Col.slice(1).map(({uuid, common}) => {return {colUuid:uuid, common: common}})
+            const choiceCommon = item3Col.slice(1).map(({ uuid, common }) => { return { colUuid: uuid, common: common } })
 
             return (
                 <div>
@@ -165,11 +168,11 @@ export default function Survey() {
                                         key={uuid + '_' + idx}>
                                         {str}
                                     </td>
-                                    {choiceCommon.map(({colUuid, common }) => (
+                                    {choiceCommon.map(({ colUuid, common }) => (
                                         common.map((val, idx) => (
                                             <td className='border border-solid border-gray-800 text-center'
-                                                key={uuid + '_' + colUuid + '_' + idx} > 
-                                            {val} 
+                                                key={uuid + '_' + colUuid + '_' + idx} >
+                                                {val}
                                             </td>
                                         ))
                                     ))}
@@ -177,6 +180,16 @@ export default function Survey() {
                             ))}
                         </tbody>
                     </table>
+                </div>
+            )
+        }
+
+        function Item4Preview(item4Desc) {
+            return (
+                <div>
+                    <div> {item4Desc} </div>
+                    <textarea id="item4" rows="5" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write your thoughts here..." >
+                    </textarea>
                 </div>
             )
         }
@@ -199,13 +212,30 @@ export default function Survey() {
                 <div id='item3'>
                     {Item3Preview(item3Desc, item3Col, item3Row, commonSelection)}
                 </div>
-
+                <div id='item4'>
+                    {Item4Preview(item4Desc)}
+                </div>
             </div>
         )
     }
 
     useEffect(() => {
-        //temp
+        // const readSurvey = async () => {
+        //     const survey = await getSurveyDb();
+        //     console.log("survey", survey);
+        //     setTitle(survey.title);
+        //     setHead(survey.head);
+        //     setItem1Row(survey.item1Row);
+        //     setItem1(survey.item1);
+        //     setItem2Desc(survey.item2Desc);
+        //     setItem2Col(survey.item2Col);
+        //     setItem2Row(survey.item2Row);
+        //     setItem3Desc(survey.item3Desc)
+        //     setItem3Col(survey.item3Col);
+        //     setItem3Row(survey.item3Row);
+        //     setItem4Desc(survey.item4Desc);
+        // }
+
         setTitle(dumData.title);
         setHead(dumData.head);
         setItem1Row(dumData.item1Row);
@@ -217,22 +247,47 @@ export default function Survey() {
         setItem3Col(dumData.item3Col);
         setItem3Row(dumData.item3Row);
         setItem4Desc(dumData.item4Desc);
+
+        // readSurvey();
+        //temp
         // makePreview();
     }, []);
+
+    const save = async () => {
+        await setSurveyDB(wholeContent);
+    }
+
+    // function item1JsonToText(item1) {
+    //     let str = '';
+    //     if (item1 !== undefined) {
+    //         item1.map(({ itemName, selection }) => (
+    //             str += String(itemName + ': ' + selection.map(s => String(s)).join('_') + "\n")
+    //         ))
+    //     }
+    //     return str;
+    // }
+
+    // function item2RowJsonToText(item2Row) {
+    //     let str = '';
+    //     if (item2Row !== undefined) {
+    //         item1.map(({ itemName, selection }) => (
+    //             str += String(itemName + ': ' + selection.map(s => String(s)).join('_') + "\n")
+    //         ))
+    //     }
+    //     return str;
+    // }
 
     return (
         <div className="flex flex-col w-full">
             <div className="flex justify-center space-x-4">
                 <button type="button"
                     className="bg-blue-600 text-white"
-                // onClick={() => insertQuestion('expert', rawQuestion)}
-                >
+                    onClick={() => save()}>
                     save
                 </button>
                 <button type="button"
                     className="bg-blue-600 text-white"
-                    onClick={() => makePreview()}
-                >
+                    onClick={() => makePreview()}>
                     test
                 </button>
             </div>
@@ -280,6 +335,6 @@ export default function Survey() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

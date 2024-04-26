@@ -186,3 +186,19 @@ export async function getTestResult() {
     
     return db.data.testResult;
 }
+
+export async function setSurveyDB(survey) {
+    console.log("setSurveyDB", survey)
+    const db = await JSONFilePreset('survey.json', dbTemplate);
+    db.read();
+    db.data = survey;
+    db.write();
+}
+
+export async function getSurveyDb() {
+    const db = await JSONFilePreset('survey.json', {});
+    db.read();
+
+    console.log("survey", db.data);
+    return db.data;
+}
