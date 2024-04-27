@@ -38,29 +38,30 @@ export default function Monitoring() {
         console.log("currentTest", currentTest);
         setTestTitle(currentTest.title);
       }
+
     }
 
     updateInitValue();
+    const questionCnt = getCurrentQuestionCnt();
+    setQuestionCnt(questionCnt);
   }, []);
 
   useEffect(() => {
     let intervalId;
-    if (readingDb) {
+    // if (readingDb) {
       intervalId = setInterval(() => {
         readTestResult();
       }, 5000);
 
-      return () => clearInterval(intervalId);
-    }
+    // }
 
-    const questionCnt = getCurrentQuestionCnt();
-    setQuestionCnt(questionCnt);
+    return () => clearInterval(intervalId);
   }, [readingDb]);
 
   return (
     <div className='flex flex-col w-full'>
       <div className='flex flex-row gap-8 px-4 py-4 justify-center'>
-        <SelectTest setTestTitle={setTestTitle} defaultVal={testTitle}> </SelectTest>
+        <SelectTest setTestTitle={setTestTitle} defaultVal={'choose'}> </SelectTest>
         <p> test: {testOnGoing ? "시험 중" : "시험 종료"}</p>
         <button className='rounded bg-blue-400'
           onClick={() => toggleTestOnGoing(!testOnGoing)}>
@@ -81,13 +82,24 @@ export default function Monitoring() {
           </tr>
         </thead>
         <tbody>
-          {testResult.length > 0 && testResult.map((result) => (
-            <tr className='text-center'>
-              <td> {result.userInfo.userName} </td>
-              <td> {result.userInfo.userId} </td>
-              <td> {result.userInfo.userAffiliation} </td>
-              <td> {result.answer.length}</td>
-              <td> {result.endTime === undefined ? 'not ' : 'done'}</td>
+          {testResult && testResult.length > 0 && testResult.map((result, idx) => (
+            <tr className='text-center'
+              key={idx + '_' + result.userInfo.userName + '_' + result.userInfo.userId + '_' + result.userInfo.userAffiliation}>
+              <td key={idx + '_' + result.userInfo.userName}>
+                {result.userInfo.userName}
+              </td>
+              <td key={idx + '_' + result.userInfo.userId}>
+                {result.userInfo.userId}
+              </td>
+              <td key={idx + '_' + result.userInfo.userAffiliation}>
+                {result.userInfo.userAffiliation}
+              </td>
+              <td key={idx + '_' + result.answer.length}>
+                {result.answer.length}
+              </td>
+              <td key={idx + '_' + "endTime"}>
+                {result.endTime === undefined ? 'not ' : 'done'}
+              </td>
             </tr>
           ))}
         </tbody>
