@@ -58,7 +58,7 @@ export default function Monitoring() {
   }, [readingDb]);
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col w-full'>
       <div className='flex flex-row gap-8 px-4 py-4 justify-center'>
         <SelectTest setTestTitle={setTestTitle} defaultVal={testTitle}> </SelectTest>
         <p> test: {testOnGoing ? "시험 중" : "시험 종료"}</p>
