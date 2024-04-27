@@ -123,7 +123,7 @@ export async function getCurrentQuestionCnt() {
     return test.length;
 }
 
-export async function setTestResult(userInfo, answer) {
+export async function setTestResultDb(userInfo, answer) {
     //result fmt
     // "testResult": 
     //      "testTitle": 111,
@@ -170,7 +170,7 @@ export async function getTestOnGoing() {
     return testOnGoing;
 }
 
-export async function setFinishTest(clientId) {
+export async function setFinishTestDb(clientId) {
     const db = await JSONFilePreset('db.json', dbTemplate);
     db.read();
     const userResult =  db.data.testResult.userResult; 
@@ -198,7 +198,6 @@ export async function setSurveyDB(survey) {
 export async function getSurveyDb() {
     const db = await JSONFilePreset('survey.json', {});
     db.read();
-
-    console.log("survey", db.data);
+    // console.log("survey", db.data);
     return db.data;
 }
