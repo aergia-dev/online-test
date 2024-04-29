@@ -1,31 +1,44 @@
+'use client'
+
+import React, { useEffect, useState } from 'react';
 
 
-export default function SurveyPreview({ title, head, item1, item1Row, item2Desc, item2Col, item2Row, item3Desc, item3Col, item3Row, item4Desc, item4Input, commonSelection }) {
+export default function SurveyPreview({ content, onAction, onActionItem2, onActionItem3, onActionItem4, onSave }) {
+    const { title, head, item1, item1Row, item2Desc, item2Col, item2Row, item3Desc, item3Col, item3Row, item4Desc, item4Input, commonSelection } = content;
+
+
+
     return (
-        <div>
+        <div className=''>
             <p className="text-center text-3xl">
-                {title}
+                {content.title}
             </p>
             <p className='border border-solid border-gray-800'>
-                {head}
+                {content.head}
             </p>
             <div id='item1'>
-                {Item1Preview(item1Row, item1)}
+                {Item1Preview(content.item1Row, content.item1, onAction)}
             </div>
             <div id='item2'>
-                {Item2Preview(item2Desc, item2Col, item2Row, commonSelection)}
+                {Item2Preview(item2Desc, item2Col, item2Row, onActionItem2)}
             </div>
             <div id='item3'>
-                {Item3Preview(item3Desc, item3Col, item3Row, commonSelection)}
+                {Item3Preview(item3Desc, item3Col, item3Row, onActionItem3)}
             </div>
             <div id='item4'>
-                {Item4Preview(item4Desc)}
+                {Item4Preview(item4Desc, item4Input, onActionItem4)}
+            </div>
+            <div className=''
+                id='submit'>
+                <button className='bg-blue-500'
+                    onClick={() => onSave()}> 제출
+                </button>
             </div>
         </div>
     )
 }
 
-function Item1Preview(item1Row, item1) {
+function Item1Preview(item1Row, item1, onAction) {
     return (
         <table className='w-full border border-collapse border-solid border-gray-800'>
             <tbody>
@@ -34,16 +47,31 @@ function Item1Preview(item1Row, item1) {
                         {item1Row}
                     </td>
                     <td className='border border-solid border-gray-800'>
-                        {item1.map(({ itemName, selection, answer }) => {
+                        {item1.map(({ itemName, selection, answer, uuid }, rowIdx) => {
                             return (
-                                <div className='flex flex-row m-4'>
-                                    <div>{itemName + ": "}</div>
+                                <div className='flex flex-row space-x-4'
+                                    key={itemName + selection + rowIdx}>
+                                    <div className=''
+                                        key={itemName + + rowIdx}>{itemName + ": "}
+                                    </div>
                                     {
                                         selection.map((item, idx) => {
-                                            if (idx + 1 === answer)
-                                                return <p className='text-red-500 m-4'> {item} </p>
+                                            if (idx + 1 === answer) {
+                                                return <div className='bg-blue-500 rounded text-white font-bold'
+                                                    key={item + idx}>
+                                                    {item}
+                                                </div>
+                                            }
                                             else
-                                                return <p > {item} </p>
+                                                return <div className=''
+                                                    key={item + idx}
+                                                    onClick={() => onAction({
+                                                        key: 'item1',
+                                                        rowIdx: rowIdx,
+                                                        uuid: uuid,
+                                                        choiceIdx: idx
+                                                    })}>
+                                                    {item} </div>
                                         })
                                     }
                                 </div>)
@@ -55,74 +83,100 @@ function Item1Preview(item1Row, item1) {
     )
 };
 
-function item2Body(item2Row, questionIdx) {
-    const choiceAction = (uuid, chooseIdx) => {
-        console.log("choose", uuid, chooseIdx);
-    }
-
-    const singleRow = ({ rowHead, rowspan, secondRow, common }) => {
+function item2Body(item2Row, onActionItem2) {
+    const singleRow = ({ rowHead, rowspan, secondRow, common }, rowIdx) => {
         const firstRow = secondRow[0];
         const restRow = secondRow.slice(1);
         return (
             <>
-                <tr>
+                <tr key={rowHead + rowIdx + 'tr'}>
                     <td rowSpan={rowspan}
+                        key={rowHead + rowIdx + 'td'}
                         className="border border-solid border-gray-800 text-center">
                         {rowHead}
                     </td>
 
-                    <td className="border border-solid border-gray-800"> {firstRow.str} </td>
+                    <td className="border border-solid border-gray-800"
+                        key={rowHead + rowIdx + 'firstrow'}>
+                        {firstRow.str}
+                    </td>
+                    {common.map((s, choiceIdx) => {
+                        if (choiceIdx === firstRow.choice - 1) {
+                            return (<td className="border border-solid border-gray-800 text-center bg-blue-500"
+                                key={firstRow.uuid + '_' + choiceIdx}>
+                                {s}
+                            </td>)
+                        }
+                        else {
+                            return (<td className="border border-solid border-gray-800 text-center"
+                                key={firstRow.uuid + '_' + choiceIdx}
+                                onClick={() => onActionItem2({ key: 'item2Row', uuid: firstRow.uuid, rowIdx: rowIdx, choiceIdx: choiceIdx })}>
+                                {s}
+                            </td>)
 
-                    {common.map((s, choiceIdx) => (
-                        <td className="border border-solid border-gray-800 text-center"
-                            key={firstRow.uuid + '_' + choiceIdx}
-                            onClick={() => choiceAction(firstRow.uuid, choiceIdx + 1)}>
-                            {s}
-                        </td>
-                    ))}
+                        }
+                    })}
                 </tr>
-                {restRow.map((row, idx) => (
-                    <tr key={row.uuid}>
+                {restRow.map(({ str, choice, uuid }) => {
+                    // console.log("row", str, choice, uuid);
+                    return (<tr key={uuid}>
                         <td className="border border-solid border-gray-800"
-                            key={row.uuid + 'q'}> {row.str} </td>
-                        {common.map((s, choiceIdx) => (
-                            <td className="border border-solid border-gray-800 text-center"
-                                key={row.uuid + '_' + choiceIdx}
-                                onClick={() => choiceAction(row.uuid, choiceIdx + 1)}> {s} </td>
-                        ))}
+                            key={uuid + 'q'}> {str} </td>
+                        {common.map((s, choiceIdx) => {
+                            if (choice - 1 === choiceIdx) {
+                                return (<td className="border border-solid border-gray-800 text-center bg-blue-500"
+                                    key={uuid + '_' + choiceIdx}
+                                    onClick={() => onActionItem2({ key: 'item2Row', uuid: uuid, rowIdx: rowIdx, choiceIdx: choiceIdx })}>
+                                    {s}
+                                </td>)
+                            }
+                            else {
+                                return (<td className="border border-solid border-gray-800 text-center"
+                                    key={uuid + '_' + choiceIdx}
+                                    onClick={() => onActionItem2({ key: 'item2Row', uuid: uuid, rowIdx: rowIdx, choiceIdx: choiceIdx })}>
+                                    {s}
+                                </td>)
+                            }
+                        })}
                     </tr>
-                ))}
+                    )
+                })}
             </>
         )
     }
 
     return (
         <tbody>
-            {item2Row.map((row) => (singleRow(row))
+            {item2Row.map((row, idx) => (
+                <React.Fragment key={idx}>
+                    {singleRow(row, idx)}
+                </React.Fragment>)
             )}
         </tbody>
     )
 }
 
-function Item2Preview(item2Desc, item2Col, item2Row) {
+
+function Item2Preview(item2Desc, item2Col, item2Row, onActionItem2) {
     return (
         <div>
             <div> {item2Desc} </div>
             <table className='w-full border border-collapse border-solid border-gray-800'>
                 <thead>
                     <tr>
-                        {item2Col.map(({ str, colspan }) => (
+                        {item2Col.map(({ str, colspan }, idx) => (
                             <td colSpan={colspan}
+                                key={'item2-' + str + { idx }}
                                 className='text-center border border-solid border-gray-800'> {str} </td>
                         ))}
                     </tr>
                 </thead>
-                {item2Body(item2Row)}
+                {item2Body(item2Row, onActionItem2)}
             </table>
         </div>);
 }
 
-function Item3Preview(item3Desc, item3Col, item3Row) {
+function Item3Preview(item3Desc, item3Col, item3Row, onActionItem3) {
     const choiceCommon = item3Col.slice(1).map(({ uuid, common }) => { return { colUuid: uuid, common: common } })
 
     return (
@@ -141,19 +195,28 @@ function Item3Preview(item3Desc, item3Col, item3Row) {
                     </tr>
                 </thead>
                 <tbody>
-                    {item3Row.map(({ str, uuid, idx }) => (
+                    {item3Row.map(({ str, uuid, choice }, rowIdx) => (
                         <tr key={uuid + '_row'}>
                             <td className='border border-solid border-gray-800'
-                                key={uuid + '_' + idx}>
+                                key={uuid + '_' + rowIdx}>
                                 {str}
                             </td>
-                            {choiceCommon.map(({ colUuid, common }) => (
-                                common.map((val, idx) => (
-                                    <td className='border border-solid border-gray-800 text-center'
-                                        key={uuid + '_' + colUuid + '_' + idx} >
-                                        {val}
-                                    </td>
-                                ))
+                            {choiceCommon.map(({ colUuid, common }, colIdx) => (
+                                common.map((val, choiceIdx) => {
+                                    if (choiceIdx === choice[colIdx] - 1) {
+                                        return (<td className='border border-solid border-gray-800 text-center bg-blue-500'
+                                            key={uuid + '_' + colUuid + '_' + choiceIdx}>
+                                            {val}
+                                        </td>)
+                                    } else {
+                                        return (<td className='border border-solid border-gray-800 text-center'
+                                            key={uuid + '_' + colUuid + '_' + choiceIdx}
+                                            onClick={() => onActionItem3({ key: 'item3Row', rowIdx: rowIdx, colIdx: colIdx, choiceIdx: choiceIdx, uuid: uuid })}>
+                                            {val}
+                                        </td>)
+
+                                    }
+                                })
                             ))}
                         </tr>
                     ))}
@@ -163,11 +226,16 @@ function Item3Preview(item3Desc, item3Col, item3Row) {
     )
 }
 
-function Item4Preview(item4Desc) {
+function Item4Preview(item4Desc, item4Input, onActionitem4) {
     return (
         <div>
             <div> {item4Desc} </div>
-            <textarea id="item4" rows="5" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write your thoughts here..." >
+            <textarea id="item4" rows="5" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                placeholder={item4Input.text}
+                onChange={(event) => {
+                    onActionitem4({ key: 'item4Input', text: event.target.value }
+                    )
+                }} >
             </textarea>
         </div>
     )

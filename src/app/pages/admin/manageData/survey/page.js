@@ -41,43 +41,36 @@ export default function Survey() {
         setWholeContent(contentsJson);
         console.log("contentsJson", JSON.stringify(contentsJson));
         // const newPreview = makeSurvey(contentsJson);
-        const newPreview = SurveyPreview(contentsJson);
+        const newPreview = SurveyPreview({content: contentsJson, onAction: null});
         setPreview(newPreview);
 
     };
 
     useEffect(() => {
-        // const readSurvey = async () => {
-        //     const survey = await getSurveyDb();
-        //     console.log("survey", survey);
-        //     setTitle(survey.title);
-        //     setHead(survey.head);
-        //     setItem1Row(survey.item1Row);
-        //     setItem1(survey.item1);
-        //     setItem2Desc(survey.item2Desc);
-        //     setItem2Col(survey.item2Col);
-        //     setItem2Row(survey.item2Row);
-        //     setItem3Desc(survey.item3Desc)
-        //     setItem3Col(survey.item3Col);
-        //     setItem3Row(survey.item3Row);
-        //     setItem4Desc(survey.item4Desc);
-        // }
-
-        setTitle(dumData.title);
-        setHead(dumData.head);
-        setItem1Row(dumData.item1Row);
-        setItem1(dumData.item1);
-        setItem2Desc(dumData.item2Desc);
-        setItem2Col(dumData.item2Col);
-        setItem2Row(dumData.item2Row);
-        setItem3Desc(dumData.item3Desc)
-        setItem3Col(dumData.item3Col);
-        setItem3Row(dumData.item3Row);
-        setItem4Desc(dumData.item4Desc);
-
-        // readSurvey();
-        //temp
-        // makePreview();
+        const readSurvey = async () => {
+            const survey = await getSurveyDb();
+            console.log("survey", survey);
+            setTitle(survey.title);
+            setHead(survey.head);
+            setItem1Row(survey.item1Row);
+            setItem1(survey.item1.map(({itemName, selection}) => {
+                return itemName + ": " + selection;
+            }).join('\n'));
+            setItem2Desc(survey.item2Desc);
+            setItem2Col(survey.item2Col.map(({str, colspan}) => {return str}).join());
+            setItem2Row(survey.item2Row.map(({rowHead, rowspan, secondRow, common}) => {
+                return rowHead + '\n' + (secondRow.map(({str, choice, uuid}) => {return str;}).join('\n'));
+            }).join('\n\n'));
+            setItem3Desc(survey.item3Desc);
+            setItem3Col(survey.item3Col.map(({str, colspan, uuid, common}) => {
+                return str;
+            }).join('\n'));
+            setItem3Row(survey.item3Row.map(({str, choice, uuid}) => {
+                return str;
+            }).join('\n'));
+            setItem4Desc(JSON.stringify(survey.item4Desc, null, 2));
+        }
+        readSurvey();
     }, []);
 
     const save = async () => {
@@ -136,7 +129,7 @@ export default function Survey() {
 
                     <div name="right-half w-1/2">
                         <div id="surveyPreview">
-                            {preview}
+                            {preview? (preview) : <div>  </div>}
                         </div>
                     </div>
                 </div>

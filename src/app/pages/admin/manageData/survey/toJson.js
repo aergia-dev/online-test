@@ -9,7 +9,11 @@ export default function toJson({ title, head, item1, item1Row, item2Desc, item2C
             const splited = row.split(':');
             const itemName = splited[0];
             const selection = splited.slice(1);
-            return { itemName: itemName, selection: selection[0].split(','), answer: 0 }
+            return {
+                itemName: itemName,
+                uuid: crypto.randomUUID(),
+                selection: selection[0].split(','), answer: 0
+            }
         });
     }
 
@@ -72,6 +76,6 @@ export default function toJson({ title, head, item1, item1Row, item2Desc, item2C
         item3Col: item3ColFn(item3Col),
         item3Row: item3RowFn(item3Row),
         item4Desc: item4Desc,
-        item4Input: { type: 'input' },
+        item4Input: { type: 'input', text: '' },
     }
 }

@@ -187,6 +187,16 @@ export async function getTestResult() {
     return db.data.testResult;
 }
 
+export async function setSurveyResultDb(userInfo, survey) {
+    const db = await JSONFilePreset('db.json', dbTemplate);
+    db.read();
+    const userResult =  db.data.testResult.userResult; 
+    const target = await userResult.find((result) => result.userInfo.clientId === userInfo.clientId);
+    console.log("##### ", userInfo.clientId, target);
+    target['surveyResult'] = survey; 
+    db.write();
+}
+
 export async function setSurveyDB(survey) {
     console.log("setSurveyDB", survey)
     const db = await JSONFilePreset('survey.json', dbTemplate);
