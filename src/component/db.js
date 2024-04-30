@@ -211,3 +211,9 @@ export async function getSurveyDb() {
     // console.log("survey", db.data);
     return db.data;
 }
+
+export async function getLevelDb() {
+    const db = await JSONFilePreset('db.json', {});
+    db.read();
+    return db.data['levels'];
+}

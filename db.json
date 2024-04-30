@@ -755,6 +755,25 @@
             "text": "ㄲㄲㄲㄲㄲㄲㄲㄲㄲㄲㄲㄲㄲㄲㄲㄲㄲㄲ"
           }
         }
+      },
+      {
+        "userInfo": {
+          "userName": "33",
+          "userId": "1",
+          "userAffiliation": "2",
+          "clientId": "7a6a245e-18f1-4069-ad80-d48d1921864d"
+        },
+        "answer": [
+          {
+            "uuid": "0b72b818-8d82-4743-a051-25de40701fc6",
+            "answer": 1
+          },
+          {
+            "uuid": "c50f3629-4f3e-4dd0-968b-99a1eb05e3cd",
+            "answer": 1
+          }
+        ],
+        "endTime": "2024-04-30T01:36:52.447Z"
       }
     ]
   }
