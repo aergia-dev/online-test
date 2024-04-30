@@ -18,101 +18,5762 @@
     }
   ],
   "questionPool": {
-    "beginner": [],
-    "itermediate": [],
-    "advanced": [],
-    "expert": [
+    "beginner": [
       {
-        "uuid": "0b72b818-8d82-4743-a051-25de40701fc6",
-        "question": "항해용 간행물에 포함되지 않는 것은? ",
+        "uuid": "d4fb924e-11f7-4d93-add1-9680cf13f9bb",
+        "question": "초급 문제 - 1  /  답: 3",
         "selection": [
           {
             "idx": 1,
-            "item": "항해용 해도, 전자해도"
+            "item": "보기 1"
           },
           {
             "idx": 2,
-            "item": "조석표, 등대표, 항로지 등을 포함하는 항해서지"
+            "item": "보기 2"
           },
           {
             "idx": 3,
-            "item": "항해용 간행물의 변경이 필요한 사항 등으로 포함하는 항행통보"
+            "item": "보기 3"
           },
           {
             "idx": 4,
-            "item": "항해 이외의 ㅣ목적으로 제작한 해양 정보 간행물"
-          }
-        ],
-        "answer": "none"
-      },
-      {
-        "uuid": "c50f3629-4f3e-4dd0-968b-99a1eb05e3cd",
-        "question": "국제수로기(IHO) 기준에 따라 해도에 표기되는 기호와 약어를 수록한 책자를 무엇이라고 하는가? ",
-        "selection": [
-          {
-            "idx": 1,
-            "item": "해도도식"
-          },
-          {
-            "idx": 2,
-            "item": "국제신호서"
-          },
-          {
-            "idx": 3,
-            "item": "항해용 간행물 목록"
-          },
-          {
-            "idx": 4,
-            "item": "해도국제표준"
-          }
-        ],
-        "answer": "none"
-      },
-      {
-        "uuid": "4429b880-b9ef-47d2-a4cc-70f53c38a0ba",
-        "question": "다은 중에서 해도의 특성과 거리가 먼 것은?",
-        "selection": [
-          {
-            "idx": 1,
-            "item": "단순화"
-          },
-          {
-            "idx": 2,
-            "item": "갱신화"
-          },
-          {
-            "idx": 3,
-            "item": "복잡성"
-          },
-          {
-            "idx": 4,
-            "item": "국제화"
+            "item": "보기 4"
           }
         ],
         "answer": 3
       },
       {
-        "uuid": "025fd6c2-ab1a-4aef-a3e5-576b79a9f6af",
-        "question": "해도의 목적과 관련이 적은 것은? ",
+        "uuid": "1ea6f214-cad4-4be5-9251-495a68b23c54",
+        "question": "초급 문제 - 2  /  답: 1",
         "selection": [
           {
             "idx": 1,
-            "item": "항해자와 정보 소통 역할"
+            "item": "보기 1"
           },
           {
             "idx": 2,
-            "item": "위치 결정 작업 도구 역할"
+            "item": "보기 2"
           },
           {
             "idx": 3,
-            "item": "자동 운항 백업 역할"
+            "item": "보기 3"
           },
           {
             "idx": 4,
-            "item": "법적 문서 역할"
+            "item": "보기 4"
           }
         ],
-        "answer": "none"
+        "answer": 1
+      },
+      {
+        "uuid": "ae6a4897-3cdd-4498-a8c4-5f2be7b985de",
+        "question": "초급 문제 - 3  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "eb071209-9acf-445f-a71e-d4d110ffef71",
+        "question": "초급 문제 - 4  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "5c64f923-0ea6-486a-9510-06492af5f751",
+        "question": "초급 문제 - 5  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "96b703f3-016d-4a65-ab85-80473345ab95",
+        "question": "초급 문제 - 6  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "9f8eb98e-292a-4442-943d-590eeb27d153",
+        "question": "초급 문제 - 7  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "baadd29f-5c39-4c36-afd0-a37345fec3fa",
+        "question": "초급 문제 - 8  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "0a07072f-7d40-4b8f-88e4-1bbe137ed271",
+        "question": "초급 문제 - 9  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "4011d188-3a13-4466-b5f9-1316e11ff67e",
+        "question": "초급 문제 - 10  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "194933c9-5d81-4906-8098-23fe828a1305",
+        "question": "초급 문제 - 11  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "693d1098-db72-4e75-9b48-8cfca3a15f53",
+        "question": "초급 문제 - 12  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "b9713dea-f3a5-45bb-887b-906386e46a19",
+        "question": "초급 문제 - 13  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "23a0fd54-d85e-44fa-8322-5a102f6ff59b",
+        "question": "초급 문제 - 14  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "82465fef-26a5-4a26-8e87-4f0effdade3a",
+        "question": "초급 문제 - 15  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "1b4a2dfb-f4f0-488d-88b3-a3b21844a00c",
+        "question": "초급 문제 - 16  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "a01db8f4-2835-4b04-98cc-3cfd81ef884e",
+        "question": "초급 문제 - 17  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "e97973a2-f962-4f25-be9b-e470a7060bd1",
+        "question": "초급 문제 - 18  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "72a6be05-d8b8-4bec-b3cd-e800ad5d24f7",
+        "question": "초급 문제 - 19  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "7a4efe33-4867-4d3c-af13-3ec709224cf7",
+        "question": "초급 문제 - 20  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "18742a9b-5313-41f8-80ed-f31b63134ab2",
+        "question": "초급 문제 - 21  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "e4a12c75-3866-45b2-b1b6-c39743021949",
+        "question": "초급 문제 - 22  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "bda0d206-f2aa-4559-accc-6ab44bfb7be5",
+        "question": "초급 문제 - 23  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "8b4cd0d0-fe93-4408-aea0-1539ab9b2b69",
+        "question": "초급 문제 - 24  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "2017bede-7bde-4da6-919b-973987010bc1",
+        "question": "초급 문제 - 25  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "2e7aa5aa-c032-48a9-a019-8d18a2fa53bd",
+        "question": "초급 문제 - 26  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "165127ef-6942-4dc5-8904-446118bcf58b",
+        "question": "초급 문제 - 27  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "59066632-c797-4833-a604-ecf08ecc41a0",
+        "question": "초급 문제 - 28  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "93e95c84-c349-4d75-8a44-87bdcbb29080",
+        "question": "초급 문제 - 29  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "98492763-722b-4a19-983a-3bd33dbc1998",
+        "question": "초급 문제 - 30  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "3a2ddb43-978f-4efe-b01a-6dad443828ef",
+        "question": "초급 문제 - 31  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "fa2f4585-4e8e-4611-8c7a-c63935dafea8",
+        "question": "초급 문제 - 32  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "d908373c-5378-4b5b-ad36-00b764ce0c39",
+        "question": "초급 문제 - 33  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "1a28bf94-746b-49bc-95d6-a10abd310066",
+        "question": "초급 문제 - 34  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "603247e8-3b06-4e20-a36d-b55f87edf212",
+        "question": "초급 문제 - 35  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "f5ace49f-6b5c-48a2-83fe-b8adbb885cf4",
+        "question": "초급 문제 - 36  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "d098b643-ff0a-4a68-ba18-03e9db54f822",
+        "question": "초급 문제 - 37  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "67b71fde-6e46-43c6-aaa9-9fabc39923dd",
+        "question": "초급 문제 - 38  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "fd12f737-8ed7-40ff-88bc-45c990207da2",
+        "question": "초급 문제 - 39  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "73d50a6d-a66b-41f7-ba1b-5bc4a36b6465",
+        "question": "초급 문제 - 40  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "d5d677b8-11e4-430a-bb26-b701aa40dcd1",
+        "question": "초급 문제 - 41  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "8bacf30e-0442-4ed1-be2c-ade64587bd36",
+        "question": "초급 문제 - 42  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "3f307ff8-e788-45a9-9ffb-24290a1c03b4",
+        "question": "초급 문제 - 43  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "a471cfdb-df62-4408-a74b-71fce21b153b",
+        "question": "초급 문제 - 44  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "138d99b6-dd7d-4b01-bd5b-42a45841f850",
+        "question": "초급 문제 - 45  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "d95784d0-cacd-4b5b-97ab-53784893b92d",
+        "question": "초급 문제 - 46  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "d430a5fd-9d62-46bc-8ab0-327a819f23c4",
+        "question": "초급 문제 - 47  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "65fbb3d2-ef28-477a-beb0-c7689258137d",
+        "question": "초급 문제 - 48  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "4e4954f5-e09d-407a-a660-a6aae50acea1",
+        "question": "초급 문제 - 49  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "dbbd19a5-de7e-42a8-96ea-0b37b20e9385",
+        "question": "초급 문제 - 50  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      }
+    ],
+    "itermediate": [
+      {
+        "uuid": "ff24fd78-1e0f-4246-90c2-7aee9b94a1a8",
+        "question": "중급 문제 - 1  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "7e201931-7a23-4ec7-a428-4eb3a394ac74",
+        "question": "중급 문제 - 2  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "ffb250b9-1589-4d6a-bb89-7015874ce931",
+        "question": "중급 문제 - 3  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "69deb1c1-05cc-4c9e-9bda-94f29ee6d761",
+        "question": "중급 문제 - 4  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "823337b4-e898-4a9e-99fd-3ed08da2ad72",
+        "question": "중급 문제 - 5  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "a3b522f8-d987-4f97-883e-1a75ea9bcc00",
+        "question": "중급 문제 - 6  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "f5e0adfb-2a04-491a-9073-911d913f450e",
+        "question": "중급 문제 - 7  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "33ffeaf3-b9aa-48a8-b8c5-7025b6bf2fb6",
+        "question": "중급 문제 - 8  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "c478d810-a78e-4371-9472-5bcade4db667",
+        "question": "중급 문제 - 9  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "136d81be-8abb-43c5-ba6f-0b61203cddb7",
+        "question": "중급 문제 - 10  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "f3263db7-e9e3-49c6-8252-e485e86a2cc1",
+        "question": "중급 문제 - 11  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "8fe590b5-ea07-44da-bbe0-5eb0369a7317",
+        "question": "중급 문제 - 12  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "8bdcce10-773b-442c-b258-6f9238b99300",
+        "question": "중급 문제 - 13  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "34643b9d-1866-4356-b700-33b6c2773eaf",
+        "question": "중급 문제 - 14  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "ff254257-6f73-426c-8355-f40870ba1c41",
+        "question": "중급 문제 - 15  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "d42c625b-6dde-460a-adf5-476a03856e9e",
+        "question": "중급 문제 - 16  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "29d8c888-2de1-4639-8a7d-9f8c1cdd9f91",
+        "question": "중급 문제 - 17  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "cfc1b711-8c75-41e6-9a89-a0e91547156a",
+        "question": "중급 문제 - 18  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "2346766c-f3ac-4ed8-91a4-d69b0c1584a2",
+        "question": "중급 문제 - 19  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "63af6a7c-adf6-478b-a643-820c72735a12",
+        "question": "중급 문제 - 20  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "2e6b09b3-57dd-475c-bc0e-f080c17b5efe",
+        "question": "중급 문제 - 21  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "8dc4f675-9a28-483b-8ade-dafaabdbb416",
+        "question": "중급 문제 - 22  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "e974867e-b076-4045-a7b0-24309ea774d4",
+        "question": "중급 문제 - 23  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "474c1c4e-ad3d-4513-a959-d9a3d28a92be",
+        "question": "중급 문제 - 24  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "ea330302-cc65-40f9-9d12-3a14f4618968",
+        "question": "중급 문제 - 25  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "eae21531-14f7-4c13-82af-49d0cbb14948",
+        "question": "중급 문제 - 26  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "381651ae-f88e-406d-a6cb-66d326a8135b",
+        "question": "중급 문제 - 27  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "85b1385a-f716-4368-924e-6b5c167022a1",
+        "question": "중급 문제 - 28  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "0040d817-f7e4-4f79-9dfb-572fde488b29",
+        "question": "중급 문제 - 29  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "e0597722-c6cd-46f8-9a31-4b501375136b",
+        "question": "중급 문제 - 30  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "9de9583f-d5fe-436d-8514-5ebf0f4501c9",
+        "question": "중급 문제 - 31  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "70ca5324-2fb3-4075-bba3-c07be0eb498f",
+        "question": "중급 문제 - 32  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "6f8cabfd-351a-4c19-948c-b48d3efaaea4",
+        "question": "중급 문제 - 33  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "88f7af9a-3c02-419b-9a5e-adbc1a32f69e",
+        "question": "중급 문제 - 34  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "17ee19b2-c1c0-46f3-9dec-e8495f7ca74a",
+        "question": "중급 문제 - 35  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "5ab44e62-1cba-4f84-8623-321a506324a2",
+        "question": "중급 문제 - 36  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "24d5fc7a-f8fa-40cb-a7c5-507fff0f727c",
+        "question": "중급 문제 - 37  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "ec8f9168-79dc-4e93-9df4-28e764d94ce7",
+        "question": "중급 문제 - 38  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "b1f3ec80-fe1e-46d9-99d8-daf807d27508",
+        "question": "중급 문제 - 39  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "acd86fce-3508-4f82-8ab0-882227172163",
+        "question": "중급 문제 - 40  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "1017e334-35a9-4c29-a039-41b0d323afb0",
+        "question": "중급 문제 - 41  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "44a4e6c0-1246-41f9-b3d4-7c40a5739e3c",
+        "question": "중급 문제 - 42  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "283d216c-3c18-4a63-8b76-759e85aedb23",
+        "question": "중급 문제 - 43  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "e80b45df-00ee-40a4-b47f-9665ec490e53",
+        "question": "중급 문제 - 44  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "07ab0b81-5276-40d5-9e9d-13e139b356c5",
+        "question": "중급 문제 - 45  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "3ed8ab0a-991b-4b33-90fe-001d964c7abf",
+        "question": "중급 문제 - 46  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "ae61b416-3b3c-4005-9e69-25e8b7714635",
+        "question": "중급 문제 - 47  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "fddda7a0-893f-4cd8-92aa-8a929541b7b9",
+        "question": "중급 문제 - 48  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "d9c623b3-eec6-4dfd-9c77-f3626661300e",
+        "question": "중급 문제 - 49  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "b44edc19-1bf2-4258-867e-97d1f5e00377",
+        "question": "중급 문제 - 50  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      }
+    ],
+    "advanced": [
+      {
+        "uuid": "3874074d-5d70-4356-a2aa-336bdbd5dff7",
+        "question": "고급 문제 - 1  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "9149417b-5fd3-486b-b5b3-d5ec42e30084",
+        "question": "고급 문제 - 2  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "29966374-ece3-41a0-b1b0-190094a6a89a",
+        "question": "고급 문제 - 3  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "b96c04b5-15fd-42ba-b05a-eba6f679613a",
+        "question": "고급 문제 - 4  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "8b55f75d-e4e3-4eed-b3d7-4d1fa2e22328",
+        "question": "고급 문제 - 5  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "ff789702-09c0-488f-b0bd-52fe3ebad338",
+        "question": "고급 문제 - 6  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "00e6e1f9-7f77-4cf0-8316-ddb0aff1a85a",
+        "question": "고급 문제 - 7  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "966db8ea-c856-4e59-b6bc-b0282c4132f2",
+        "question": "고급 문제 - 8  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "4c8d5ca2-dc93-4745-9c8f-c18533c9b452",
+        "question": "고급 문제 - 9  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "aa506d10-a8eb-4699-a263-2e9d9e4d9915",
+        "question": "고급 문제 - 10  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "63fcb957-96b8-454c-825f-8c297c06bb95",
+        "question": "고급 문제 - 11  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "4cebda7d-6a50-432d-bcf6-abc0f2f2253f",
+        "question": "고급 문제 - 12  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "35a184b2-1208-4749-9a38-de411e6d9a70",
+        "question": "고급 문제 - 13  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "8b916201-e2fd-4ee5-8920-cc51f7686fb1",
+        "question": "고급 문제 - 14  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "13793245-8097-4928-95a2-3d041d9f6dcd",
+        "question": "고급 문제 - 15  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "57594d39-3489-4e5b-9c9d-bfb9988180aa",
+        "question": "고급 문제 - 16  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "265631ea-302a-4794-8231-64ef8cfc2a22",
+        "question": "고급 문제 - 17  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "80bdaaef-97c1-41ad-b368-158ff5d587b0",
+        "question": "고급 문제 - 18  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "a04c448a-e3e7-41be-af49-ccd71f92d314",
+        "question": "고급 문제 - 19  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "f2dd4124-b15b-4137-998f-7af92b814962",
+        "question": "고급 문제 - 20  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "b2932f87-627b-4f64-8b5e-f821e25a5040",
+        "question": "고급 문제 - 21  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "fe41f79c-8e7b-4b4c-8525-2408f5f375c0",
+        "question": "고급 문제 - 22  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "f3156d48-61d9-456f-8cbb-ce36e6854634",
+        "question": "고급 문제 - 23  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "e258bf42-8f0f-47a7-9b3c-da5f6f37234a",
+        "question": "고급 문제 - 24  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "793f5dae-6834-4785-80e2-6bbd7c43ac1b",
+        "question": "고급 문제 - 25  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "ec03007c-0e47-461f-9ffa-669c28deba65",
+        "question": "고급 문제 - 26  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "d54f93dc-fc38-46cc-a44a-593aa7a284e8",
+        "question": "고급 문제 - 27  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "5a78499d-4047-403e-8966-af02dbdc69ab",
+        "question": "고급 문제 - 28  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "9e57e626-ce45-4c3e-a4ee-8aab4c73f7de",
+        "question": "고급 문제 - 29  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "a7364ce3-4a5f-4125-935d-ecb7002eec57",
+        "question": "고급 문제 - 30  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "c4d367dd-c4e0-411d-bcf3-2e5d3434cf7e",
+        "question": "고급 문제 - 31  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "853b190b-6584-4a17-8092-6e759485e3bd",
+        "question": "고급 문제 - 32  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "0f601124-9647-4e2a-b396-5747a9c03e01",
+        "question": "고급 문제 - 33  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "c5984a6f-833d-4cca-acf1-5ddd296be953",
+        "question": "고급 문제 - 34  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "63e38940-99c0-4490-b414-c38f150688d8",
+        "question": "고급 문제 - 35  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "4b83aa0b-0231-4071-b94c-7e7673833713",
+        "question": "고급 문제 - 36  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "7e4968a0-03e4-43a8-8355-deef53409219",
+        "question": "고급 문제 - 37  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "4c1f594f-3005-4af7-b04e-a0673852ab23",
+        "question": "고급 문제 - 38  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "5e60af72-8435-4b04-8a86-7566c61963e1",
+        "question": "고급 문제 - 39  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "cbaa4e27-4619-4b7e-8dbd-d20144eddc77",
+        "question": "고급 문제 - 40  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "9e5bec97-c596-4da9-8c1b-9827dd98de90",
+        "question": "고급 문제 - 41  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "40da8b05-25df-40a0-ab1a-6ebfd204d2e8",
+        "question": "고급 문제 - 42  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "89df53c1-9391-4cbc-967f-015ca38124a6",
+        "question": "고급 문제 - 43  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "b1b4218c-dc3b-4dd3-825c-6d3c47307b26",
+        "question": "고급 문제 - 44  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "eb483444-8beb-4d23-91a3-43c39d967135",
+        "question": "고급 문제 - 45  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "b414f133-6c53-443d-9d37-eba6fcfe46d6",
+        "question": "고급 문제 - 46  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "46214b9b-8232-4adf-bd32-efdb87ceb3fd",
+        "question": "고급 문제 - 47  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "a58cb1d6-449e-4220-803b-87a4743aec49",
+        "question": "고급 문제 - 48  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "d47f85b4-75cc-41c3-bb7b-af0ed47a9172",
+        "question": "고급 문제 - 49  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "1aef5b9b-b62f-4eae-a89e-a5a88e3f8285",
+        "question": "고급 문제 - 50  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      }
+    ],
+    "expert": [
+      {
+        "uuid": "965e2073-d4db-4613-865d-896d1abcd054",
+        "question": "특급 문제 - 1  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "406c95e3-2a1a-4665-8e8a-e530fe21914f",
+        "question": "특급 문제 - 2  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "c61e4b2c-6d1a-4421-bdd7-0af5646d9d11",
+        "question": "특급 문제 - 3  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "7a32acbf-fda0-432b-9f00-7e934947ba4b",
+        "question": "특급 문제 - 4  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "612c67c2-dfe7-4a1f-8b3d-7db447e6a25a",
+        "question": "특급 문제 - 5  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "0c6139bc-2ca9-4a4f-8cab-c65f358bb935",
+        "question": "특급 문제 - 6  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "dd19a814-7a55-483d-9cfd-ffd2d4c4ada3",
+        "question": "특급 문제 - 7  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "ad6458bb-6833-4443-81c7-84f56109e2f0",
+        "question": "특급 문제 - 8  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "642406f9-d6e9-4e83-9aa2-81889f3e7ce4",
+        "question": "특급 문제 - 9  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "6caf9c1b-4362-4b5a-a2b9-27efd0e96844",
+        "question": "특급 문제 - 10  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "791e0085-a575-492f-8406-49302199c85a",
+        "question": "특급 문제 - 11  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "4c34a647-2fc1-438a-a7bc-800e36cdab2b",
+        "question": "특급 문제 - 12  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "1e676496-2f0d-49d6-92bd-41f973d810c4",
+        "question": "특급 문제 - 13  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "9ef94819-b093-409a-8158-2678a03d4887",
+        "question": "특급 문제 - 14  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "6022ca5e-bf4e-497e-9956-0f87bfdd98c8",
+        "question": "특급 문제 - 15  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "d4a6efd0-b0ad-42c3-99d9-ef7cb59dafa2",
+        "question": "특급 문제 - 16  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "68a104b0-f2b5-4414-bcd8-3031cc4d16f9",
+        "question": "특급 문제 - 17  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "cd118240-14a2-4148-ab61-9a59e1b76ac2",
+        "question": "특급 문제 - 18  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "ac8edd69-68d9-4a0d-afbf-e12758031cf4",
+        "question": "특급 문제 - 19  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "b0213b04-5da6-428c-a2b8-5dd53324f79e",
+        "question": "특급 문제 - 20  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "d4b93405-4827-473a-9904-d6fdfa52ad75",
+        "question": "특급 문제 - 21  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "3112821b-006b-462e-9bcc-643332d847b5",
+        "question": "특급 문제 - 22  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "740c2f4a-9ffa-48c0-986e-520ee86c3b87",
+        "question": "특급 문제 - 23  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "91c1e9ef-e39f-4558-b135-091bc0184600",
+        "question": "특급 문제 - 24  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "e0e3d40d-ae27-438c-8e55-9d6b1b543391",
+        "question": "특급 문제 - 25  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "1290ae11-db8e-4c0d-9eda-596637ccd81a",
+        "question": "특급 문제 - 26  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "eff7fb9c-10da-4cd1-b833-a3a23376ec07",
+        "question": "특급 문제 - 27  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "ab233755-88a7-43ff-b99e-83fe1cd548f0",
+        "question": "특급 문제 - 28  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "ce295d82-a935-4d00-a8c8-71373d16211c",
+        "question": "특급 문제 - 29  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "e04b3c35-a585-4acf-b81d-110d04f1e019",
+        "question": "특급 문제 - 30  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "e48c17ec-950f-4c30-8f3b-8192d05319e6",
+        "question": "특급 문제 - 31  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "d7cb8413-f40d-409b-93b0-2c574d622cec",
+        "question": "특급 문제 - 32  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "e88e7c8c-76f0-4ccb-b2ae-16ab2deeffbe",
+        "question": "특급 문제 - 33  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "30489eb7-0cf0-402d-9f27-f6f05f8245dc",
+        "question": "특급 문제 - 34  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "eb909693-e4fe-4cf1-8d95-650eb8f8d139",
+        "question": "특급 문제 - 35  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "85813e6f-d929-4423-8a9b-671b41eb8ad0",
+        "question": "특급 문제 - 36  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "59485218-3769-463c-8670-c8fd15fa10c0",
+        "question": "특급 문제 - 37  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "31453f92-41f3-4208-a7ea-b79643d3c4a8",
+        "question": "특급 문제 - 38  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "e0028397-1ea1-452a-b98a-0448c89afc02",
+        "question": "특급 문제 - 39  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "c7669763-dd6c-4f16-aee1-cbc4b8af0062",
+        "question": "특급 문제 - 40  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "845a6ded-efd3-4dd8-be59-d024fbde0e43",
+        "question": "특급 문제 - 41  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "b4c9bd01-d392-47ba-a402-977af1111a45",
+        "question": "특급 문제 - 42  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "09e22514-81a9-4d4b-a262-81294b8aa7f9",
+        "question": "특급 문제 - 43  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "dfbc64b0-6495-4f0e-9a5a-dc99d9be47f0",
+        "question": "특급 문제 - 44  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "39c467d7-8beb-4f16-a1b3-f263f5f83b6e",
+        "question": "특급 문제 - 45  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "ec02fa60-6ef2-4bb7-ae02-76d9dc32cad5",
+        "question": "특급 문제 - 46  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "13c4fa90-80f0-4f06-9529-de05a1758ad3",
+        "question": "특급 문제 - 47  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "332f9c87-10d1-4a18-a5c6-16491da22e55",
+        "question": "특급 문제 - 48  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "2bee6077-4140-4059-b5e6-0b6df798f6be",
+        "question": "특급 문제 - 49  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "0f63d247-99bd-49bf-a49b-ed73ebb9846b",
+        "question": "특급 문제 - 50  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "ad71bbdc-6d44-45d4-9e42-ca95589cd8cd",
+        "question": "특급 문제 - 51  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "6d9be10f-5df8-4bee-ac45-071a9e928ce3",
+        "question": "특급 문제 - 52  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "404314c1-10db-4ebf-b5c3-fe6a51e84cad",
+        "question": "특급 문제 - 53  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "16c0139e-1f26-4e96-8cd1-9474e8c717d3",
+        "question": "특급 문제 - 54  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "5b3eb5e5-80cd-47be-8d56-8fb00dace9b9",
+        "question": "특급 문제 - 55  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "bf2482dd-ea7b-4d0a-97e1-aea6a586f9da",
+        "question": "특급 문제 - 56  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "e727ce46-ce76-44ac-baeb-de79e74099f9",
+        "question": "특급 문제 - 57  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "22cfc0d6-84c7-4036-88be-26ff2dcbfc8b",
+        "question": "특급 문제 - 58  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "ded9bbcb-4229-42af-9567-c59a3bf6226e",
+        "question": "특급 문제 - 59  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "081db534-4ee7-4775-9472-fd0f7242a497",
+        "question": "특급 문제 - 60  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "4b2eb48c-38d7-4f5b-96c9-5d063231a146",
+        "question": "특급 문제 - 61  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "5a84005f-9965-43a4-b3a8-e7c3dcdd1233",
+        "question": "특급 문제 - 62  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "3b7042d6-fad3-4bbb-a30c-362cb576fdfd",
+        "question": "특급 문제 - 63  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "89ef33be-9d1d-4518-8a50-1b8424c7eb29",
+        "question": "특급 문제 - 64  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "c3f76d44-4189-4919-b1f4-ce17e9e0515a",
+        "question": "특급 문제 - 65  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "62e00829-fa31-4f21-9e85-a3d0a75672fa",
+        "question": "특급 문제 - 66  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "7c961805-4f61-4338-8c58-3a982ab515e7",
+        "question": "특급 문제 - 67  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "75c89322-494e-4edb-aab1-b86ecac8e4bf",
+        "question": "특급 문제 - 68  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "f3448d92-eb07-4d43-a235-091a0a6fd483",
+        "question": "특급 문제 - 69  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "3a5da4c5-c8d8-4ba3-977e-5ed981b7bda2",
+        "question": "특급 문제 - 70  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "48d06c32-4ba9-44e1-9781-acf642ebabee",
+        "question": "특급 문제 - 71  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "a69b4260-96df-45ab-b533-49eb2056318e",
+        "question": "특급 문제 - 72  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "07bb5d97-9e0a-47c8-bb09-202ffce1311b",
+        "question": "특급 문제 - 73  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "48d018bb-5838-426e-b04f-f2967901656c",
+        "question": "특급 문제 - 74  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "316670c0-77f5-4955-8df1-24d261982670",
+        "question": "특급 문제 - 75  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "080e6ff3-97ff-485c-ab43-36bcc71ffe97",
+        "question": "특급 문제 - 76  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "b30dcafa-758b-4155-8fec-5bc506b391fa",
+        "question": "특급 문제 - 77  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "9e5bf215-57dc-444a-8e3c-2d02e122f5f0",
+        "question": "특급 문제 - 78  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "b8bd44a2-23b7-447b-aef7-954992e730f4",
+        "question": "특급 문제 - 79  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "86f16ffe-f80a-4f93-8883-5be9d45c9f8b",
+        "question": "특급 문제 - 80  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "78da5c61-8099-4acb-863b-a8d37ac797f3",
+        "question": "특급 문제 - 81  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "80f6ec43-e138-4c06-8471-b57cf036891b",
+        "question": "특급 문제 - 82  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "61e89573-d52e-4c3b-9501-7ce7a516d698",
+        "question": "특급 문제 - 83  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "78e5696a-8b99-4de6-9fa6-c5cc6b9ae551",
+        "question": "특급 문제 - 84  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "c8248a6e-5674-4f9c-ba2a-40baec68db86",
+        "question": "특급 문제 - 85  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "260b7e94-cc8a-4c3e-a4a5-2a08e3d0e387",
+        "question": "특급 문제 - 86  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "1780a5fb-0111-4183-90dd-e2810c81a4d4",
+        "question": "특급 문제 - 87  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "9f4f1337-ab19-4e64-952b-c55384e28e9d",
+        "question": "특급 문제 - 88  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "9b75607d-8036-4db8-b878-2dcc233610fb",
+        "question": "특급 문제 - 89  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "48ea4964-ba82-4702-91f1-580943a6bbee",
+        "question": "특급 문제 - 90  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "d2e874b0-7878-4bf4-baea-d6e40ac5a63c",
+        "question": "특급 문제 - 91  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "7e72499d-fc4f-4e94-9353-aa1022f0a974",
+        "question": "특급 문제 - 92  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "13b960e2-d8b7-4886-bd18-47456e2f0087",
+        "question": "특급 문제 - 93  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "6e0dd5f6-a909-4c38-99d9-7d28c94a9715",
+        "question": "특급 문제 - 94  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "21327001-6309-4fd3-9075-8e824505eabf",
+        "question": "특급 문제 - 95  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "6e90da17-2a9c-4d5c-80d3-390cce6ae484",
+        "question": "특급 문제 - 96  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
+      },
+      {
+        "uuid": "37d59a4c-26a9-4733-a08e-74a6ee350de1",
+        "question": "특급 문제 - 97  /  답: 4",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 4
+      },
+      {
+        "uuid": "99ef5965-e321-407e-9902-bd9b1c05f4f9",
+        "question": "특급 문제 - 98  /  답: 2",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 2
+      },
+      {
+        "uuid": "9e4d4fc5-a63a-4b7e-9002-3d85ce6d11b3",
+        "question": "특급 문제 - 99  /  답: 1",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 1
+      },
+      {
+        "uuid": "d66d272d-b940-4100-a7c7-da63b02f6413",
+        "question": "특급 문제 - 100  /  답: 3",
+        "selection": [
+          {
+            "idx": 1,
+            "item": "보기 1"
+          },
+          {
+            "idx": 2,
+            "item": "보기 2"
+          },
+          {
+            "idx": 3,
+            "item": "보기 3"
+          },
+          {
+            "idx": 4,
+            "item": "보기 4"
+          }
+        ],
+        "answer": 3
       }
     ]
   },
