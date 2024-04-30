@@ -3,7 +3,7 @@
 import { getCurrentQuestion, setTestResultDb, setFinishTestDb } from "@/component/db";
 import { useState, useEffect } from "react";
 import { getSessionInfo } from "@/app/login/action";
-import  marking  from './marking'
+import marking from './marking'
 
 function shuffle(question) {
     for (let i = question.length - 1; i > 0; i--) {
@@ -20,8 +20,6 @@ export default function testPage() {
     const [session, setSession] = useState();
     const [testResult, setTestResult] = useState({});
     const [testFinish, setTestFinish] = useState(false);
-
-    // {testResult: {passed: true, score: 0}}
 
     useEffect(() => {
         const fetchTest = async () => {
@@ -57,22 +55,18 @@ export default function testPage() {
 
         // setQuestions(newQuestions); -> didn't rendering
         setQuestions([...newQuestions]);
-        // console.log("after questions ", newQuestions);
-
         const answer = { uuid: uuid, selected: idx }
-
-        console.log("!!! answer", uuid, idx);
         setTestResultDb(session, answer);
     }
 
     const setTestEnd = async () => {
-        console.log("submit");
-        setFinishTestDb(session.clientId);
+        console.log("submit", session);
+        // setFinishTestDb(session.clientId);
         setTestFinish(true);
-        setTestResult(await marking());
+        setTestResult(await marking(session));
 
-        const ttt = await marking();
-        console.log("marking", ttt, ttt['score']);
+        // const ttt = await marking();
+        // console.log("marking", ttt, ttt['score']);
     }
     // if (!onGoing)
     //     return <div> not yet start</div>
@@ -81,8 +75,8 @@ export default function testPage() {
     const Footer = () => {
         if (testFinish === false) {
             return (
-                <div>
-                    <button className='bg-blue-500 rounded'
+                <div className='mx-auto'>
+                    <button className='bg-blue-500 rounded-full w-32 h-8 mx-8'
                         onClick={setTestEnd}> 제 출 </button>
                 </div>
             )
@@ -90,16 +84,16 @@ export default function testPage() {
             return (
                 <div>
                     <p> score: {testResult.score}</p>
-                    <p> pass : {testResult.passed ? "시험 통과함" : "시험 통과하지 못함" }</p>
-                    {testResult.passed ? ( 
-                    <a href="/pages/user/survey" className="bg-blue-500 block mt-4 lg:inline-block lg:mt-0 font-bold  mr-4">
-                       go to survey 
-                    </a>
+                    <p> pass : {testResult.passed ? "시험 통과함" : "시험 통과하지 못함"}</p>
+                    {testResult.passed ? (
+                        <a href="/pages/user/survey" className="bg-blue-500 block mt-4 lg:inline-block lg:mt-0 font-bold  mr-4">
+                            go to survey
+                        </a>
                     ) : (
                         <div> .... </div>
-                    // <a href="/pages/user/survey" className="bg-blue-500 block mt-4 lg:inline-block lg:mt-0 font-bold  mr-4">
-                    //    go to survey 
-                    // </a>
+                        // <a href="/pages/user/survey" className="bg-blue-500 block mt-4 lg:inline-block lg:mt-0 font-bold  mr-4">
+                        //    go to survey 
+                        // </a>
                     )}
                 </div>
             )
@@ -108,13 +102,14 @@ export default function testPage() {
 
     return (
         <div className="flex flex-col">
-            <div>
+            <div className='mx-auto'>
                 {session?.userName + ' ' + session?.userAffiliation};
             </div>
-            <div className='py-4 space-y-4'>
+            <div className='py-4 space-y-4 mx-auto'>
                 {questions &&
                     (questions.map(({ uuid, question, selection, selectedAnswer }, qIdx) => (
-                        <div key={uuid}>
+                        <div className=''
+                            key={uuid}>
                             <p>{(qIdx + 1) + '. ' + question}</p>
                             {selection.map(({ idx, item }) => (
                                 ((selectedAnswer === idx) ?
@@ -134,7 +129,7 @@ export default function testPage() {
                             )}
                         </div>
                     )))}
-                <div className="">
+                <div className="justify-items-center">
                     <Footer />
                 </div>
             </div>

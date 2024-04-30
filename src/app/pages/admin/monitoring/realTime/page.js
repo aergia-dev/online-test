@@ -13,8 +13,11 @@ export default function Monitoring() {
 
   const toggleTestOnGoing = (status) => {
     if (testTitle) {
+      //todo: move into db
+      const minimumScore = 8;
+
       setTestOnGoing(status);
-      setCurretnTestDB(testTitle, status);
+      setCurretnTestDB(testTitle, status, minimumScore);
       setReadingDb(status);
     }
     else {
@@ -52,7 +55,6 @@ export default function Monitoring() {
       intervalId = setInterval(() => {
         readTestResult();
       }, 5000);
-
     // }
 
     return () => clearInterval(intervalId);

@@ -67,10 +67,10 @@ export async function loadTestList() {
     return db.data.testList;
 }
 
-export async function setCurretnTestDB(title, onGoing) {
+export async function setCurretnTestDB(title, onGoing, minimumScore) {
     const db = await JSONFilePreset('db.json', dbTemplate);
     db.read();
-    db.data.currentTest = { title: title, onGoing: onGoing };
+    db.data.currentTest = { title: title, onGoing: onGoing, minScore:  minimumScore};
     db.write();
 
     if (onGoing) {
@@ -136,8 +136,8 @@ export async function setTestResultDb(userInfo, answer) {
     const result = await db.data.testResult.userResult?.find((result) => result.userInfo['clientId'] === userInfo.clientId);
 
 
-    console.log("!!! answer", answer.uuid, answer.selected);
-    console.log("set test result: ", result)
+    // console.log("!!! answer", answer.uuid, answer.selected);
+    // console.log("set test result: ", result)
     if (result === undefined) {
         db.data.testResult.userResult.push({
             userInfo: userInfo, answer: [
@@ -159,7 +159,25 @@ export async function setTestResultDb(userInfo, answer) {
     }
 
     db.write();
+}
 
+export async function setFinalizeTestResulttDb(testResult){
+    const db = await JSONFilePreset('db.json', dbTemplate);
+    db.read();
+    const userResult =  db.data.testResult.userResult; 
+    const target = await userResult.find((result) => result.userInfo.clientId === clientId);
+    target['question'] = testResult.question;
+    target['userInfo']['score'] = testResult.userInfo.score;
+    target['endTime'] = new Date(); 
+    db.write();
+}
+
+export async function getUserTestResultDb(userInfo) {
+    const db = await JSONFilePreset('db.json', dbTemplate);
+    db.read();
+    const result = await db.data.testResult.userResult?.find((result) => result.userInfo['clientId'] === userInfo.clientId);
+
+    return result;
 }
 
 export async function getTestOnGoing() {
@@ -170,15 +188,15 @@ export async function getTestOnGoing() {
     return testOnGoing;
 }
 
-export async function setFinishTestDb(clientId) {
-    const db = await JSONFilePreset('db.json', dbTemplate);
-    db.read();
-    const userResult =  db.data.testResult.userResult; 
-    const target = await userResult.find((result) => result.userInfo.clientId === clientId);
-    console.log("##### ", clientId, target);
-    target['endTime'] = new Date(); 
-    db.write();
-}
+// export async function setFinishTestDb(clientId) {
+//     const db = await JSONFilePreset('db.json', dbTemplate);
+//     db.read();
+//     const userResult =  db.data.testResult.userResult; 
+//     const target = await userResult.find((result) => result.userInfo.clientId === clientId);
+//     console.log("##### ", clientId, target);
+//     target['endTime'] = new Date(); 
+//     db.write();
+// }
 
 export async function getTestResult() {
     const db = await JSONFilePreset('db.json', dbTemplate);
