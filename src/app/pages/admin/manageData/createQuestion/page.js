@@ -145,33 +145,6 @@ function makePreview(content, setPreview, setRawQuestion) {
     setPreview(previewQuestion(question, changeAnswer));
 }
 
-const testData = " \n\
-2. 항해용 간행물에 포함되지 않는 것은? \n\
- ① 항해용 해도, 전자해도\n\
- ② 조석표, 등대표, 항로지 등을 포함하는 항해서지\n\
- ③ 항해용 간행물의 변경이 필요한 사항 등으로 포함하는 항행통보\n\
- ④ 항해 이외의 ㅣ목적으로 제작한 해양 정보 간행물\n\
-\n\
-2. 국제수로기(IHO) 기준에 따라 해도에 표기되는 기호와 약어를 수록한 책자를 무엇이라고 하는가? \n\
- ① 해도도식 \n\
- ② 국제신호서 \n\
- ③ 항해용 간행물 목록 \n\
- ④ 해도국제표준 \n\
-\n\
-3. 다은 중에서 해도의 특성과 거리가 먼 것은?\n\
- ① 단순화\n\
- ② 갱신화\n\
- ③ 복잡성\n\
- ④ 국제화\n\
-\n\
-4. 해도의 목적과 관련이 적은 것은? \n\
- ① 항해자와 정보 소통 역할 \n\
- ② 위치 결정 작업 도구 역할 \n\
- ③ 자동 운항 백업 역할  \n\
- ④ 법적 문서 역할 \n";
-
-
-
 export default function CreateQuestion() {
     const ref = useRef(null);
     const [preview, setPreview] = useState("null");

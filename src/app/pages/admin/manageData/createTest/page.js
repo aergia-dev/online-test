@@ -28,24 +28,14 @@ export default function CreateTest({ props }) {
     }, []);
 
     const handleOptionClick = (selectedLevel) => {
-        // console.log("selected: ", selectedLevel)
         setSelectedOption(selectedLevel);
         setIsDropdownOpened(false);
         setQuestion(fullQuestion['questionPool'][selectedLevel['level']]);
-        // console.log("qeustion ", question);
-        // console.log("qeustion full", fullQuestion['questionPool'][selectedLevel['level']]);
     }
 
     const selectQuestion = (uuid, question, selection, answer) => {
         const curSelectedQ = selectedQ;
-        // console.log(typeof (curSelectedQ));
-        // curSelectedQ.push({ uuid: uuid, qustion: question, selection: selection });
-        setSelectedQ(curSelectedQ => { return [...curSelectedQ, { uuid: uuid, question: question, selection: selection, answer:answer }]; });
-        // console.log('curSelectedQ', curSelectedQ);
-        // selectedQ.map(({ uuid, question, selection }) => {
-
-        //     console.log('selected q item', uuid, question, selection);
-        // });
+        setSelectedQ(curSelectedQ => { return [...curSelectedQ, { uuid: uuid, question: question, selection: selection, answer: answer }]; });
     };
     const saveTestOnClick = () => {
         console.log("save", nthTest, " - ", selectedQ);
@@ -57,10 +47,10 @@ export default function CreateTest({ props }) {
 
     return (
         <div className="flex flex-col w-full">
-            <div className="flex flex-row w-full py-5">
-                <div className="flex space-x-4 space-y-4 px-10">
-                    <div className="relative inline-block text-left ">
-                        <div>
+            <div className="flex flex-row w-full space-x-4 px-4 py-4 justify-center items-stretch">
+                <div className="flex space-x-4 space-y-4 px-10 py-1 items-center">
+                    <div className="relative inline-block text-left">
+                        <div className=''>
                             <button type="button"
                                 className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                                 id="menu-button"
@@ -74,7 +64,7 @@ export default function CreateTest({ props }) {
                             </button>
                         </div>
                         {isDropdownOpened && (
-                            <div className=" right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
+                            <div className="absolute right-0 z-10 mt-2 w-32 text-center origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
                                 <div className="py-1" role="none">
                                     {levels.map((levels, idx) => (
                                         <a href="#" className="text-gray-700 block px-4 py-2 text-sm"
@@ -91,21 +81,21 @@ export default function CreateTest({ props }) {
                         )}
                     </div>
                 </div>
-                <div>
+                <div className='py-2'>
                     <label> 회차: </label>
-                    <input className="border rounded px-3 py-2 mb-3 text-gray-800"
-                            id="nthTest"
-                            value={nthTest}
-                            onChange={inputOnChange}>
+                    <input className="border rounded px-3 py-1 text-gray-800"
+                        id="nthTest"
+                        value={nthTest}
+                        onChange={inputOnChange}>
                     </input>
                 </div>
-                <button className='border border-2 bg-blue-200 px-3 py-2 rounded'
-                onClick={() => {saveTestOnClick();}}>
+                <button className='bg-blue-600 text-white px-4 py-1 w-24 rounded-full'
+                    onClick={() => { saveTestOnClick(); }}>
                     저장
                 </button>
             </div>
             <div className='flex flex-row w-full'>
-                <div className='w-1/2 y-2 gap-2'>
+                <div className='w-1/2 y-2 gap-2 px-8'>
                     {question && (question.map(({ uuid, question, selection, answer }) => (
                         <div className='border border-gray-300 border-2 px-2 py-2'
                             onClick={() => { selectQuestion(uuid, question, selection, answer); }}
@@ -119,13 +109,25 @@ export default function CreateTest({ props }) {
                     )}
                 </div>
                 <div className='w-1/2'>
-                    <div className='w-1/2 y-2 gap-2'>
-                        {selectedQ && (selectedQ.map(({ uuid, question, selection }) => (
-                            <div className='border border-gray-300 border-2 px-2 py-2'
+                    <div className='w-1/2 y-2 gap-2 px-8 space-y-2'>
+                        {selectedQ && (selectedQ.map(({ uuid, question, selection, answer }, idx) => (
+                            <div className='border border-gray-300 border-2 px-2 '
                                 key={'selected' + uuid}>
-                                <p key={'selected-question' + uuid}>{question}</p>
-                                {selection.map(({ idx, item }) =>
-                                    (<p key={'selected-selection-' + idx + uuid}> {idx + '. ' + item} </p>))}
+                                <p key={'selected-question' + uuid}>{(idx + 1) + '. ' + question}</p>
+                                {selection.map(({ idx, item }) => {
+                                    if (answer === idx) {
+                                        return <p key={'selected-selection-' + idx + uuid}
+                                            className='indent-4 text-red-400'>
+                                            {idx + '. ' + item}
+                                        </p>
+                                    }
+                                    else {
+                                        return <p key={'selected-selection-' + idx + uuid}
+                                            className='indent-4'>
+                                            {idx + '. ' + item}
+                                        </p>
+                                    }
+                                })}
                             </div>
                         )))}
                     </div>
