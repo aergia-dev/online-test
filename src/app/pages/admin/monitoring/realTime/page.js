@@ -2,7 +2,7 @@
 
 import SelectTest from './selectTest'
 import { useState, useEffect } from 'react'
-import { setCurretnTestDB, getCurrentTestDB, getTestResult, getCurrentQuestionCnt, getTestOnGoing } from '@/component/db'
+import { setAllTestResultDb, setCurretnTestDB, getCurrentTestDB, getTestResult, getCurrentQuestionCnt, getTestOnGoing } from '@/component/db'
 
 export default function Monitoring() {
   const [testOnGoing, setTestOnGoing] = useState();
@@ -19,6 +19,13 @@ export default function Monitoring() {
       setTestOnGoing(status);
       setCurretnTestDB(testTitle, status, minimumScore);
       setReadingDb(status);
+
+      //info: end of test
+      if(status === false)
+      {
+        //move testResult in db to testResult.json
+        setAllTestResultDb();
+      }
     }
     else {
       alert("should select test");
@@ -41,7 +48,6 @@ export default function Monitoring() {
         console.log("currentTest", currentTest);
         setTestTitle(currentTest.title);
       }
-
     }
 
     updateInitValue();
@@ -54,7 +60,7 @@ export default function Monitoring() {
     // if (readingDb) {
       intervalId = setInterval(() => {
         readTestResult();
-      }, 5000);
+      }, 1000);
     // }
 
     return () => clearInterval(intervalId);

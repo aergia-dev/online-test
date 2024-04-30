@@ -235,3 +235,16 @@ export async function getLevelDb() {
     db.read();
     return db.data['levels'];
 }
+
+export async function setAllTestResultDb() {
+    const db = await JSONFilePreset('db.json', {});
+    db.read();
+
+    const resultDb = await JSONFilePreset('testResult.json', {});
+    resultDb.read();
+    resultDb['testResult'].push(db.data.testResult);
+    resultDb.write();
+
+    db.testResult = [];
+    db.write();
+}
