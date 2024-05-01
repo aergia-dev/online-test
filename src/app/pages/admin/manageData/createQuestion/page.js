@@ -26,7 +26,8 @@ function previewSingleQuestion(question, changeAnswerFn) {
                     const Skey = Qkey + "-" + idx;
                     const Ckey = Qkey + "-" + idx + "-C";
                     return (
-                        <div className="flex flex-row">
+                        <div className="flex flex-row"
+                             key={Skey + Ckey}>
                             <input type="checkbox" id={Ckey} onChange={(e) => {
                                 checkboxOnChange(question, idx, e.target.checked);
                             }} />

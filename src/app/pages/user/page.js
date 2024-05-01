@@ -15,7 +15,7 @@ function shuffle(question) {
 }
 
 
-export default function testPage() {
+export default function TestPage() {
     const [questions, setQuestions] = useState([]);
     const [session, setSession] = useState();
     const [testResult, setTestResult] = useState({});
