@@ -16,6 +16,9 @@ export default async function LoginFrom() {
 
 
 function Login() {
+  // const loginFn = () {
+  // }
+  
   return (
     <form
       action={login}
@@ -78,17 +81,17 @@ function Login() {
 }
 
 
-function LogoutButton() {
-  const { logout } = useSession();
+// function LogoutButton() {
+//   const { logout } = useSession();
 
-  return (
-    <p>
-      <a className=""
-        onClick={(event) => {
-          event.preventDefault();
-          logout(null, { optimisticData: DefaultSession, });
-        }}
-      > log out</a>
-    </p>
-  )
-}
+//   return (
+//     <p>
+//       <a className=""
+//         onClick={(event) => {
+//           event.preventDefault();
+//           logout(null, { optimisticData: DefaultSession, });
+//         }}
+//       > log out</a>
+//     </p>
+//   )
+// }

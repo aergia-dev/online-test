@@ -81,9 +81,7 @@ export async function setCurretnTestDB(title, onGoing, minimumScore) {
             endTime: undefined,
             userResult: []
         };
-    } else {
-        db.data.testResult = {};
-    }
+    } 
 
     db.write();
     // const restResult = db.data.testResult.push({})
@@ -165,10 +163,11 @@ export async function setFinalizeTestResulttDb(testResult){
     const db = await JSONFilePreset('db.json', dbTemplate);
     db.read();
     const userResult =  db.data.testResult.userResult; 
-    const target = await userResult.find((result) => result.userInfo.clientId === clientId);
+    const target = await userResult.find((result) => result.userInfo.clientId === testResult.userInfo.clientId);
     target['question'] = testResult.question;
     target['userInfo']['score'] = testResult.userInfo.score;
     target['endTime'] = new Date(); 
+    console.log("target", target)
     db.write();
 }
 
@@ -240,11 +239,30 @@ export async function setAllTestResultDb() {
     const db = await JSONFilePreset('db.json', {});
     db.read();
 
+    console.log('test result', db.data.testResult);
     const resultDb = await JSONFilePreset('testResult.json', {});
     resultDb.read();
-    resultDb['testResult'].push(db.data.testResult);
+    resultDb.data['testResult'].push(db.data.testResult);
     resultDb.write();
 
     db.testResult = [];
     db.write();
+}
+
+export async function getAllTestResultDb(title) {
+    const resultDb = await JSONFilePreset('testResult.json', {});
+    resultDb.read();
+    
+    const testReslut = await resultDb.data['testResult'].find((a) => a.title === title);
+
+    return testReslut;
+}
+
+export async function getAllTestResultTilesDb() {
+    const resultDb = await JSONFilePreset('testResult.json', {});
+    resultDb.read();
+    console.log('resultDb', resultDb.data);
+    const titles =  resultDb.data['testResult'].map((result) => result.title)    
+
+    return titles;
 }

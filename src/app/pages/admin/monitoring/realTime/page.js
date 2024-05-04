@@ -11,7 +11,7 @@ export default function Monitoring() {
   const [testResult, setTestResult] = useState([]);
   const [quesitonCnt, setQuestionCnt] = useState();
 
-  const toggleTestOnGoing = (status) => {
+  const toggleTestOnGoing = async (status) => {
     if (testTitle) {
       //todo: move into db
       const minimumScore = 8;
@@ -20,11 +20,12 @@ export default function Monitoring() {
       setCurretnTestDB(testTitle, status, minimumScore);
       setReadingDb(status);
 
+      console.log('status', status);
       //info: end of test
       if(status === false)
       {
         //move testResult in db to testResult.json
-        setAllTestResultDb();
+        await setAllTestResultDb();
       }
     }
     else {

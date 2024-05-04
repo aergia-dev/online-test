@@ -46,7 +46,7 @@ export async function getSession() {
 }
 
 export async function login(formData) {
-    'use server';
+    // 'use server';
     console.log("login");
     const session = await getSession();
     session.userId = formData.get('userId');
@@ -69,7 +69,7 @@ export async function login(formData) {
 }
 
 export async function logout() {
-    'use server';
+    // 'use server';
     const session = await getSession();
     session.destroy();
 }

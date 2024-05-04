@@ -1,12 +1,13 @@
 'use client'
 
 import SurveyPriview from "@/component/surveyPreview";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Link } from "react";
 import { getSurveyDb, setSurveyResultDb } from '@/component/db'
 import { getSession } from "@/app/login/action";
 
 export default function Survey() {
     const [surveyForm, setSurveyForm] = useState(null);
+    const [fin, setFin] = useState(false);
 
     const onAction = ({ key, rowIdx, colIdx, choiceIdx, uuid }) => {
         console.log("onAction", key, rowIdx, colIdx, choiceIdx, uuid);
@@ -50,6 +51,7 @@ export default function Survey() {
         if (validation(surveyForm)) {
             const userInfo = await getSession();
             await setSurveyResultDb(userInfo, surveyForm);
+            setFin(true);
         }
         else {
             alert("there is not selected item");
@@ -66,6 +68,9 @@ export default function Survey() {
         updateInitVal();
     }, []);
 
+    if(fin)
+        return (<div> fin.. close window</div>)
+    else
     return (
         <div className='m-16'>
             {surveyForm ?
