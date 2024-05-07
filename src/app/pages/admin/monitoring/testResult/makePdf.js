@@ -43,7 +43,7 @@ export function makeQuestionPreview(userInfo, questions, answer) {
         </div>);
 }
 
-export function makeQuestionPreview2(userInfo, questions, answer) {
+export function makeQuestionPreview2({userInfo, questions, answer}) {
 
     const findAnswer = (uuid) => {
         const item = answer.filter(a => a.uuid === uuid);
