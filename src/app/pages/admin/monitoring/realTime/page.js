@@ -2,7 +2,7 @@
 
 import SelectTest from './selectTest'
 import { useState, useEffect } from 'react'
-import { setAllTestResultDb, setCurretnTestDB, getCurrentTestDB, getTestResult, getCurrentQuestionCnt, getTestOnGoing } from '@/component/db'
+import { setEndTestDb, setCurretnTestDB, getCurrentTestDB, getTestResultDb, getCurrentQuestionCnt, getTestOnGoing } from '@/component/db'
 
 export default function Monitoring() {
   const [testOnGoing, setTestOnGoing] = useState();
@@ -25,7 +25,7 @@ export default function Monitoring() {
       if(status === false)
       {
         //move testResult in db to testResult.json
-        await setAllTestResultDb();
+        await setEndTestDb();
       }
     }
     else {
@@ -34,7 +34,7 @@ export default function Monitoring() {
   }
 
   const readTestResult = async () => {
-    const r = await getTestResult();
+    const r = await getTestResultDb();
     console.log("got result: ", r);
     setTestResult(r['userResult']);
   }

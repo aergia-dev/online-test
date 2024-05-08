@@ -70,7 +70,7 @@ export async function loadTestList() {
 export async function setCurretnTestDB(title, onGoing, minimumScore) {
     const db = await JSONFilePreset('db.json', dbTemplate);
     db.read();
-    db.data.currentTest = { title: title, onGoing: onGoing, minScore:  minimumScore};
+    db.data.currentTest = { title: title, onGoing: onGoing, minScore: minimumScore };
     db.write();
 
     if (onGoing) {
@@ -81,7 +81,7 @@ export async function setCurretnTestDB(title, onGoing, minimumScore) {
             endTime: undefined,
             userResult: []
         };
-    } 
+    }
 
     db.write();
     // const restResult = db.data.testResult.push({})
@@ -144,12 +144,10 @@ export async function setTestResultDb(userInfo, answer) {
         });
     } else {
         const alreadAnswered = await result.answer.find((a) => a.uuid === answer.uuid);
-        if(alreadAnswered === undefined) 
-        {
+        if (alreadAnswered === undefined) {
             result.answer.push({ uuid: answer.uuid, answer: answer.selected });
         }
-        else
-        {
+        else {
             alreadAnswered.answer = answer.selected;
             console.log("alreadAnswered", alreadAnswered);
         }
@@ -159,14 +157,14 @@ export async function setTestResultDb(userInfo, answer) {
     db.write();
 }
 
-export async function setFinalizeTestResulttDb(testResult){
+export async function setFinalizeTestResulttDb(testResult) {
     const db = await JSONFilePreset('db.json', dbTemplate);
     db.read();
-    const userResult =  db.data.testResult.userResult; 
+    const userResult = db.data.testResult.userResult;
     const target = await userResult.find((result) => result.userInfo.clientId === testResult.userInfo.clientId);
     target['question'] = testResult.question;
     target['userInfo']['score'] = testResult.userInfo.score;
-    target['endTime'] = new Date(); 
+    target['endTime'] = new Date();
     console.log("target", target)
     db.write();
 }
@@ -197,20 +195,20 @@ export async function getTestOnGoing() {
 //     db.write();
 // }
 
-export async function getTestResult() {
+export async function getTestResultDb() {
     const db = await JSONFilePreset('db.json', dbTemplate);
     db.read();
-    
+
     return db.data.testResult;
 }
 
 export async function setSurveyResultDb(userInfo, survey) {
     const db = await JSONFilePreset('db.json', dbTemplate);
     db.read();
-    const userResult =  db.data.testResult.userResult; 
+    const userResult = db.data.testResult.userResult;
     const target = await userResult.find((result) => result.userInfo.clientId === userInfo.clientId);
     console.log("##### ", userInfo.clientId, target);
-    target['surveyResult'] = survey; 
+    target['surveyResult'] = survey;
     db.write();
 }
 
@@ -235,24 +233,26 @@ export async function getLevelDb() {
     return db.data['levels'];
 }
 
-export async function setAllTestResultDb() {
+export async function setEndTestDb() {
     const db = await JSONFilePreset('db.json', {});
     db.read();
-
     console.log('test result', db.data.testResult);
-    const resultDb = await JSONFilePreset('testResult.json', {});
-    resultDb.read();
-    resultDb.data['testResult'].push(db.data.testResult);
-    resultDb.write();
 
-    db.testResult = [];
+    //only save when there is test result
+    if (db.data.testResult.userResult.length> 0) {
+        const resultDb = await JSONFilePreset('testResult.json', {});
+        resultDb.read();
+        resultDb.data['testResult'].push(db.data.testResult);
+        resultDb.write();
+    }
+    db.data.testResult = {};
     db.write();
 }
 
 export async function getAllTestResultDb(title) {
     const resultDb = await JSONFilePreset('testResult.json', {});
     resultDb.read();
-    
+
     const testReslut = await resultDb.data['testResult'].find((a) => a.title === title);
 
     return testReslut;
@@ -262,7 +262,7 @@ export async function getAllTestResultTilesDb() {
     const resultDb = await JSONFilePreset('testResult.json', {});
     resultDb.read();
     console.log('resultDb', resultDb.data);
-    const titles =  resultDb.data['testResult'].map((result) => result.title)    
+    const titles = resultDb.data['testResult'].map((result) => result.title)
 
     return titles;
 }
