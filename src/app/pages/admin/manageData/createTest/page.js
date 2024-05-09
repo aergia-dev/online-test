@@ -1,42 +1,70 @@
 'use client'
-// import LevelDropdown from './init';
-import { useState, useEffect } from 'react';
-import getQuestion from '@/api/dbQuestion'
-import { saveTest } from '@/component/db'
+import React, { useState, useEffect } from 'react';
+import { saveTest, getLevelQuestionsDB, getLevelDb } from '@/component/db'
+import Image from 'next/image'
 
 export default function CreateTest({ props }) {
     const [levels, setLevels] = useState({});
     const [isDropdownOpened, setIsDropdownOpened] = useState(false);
     const [toggle, setToggle] = useState();
     const [selectedOption, setSelectedOption] = useState();
-    const [fullQuestion, setFullQuestion] = useState();
+    // const [fullQuestion, setFullQuestion] = useState();
     const [question, setQuestion] = useState();
     const [selectedQ, setSelectedQ] = useState([]);
     const [nthTest, setNthTest] = useState("");
 
-    const updateLevels = async () => {
-        const q = await getQuestion();
-        console.log("levels", q['levels']);
-        setLevels(q['levels']);
-        setFullQuestion(q);
-        return q['levels'];
+    function renderQuestion(questions, onClick) {
+        const renderSingleQ = ({ Quuid, Qtype, Qtext, Qimg, Qselection, Qanswer }) => {
+            console.log('qimg', Qimg);
+            const isMultChoice = Qtype === 'multChoice';
+            return (<div className='border border-gray-300 border-2 px-2 py-2'
+                onClick={() => { onclick(Quuid, Qtext, Qselection, Qanswer); }}
+                key={Quuid}>
+                <p key={Quuid + '-text'}>{Qtext}</p>
+                {Qimg.content !== null && <Image src={Qimg.content} width={Qimg.width} height={Qimg.height} alt='images'/>}
+                {isMultChoice ?
+                    (Qselection.map((item, idx) =>
+                        (<p key={Quuid + "-" + idx + '-selection'}> {(idx + 1) + '. ' + item} </p>)))
+                    :
+                    (<p key={Quuid + "-essay"}> answer lst:
+                    {Qanswer.answers.map((item) => (item))}
+                    </p>)
+                }
+            </div>);
+        }
+
+        return (
+            <React.Fragment>
+                {questions && questions.map(question => renderSingleQ(question))}
+            </React.Fragment>
+        )
+    }
+
+    const readQuestions = async () => {
+        const levels = await getLevelDb();
+        setLevels(levels);
+        console.log('levels', levels);
     }
 
 
     useEffect(() => {
-        updateLevels();
+        readQuestions();
     }, []);
 
-    const handleOptionClick = (selectedLevel) => {
+    const handleOptionClick = async (selectedLevel) => {
         setSelectedOption(selectedLevel);
         setIsDropdownOpened(false);
-        setQuestion(fullQuestion['questionPool'][selectedLevel['level']]);
+        console.log('selectedLevel', selectedLevel);
+        const question = await getLevelQuestionsDB(selectedLevel['level'])
+        console.log("question", question);
+        setQuestion(question);
     }
 
     const selectQuestion = (uuid, question, selection, answer) => {
         const curSelectedQ = selectedQ;
         setSelectedQ(curSelectedQ => { return [...curSelectedQ, { uuid: uuid, question: question, selection: selection, answer: answer }]; });
     };
+
     const saveTestOnClick = () => {
         console.log("save", nthTest, " - ", selectedQ);
         saveTest(nthTest, selectedQ);
@@ -96,18 +124,8 @@ export default function CreateTest({ props }) {
             </div>
             <div className='flex flex-row w-full'>
                 <div className='w-1/2 y-2 gap-2 px-8'>
-                    {question && (question.map(({ uuid, question, selection, answer }) => (
-                        <div className='border border-gray-300 border-2 px-2 py-2'
-                            onClick={() => { selectQuestion(uuid, question, selection, answer); }}
-                            key={uuid}>
-                            {/* <p>{uuid}</p> */}
-                            <p key={uuid + '-question'}>{question}</p>
-                            {selection.map(({ idx, item }) =>
-                                (<p key={uuid + "-" + idx + '-selection'}> {idx + '. ' + item} </p>))}
-                        </div>
-                    ))
-                    )}
-                </div>
+                    {renderQuestion(question)}
+               </div>
                 <div className='w-1/2'>
                     <div className='w-1/2 y-2 gap-2 px-8 space-y-2'>
                         {selectedQ && (selectedQ.map(({ uuid, question, selection, answer }, idx) => (

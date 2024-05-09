@@ -1,6 +1,7 @@
 'use server'
 
 import { JSONFilePreset } from 'lowdb/node';
+import { loadImage } from './image';
 
 const dbTemplate = {
     levels: [
@@ -22,7 +23,7 @@ const dbTemplate = {
 }
 
 export default async function test() {
-    const db = await JSONFilePreset('db.json', dbTemplate);
+    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
 
     if (db.data !== null) {
         db.read();
@@ -31,44 +32,44 @@ export default async function test() {
 }
 
 export async function insertQuestion(level, question) {
-    const db = await JSONFilePreset('db.json', dbTemplate);
+    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
     question.map((e) => { db.data.questionPool[level].push(e); });
     db.write();
 }
 
 export async function getQuestionPool() {
-    const db = await JSONFilePreset('db.json', dbTemplate);
+    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
 
     console.log("is called???");
     return db.data;
 }
 
-export async function openDb() {
-    const db = await JSONFilePreset('db.json', dbTemplate);
-    db.read();
-    const data = db.data;
-    // where is close? 
-    // should always copy? 
-    return data;
-}
+// export async function () {
+//     const db = await JSONFilePreset('./db/questions.json', dbTemplate);
+//     db.read();
+//     const data = db.data;
+//     // where is close? 
+//     // should always copy? 
+//     return data;
+// }
 
 export async function saveTest(title, question) {
-    const db = await JSONFilePreset('db.json', dbTemplate);
+    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
     db.update(({ testList }) => testList.push(title));
     db.update(({ test }) => test.push({ title: title, question: question }))
 }
 
 export async function loadTestList() {
-    const db = await JSONFilePreset('db.json', dbTemplate);
+    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
     return db.data.testList;
 }
 
 export async function setCurretnTestDB(title, onGoing, minimumScore) {
-    const db = await JSONFilePreset('db.json', dbTemplate);
+    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
     db.data.currentTest = { title: title, onGoing: onGoing, minScore: minimumScore };
     db.write();
@@ -90,21 +91,34 @@ export async function setCurretnTestDB(title, onGoing, minimumScore) {
 }
 
 export async function getCurrentTestDB() {
-    const db = await JSONFilePreset('db.json', dbTemplate);
+    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
     return db.data.currentTest;
 }
 
-export async function getQuestionDB(title) {
-    const db = await JSONFilePreset('db.json', dbTemplate);
+export async function getLevelQuestionsDB(level) {
+    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
-    const allTest = db.data.test;
-    const test = allTest((test) => test['title'] === title);
-    return test;
+    const questions = db.data.questionPool[level];
+    const newQuestionPromise = questions.map(async (q) => {
+        const newQ = q;
+        if (q.Qimg.file !== null) {
+            q.Qimg.content = await loadImage(q.Qimg.file);
+        } else {
+            q.Qimg.content = null;
+        }
+
+        return q;
+    })
+
+    const newQuestion = await Promise.all(newQuestionPromise)
+    console.log('newQeustion', newQuestion)
+
+    return newQuestion;
 }
 
 export async function getCurrentQuestion() {
-    const db = await JSONFilePreset('db.json', dbTemplate);
+    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
     const curTitle = db.data.currentTest['title'];
     const test = await db.data['test'].find((test) => test.title === curTitle);
@@ -113,7 +127,7 @@ export async function getCurrentQuestion() {
 }
 
 export async function getCurrentQuestionCnt() {
-    const db = await JSONFilePreset('db.json', dbTemplate);
+    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
     const curTitle = db.data.currentTest['title'];
     const test = await db.data['test'].find((test) => test.title === curTitle);
@@ -128,7 +142,7 @@ export async function setTestResultDb(userInfo, answer) {
     //      "status: 
     //          ["user": {idNum: "", affiliation: "", name: ""}
     //           "result: {question: uuid, answer: {idx} ... ]]
-    const db = await JSONFilePreset('db.json', dbTemplate);
+    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
     const testTitle = db.data.currentTest['title'];
     const result = await db.data.testResult.userResult?.find((result) => result.userInfo['clientId'] === userInfo.clientId);
@@ -158,7 +172,7 @@ export async function setTestResultDb(userInfo, answer) {
 }
 
 export async function setFinalizeTestResulttDb(testResult) {
-    const db = await JSONFilePreset('db.json', dbTemplate);
+    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
     const userResult = db.data.testResult.userResult;
     const target = await userResult.find((result) => result.userInfo.clientId === testResult.userInfo.clientId);
@@ -170,7 +184,7 @@ export async function setFinalizeTestResulttDb(testResult) {
 }
 
 export async function getUserTestResultDb(userInfo) {
-    const db = await JSONFilePreset('db.json', dbTemplate);
+    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
     const result = await db.data.testResult.userResult?.find((result) => result.userInfo['clientId'] === userInfo.clientId);
 
@@ -178,7 +192,7 @@ export async function getUserTestResultDb(userInfo) {
 }
 
 export async function getTestOnGoing() {
-    const db = await JSONFilePreset('db.json', dbTemplate);
+    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
     const testOnGoing = db.data.currentTest.onGoing;
 
@@ -186,7 +200,7 @@ export async function getTestOnGoing() {
 }
 
 // export async function setFinishTestDb(clientId) {
-//     const db = await JSONFilePreset('db.json', dbTemplate);
+//     const db = await JSONFilePreset('./db/questions.json', dbTemplate);
 //     db.read();
 //     const userResult =  db.data.testResult.userResult; 
 //     const target = await userResult.find((result) => result.userInfo.clientId === clientId);
@@ -196,14 +210,14 @@ export async function getTestOnGoing() {
 // }
 
 export async function getTestResultDb() {
-    const db = await JSONFilePreset('db.json', dbTemplate);
+    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
 
     return db.data.testResult;
 }
 
 export async function setSurveyResultDb(userInfo, survey) {
-    const db = await JSONFilePreset('db.json', dbTemplate);
+    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
     const userResult = db.data.testResult.userResult;
     const target = await userResult.find((result) => result.userInfo.clientId === userInfo.clientId);
@@ -214,33 +228,33 @@ export async function setSurveyResultDb(userInfo, survey) {
 
 export async function setSurveyDB(survey) {
     console.log("setSurveyDB", survey)
-    const db = await JSONFilePreset('survey.json', dbTemplate);
+    const db = await JSONFilePreset('./db/survey.json', dbTemplate);
     db.read();
     db.data = survey;
     db.write();
 }
 
 export async function getSurveyDb() {
-    const db = await JSONFilePreset('survey.json', {});
+    const db = await JSONFilePreset('./db/survey.json', {});
     db.read();
     // console.log("survey", db.data);
     return db.data;
 }
 
 export async function getLevelDb() {
-    const db = await JSONFilePreset('db.json', {});
+    const db = await JSONFilePreset('./db/questions.json', {});
     db.read();
     return db.data['levels'];
 }
 
 export async function setEndTestDb() {
-    const db = await JSONFilePreset('db.json', {});
+    const db = await JSONFilePreset('./db/questions.json', {});
     db.read();
     console.log('test result', db.data.testResult);
 
     //only save when there is test result
-    if (db.data.testResult.userResult.length> 0) {
-        const resultDb = await JSONFilePreset('testResult.json', {});
+    if (db.data.testResult.userResult.length > 0) {
+        const resultDb = await JSONFilePreset('./db/testResult.json', {});
         resultDb.read();
         resultDb.data['testResult'].push(db.data.testResult);
         resultDb.write();
@@ -250,7 +264,7 @@ export async function setEndTestDb() {
 }
 
 export async function getAllTestResultDb(title) {
-    const resultDb = await JSONFilePreset('testResult.json', {});
+    const resultDb = await JSONFilePreset('./db/testResult.json', {});
     resultDb.read();
 
     const testReslut = await resultDb.data['testResult'].find((a) => a.title === title);
@@ -259,10 +273,11 @@ export async function getAllTestResultDb(title) {
 }
 
 export async function getAllTestResultTilesDb() {
-    const resultDb = await JSONFilePreset('testResult.json', {});
+    const resultDb = await JSONFilePreset('./db/testResult.json', {});
     resultDb.read();
     console.log('resultDb', resultDb.data);
     const titles = resultDb.data['testResult'].map((result) => result.title)
 
     return titles;
 }
+
