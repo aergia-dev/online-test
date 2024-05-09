@@ -46,9 +46,9 @@
         "Qtype": "multChoice",
         "Qtext": "초급 문제 - 1  /  답: 3",
         "Qimg": {
-          "file": null,
-          "width": 480,
-          "height": 480
+          "file": "cat-img3",
+          "width": 1000,
+          "height": 1000 
         },
         "Qselection": [
           "보기 1",
@@ -68,9 +68,9 @@
         "Qtype": "essay",
         "Qtext": "해저퇴적물 시료를 채취하는 장비의 종류 2가지 이상을 작성하시오?(답: 채니기, 드랫지, 박스형코어러, 주상시료코어러, 시추)",
         "Qimg": {
-          "file": null,
-          "width": null,
-          "height": null
+          "file": "cat-img2",
+          "width": 500,
+          "height": 500 
         },
         "Qanswer": {
           "answers": [
@@ -5163,9 +5163,13 @@
     }
   ],
   "currentTest": {
-    "title": "test 1st",
-    "onGoing": false,
+    "title": "000 회차",
+    "onGoing": true,
     "minScore": 8
   },
-  "testResult": {}
+  "testResult": {
+    "title": "000 회차",
+    "startTime": "2024-05-09T10:23:53.547Z",
+    "userResult": []
+  }
 }
