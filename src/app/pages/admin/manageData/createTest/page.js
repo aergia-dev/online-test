@@ -6,28 +6,25 @@ import Image from 'next/image'
 export default function CreateTest({ props }) {
     const [levels, setLevels] = useState({});
     const [isDropdownOpened, setIsDropdownOpened] = useState(false);
-    const [toggle, setToggle] = useState();
     const [selectedOption, setSelectedOption] = useState();
-    // const [fullQuestion, setFullQuestion] = useState();
     const [question, setQuestion] = useState();
     const [selectedQ, setSelectedQ] = useState([]);
     const [nthTest, setNthTest] = useState("");
 
     function renderQuestion(questions, onClick) {
         const renderSingleQ = ({ Quuid, Qtype, Qtext, Qimg, Qselection, Qanswer }) => {
-            console.log('qimg', Qimg);
             const isMultChoice = Qtype === 'multChoice';
             return (<div className='border border-gray-300 border-2 px-2 py-2'
-                onClick={() => { onclick(Quuid, Qtext, Qselection, Qanswer); }}
+                onClick={() => { onClick(Quuid, Qtype, Qtext, Qimg, Qselection, Qanswer); }}
                 key={Quuid}>
                 <p key={Quuid + '-text'}>{Qtext}</p>
-                {Qimg.content !== null && <Image src={Qimg.content} width={Qimg.width} height={Qimg.height} alt='images'/>}
+                {Qimg.content !== null && <Image src={Qimg.content} width={Qimg.width} height={Qimg.height} alt='images' />}
                 {isMultChoice ?
                     (Qselection.map((item, idx) =>
                         (<p key={Quuid + "-" + idx + '-selection'}> {(idx + 1) + '. ' + item} </p>)))
                     :
-                    (<p key={Quuid + "-essay"}> answer lst:
-                    {Qanswer.answers.map((item) => (item))}
+                    (<p key={Quuid + "-essay"}> 답 목록 :
+                        {Qanswer.answers.join(', ')}
                     </p>)
                 }
             </div>);
@@ -60,10 +57,23 @@ export default function CreateTest({ props }) {
         setQuestion(question);
     }
 
-    const selectQuestion = (uuid, question, selection, answer) => {
+    const selectQuestion = (Quuid, Qtype, Qtext, Qimg, Qselection, Qanswer) => {
         const curSelectedQ = selectedQ;
-        setSelectedQ(curSelectedQ => { return [...curSelectedQ, { uuid: uuid, question: question, selection: selection, answer: answer }]; });
+        const existItem = curSelectedQ.filter(q => q.Quuid === Quuid);
+
+        if (existItem.length === 0) {
+            setSelectedQ(curSelectedQ => {
+                return [...curSelectedQ,
+                { Quuid: Quuid, Qtype: Qtype, Qtext: Qtext, Qimg: Qimg, Qselection: Qselection, Qanswer: Qanswer }];
+            });
+        }
     };
+
+    const removeQuestion = (Quuid, Qtype, Qtext, Qimg, Qselection, Qanswer) => {
+        const curSelectedQ = selectedQ;
+        const removed = curSelectedQ.filter(q => q.Quuid !== Quuid);
+        setSelectedQ(removed);
+    }
 
     const saveTestOnClick = () => {
         console.log("save", nthTest, " - ", selectedQ);
@@ -110,7 +120,7 @@ export default function CreateTest({ props }) {
                     </div>
                 </div>
                 <div className='py-2'>
-                    <label> 회차: </label>
+                    <label> 시험 회차: </label>
                     <input className="border rounded px-3 py-1 text-gray-800"
                         id="nthTest"
                         value={nthTest}
@@ -124,31 +134,10 @@ export default function CreateTest({ props }) {
             </div>
             <div className='flex flex-row w-full'>
                 <div className='w-1/2 y-2 gap-2 px-8'>
-                    {renderQuestion(question)}
-               </div>
-                <div className='w-1/2'>
-                    <div className='w-1/2 y-2 gap-2 px-8 space-y-2'>
-                        {selectedQ && (selectedQ.map(({ uuid, question, selection, answer }, idx) => (
-                            <div className='border border-gray-300 border-2 px-2 '
-                                key={'selected' + uuid}>
-                                <p key={'selected-question' + uuid}>{(idx + 1) + '. ' + question}</p>
-                                {selection.map(({ idx, item }) => {
-                                    if (answer === idx) {
-                                        return <p key={'selected-selection-' + idx + uuid}
-                                            className='indent-4 text-red-400'>
-                                            {idx + '. ' + item}
-                                        </p>
-                                    }
-                                    else {
-                                        return <p key={'selected-selection-' + idx + uuid}
-                                            className='indent-4'>
-                                            {idx + '. ' + item}
-                                        </p>
-                                    }
-                                })}
-                            </div>
-                        )))}
-                    </div>
+                    {renderQuestion(question, selectQuestion)}
+                </div>
+                <div className='w-1/2 y-2 gap-2 px-8 space-y-2'>
+                    {renderQuestion(selectedQ, removeQuestion)}
                 </div>
 
             </div>
