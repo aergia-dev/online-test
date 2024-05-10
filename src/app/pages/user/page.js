@@ -24,9 +24,6 @@ export default function TestPage() {
 
     useEffect(() => {
         const fetchTest = async () => {
-            // const onGoing = await getTestOnGoin();
-            // setOnGoing(onGoing);
-
             const test = await getTestQuestionForUserDb();
             console.log("test ", test);
             const testQuestion = test['question'];
@@ -93,12 +90,7 @@ export default function TestPage() {
         setTestFinish(true);
         setTestResult(await marking(session));
 
-        // const ttt = await marking();
-        // console.log("marking", ttt, ttt['score']);
     }
-    // if (!onGoing)
-    //     return <div> not yet start</div>
-    // else
 
     const Footer = () => {
         if (testFinish === false) {
@@ -119,10 +111,7 @@ export default function TestPage() {
                         </a>
                     ) : (
                         <div> .... </div>
-                        // <a href="/pages/user/survey" className="bg-blue-500 block mt-4 lg:inline-block lg:mt-0 font-bold  mr-4">
-                        //    go to survey 
-                        // </a>
-                    )}
+                   )}
                 </div>
             )
         }

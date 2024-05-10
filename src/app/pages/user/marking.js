@@ -1,21 +1,17 @@
 'use server'
 
-import {getCurrentTestDB, setFinalizeTestResulttDb, getUserTestResultDb, getCurrentQuestion } from "@/component/db"
+import {getCurrentTestDB, setFinalizeTestResulttDb, getUserTestResultDb, getTestQuestionForUserDb } from "@/component/db"
 
 export default async function marking(session) {
     console.log(session)
     const testStatus = await getCurrentTestDB();
-    //read question 
-    const questions= await getCurrentQuestion();
+    const questions= await getTestQuestionForUserDb();
+
     // use it -> session.clientId.
     const testResult = await getUserTestResultDb(session)
     //marking
 
-    //return {testResult: {score: 0, passed: true}}
-    // testResult.map(())
-    // console.log('2222', questions)
-    // console.log('33333', testResult)
-    testResult['answer'].map(({uuid, answer}) => {
+   testResult['answer'].map(({uuid, answer}) => {
         const idx = questions['question'].findIndex((q) => q.uuid === uuid);
         questions['question'][idx].choice = answer;
     });
