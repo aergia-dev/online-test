@@ -1,9 +1,10 @@
 'use client'
 
-import { getCurrentQuestion, setTestResultDb, setFinishTestDb } from "@/component/db";
+import { getTestQuestionForUserDb, setTestResultDb } from "@/component/db";
 import { useState, useEffect } from "react";
 import { getSessionInfo } from "@/app/login/action";
 import marking from './marking'
+import { renderQuestionForUser } from "../common/renderQuestion";
 
 function shuffle(question) {
     for (let i = question.length - 1; i > 0; i--) {
@@ -26,16 +27,13 @@ export default function TestPage() {
             // const onGoing = await getTestOnGoin();
             // setOnGoing(onGoing);
 
-            const test = await getCurrentQuestion();
-            console.log("??", test);
+            const test = await getTestQuestionForUserDb();
+            console.log("test ", test);
             const testQuestion = test['question'];
             const question = shuffle(testQuestion);
-            question.map((q) => {
-                q.selectedAnswer = 0;
-            });
 
-            //add color for marking answer is different color
-            setQuestions(test['question']);
+            console.log('question - useeffect', question)
+            setQuestions(question);
             const userInfo = await getSessionInfo();
             setSession(userInfo);
 
@@ -44,20 +42,50 @@ export default function TestPage() {
         fetchTest();
     }, []);
 
-    function markAnswer(e, uuid, idx) {
+    function markAnswerMultiChoice(Quuid, qIdx) {
         const newQuestions = questions;
-        const foundIdx = newQuestions.findIndex(q => q.uuid === uuid);
+        const foundIdx = newQuestions.findIndex(q => q.Quuid === Quuid);
+        const realIdx = qIdx + 1;
+
         if (foundIdx !== -1) {
-            newQuestions[foundIdx]['selectedAnswer'] = idx;
+            //info: remove prev answer
+            if (newQuestions[foundIdx]['Qanswer']['answerCnt'] == 1)
+                newQuestions[foundIdx]['Qanswer']['userAnswer'] = [];
+
+            //info: remove when already exist 
+            if (newQuestions[foundIdx]['Qanswer']['userAnswer'].includes(realIdx)) {
+               newQuestions[foundIdx]['Qanswer']['userAnswer'] = newQuestions[foundIdx]['Qanswer']['userAnswer'].filter((a) => a !== realIdx);
+            }
+            else {
+                newQuestions[foundIdx]['Qanswer']['userAnswer'].push(realIdx);
+            }
         } else {
             console.log("error ??");
         }
 
-        // setQuestions(newQuestions); -> didn't rendering
         setQuestions([...newQuestions]);
-        const answer = { uuid: uuid, selected: idx }
+        const answer = { Quuid: Quuid, Qtype: 'mutlChoice', userAnswer: realIdx }
         setTestResultDb(session, answer);
     }
+
+    function makrAnswerEssay(Quuid, answerText) {
+        const newQuestions = questions;
+        const foundIdx = newQuestions.findIndex(q => q.Quuid === Quuid);
+
+            console.log(Quuid);
+        if (foundIdx !== -1) {
+        newQuestions[foundIdx]['Qanswer']['userAnwser'] = [];
+        newQuestions[foundIdx]['Qanswer']['userAnwser'].push(answerText)
+
+        setQuestions([...newQuestions]);
+        const answer = { Quuid: Quuid, Qtype: 'essay', userAnswer: answerText }
+        setTestResultDb(session, answer);
+        }
+        else {
+            console.log("makrAnswerEssay err");
+        }
+    }
+
 
     const setTestEnd = async () => {
         console.log("submit", session);
@@ -106,30 +134,8 @@ export default function TestPage() {
                 {session?.userName + ' ' + session?.userAffiliation};
             </div>
             <div className='py-4 space-y-4 mx-auto'>
-                {questions &&
-                    (questions.map(({ uuid, question, selection, selectedAnswer }, qIdx) => (
-                        <div className=''
-                            key={uuid}>
-                            <p>{(qIdx + 1) + '. ' + question}</p>
-                            {selection.map(({ idx, item }) => (
-                                ((selectedAnswer === idx) ?
-                                    <p className='ml-4 text-red-400'
-                                        key={uuid + idx}
-                                        onClick={(e) =>
-                                            markAnswer(e, uuid, idx)}>
-                                        {idx + ". " + item}
-                                    </p>
-                                    :
-                                    <p className='ml-4'
-                                        key={uuid + idx}
-                                        onClick={(e) => markAnswer(e, uuid, idx)}>
-                                        {idx + ". " + item}
-                                    </p>
-                                ))
-                            )}
-                        </div>
-                    )))}
-                <div className="justify-items-center">
+                {renderQuestionForUser(questions, markAnswerMultiChoice, makrAnswerEssay)}
+               <div className="justify-items-center">
                     <Footer />
                 </div>
             </div>

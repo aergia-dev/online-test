@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { saveTest, getLevelQuestionsDB, getLevelDb } from '@/component/db'
-import { renderQuestion } from '@/app/pages/common/renderQuestion';
+import { renderQuestionWithAnswer } from '@/app/pages/common/renderQuestion';
 
 export default function CreateTest({ props }) {
     const [levels, setLevels] = useState({});
@@ -108,10 +108,10 @@ export default function CreateTest({ props }) {
             </div>
             <div className='flex flex-row w-full'>
                 <div className='w-1/2 y-2 gap-2 px-8'>
-                    {renderQuestion(question, selectQuestion)}
+                    {renderQuestionWithAnswer(question, selectQuestion)}
                 </div>
                 <div className='w-1/2 y-2 gap-2 px-8 space-y-2'>
-                    {renderQuestion(selectedQ, removeQuestion)}
+                    {renderQuestionWithAnswer(selectedQ, removeQuestion)}
                 </div>
 
             </div>

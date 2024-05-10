@@ -38,7 +38,8 @@
           "answers": [
             3
           ],
-          "asnwerCnt": 1
+          "answerCnt": 1,
+          "userAnswer": []
         }
       },
       {
@@ -48,7 +49,7 @@
         "Qimg": {
           "file": "cat-img3",
           "width": 1000,
-          "height": 1000 
+          "height": 1000
         },
         "Qselection": [
           "보기 1",
@@ -60,7 +61,8 @@
           "answers": [
             3
           ],
-          "asnwerCnt": 1
+          "answerCnt": 1,
+          "userAnswer": []
         }
       },
       {
@@ -70,7 +72,7 @@
         "Qimg": {
           "file": "cat-img2",
           "width": 500,
-          "height": 500 
+          "height": 500
         },
         "Qanswer": {
           "answers": [
@@ -80,7 +82,8 @@
             "주상시료코어러",
             "시추"
           ],
-          "answerCnt": 2
+          "answerCnt": 2,
+          "userAnswer": []
         }
       },
       {
@@ -96,7 +99,8 @@
           "answers": [
             "평균고조간격"
           ],
-          "answerCnt": 1
+          "answerCnt": 1,
+          "userAnswer": []
         }
       }
     ],
@@ -5095,7 +5099,7 @@
             "answers": [
               3
             ],
-            "asnwerCnt": 1
+            "answerCnt": 1
           }
         },
         {
@@ -5139,7 +5143,7 @@
             "answers": [
               3
             ],
-            "asnwerCnt": 1
+            "answerCnt": 1
           }
         },
         {
@@ -5170,6 +5174,13 @@
   "testResult": {
     "title": "000 회차",
     "startTime": "2024-05-09T10:23:53.547Z",
-    "userResult": []
+    "userResult": [
+      {
+        "userInfo": {},
+        "answer": [
+          {}
+        ]
+      }
+    ]
   }
 }

@@ -112,17 +112,26 @@ export async function getLevelQuestionsDB(level) {
     })
 
     const newQuestion = await Promise.all(newQuestionPromise)
-    console.log('newQeustion', newQuestion)
+    // console.log('newQeustion', newQuestion)
 
     return newQuestion;
 }
 
-export async function getCurrentQuestion() {
+export async function getTestQuestionForUserDb() {
     const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
     const curTitle = db.data.currentTest['title'];
     const test = await db.data['test'].find((test) => test.title === curTitle);
     console.log("test ", test);
+
+    //info: remove answer
+    const qWithoutAnswer = test.question.map((q) => {
+        q.Qanswer = {'userAnswer': [], 'answers': [], 'answerCnt': q.Qanswer.answerCnt};
+        return q;
+    });
+
+    console.log('qWithoutAnswer', qWithoutAnswer)
+    test.question = qWithoutAnswer;
     return test;
 }
 
