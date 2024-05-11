@@ -83,13 +83,13 @@ export function renderQuestionForUser(questions, markingAnswerMultiChoice, marki
                 return (<p className='text-red-400'
                     key={Quuid + "-" + selectionIdx + '-selection'}
                     onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx) }}>
-                    {(selectionIdx + 1) + '. ' + item}
+                    {toStr((selectionIdx + 1) + '. ', item)}
                 </p>)
             }
             else {
                 return (<p key={Quuid + "-" + selectionIdx + '-selection'}
                     onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx) }}>
-                    {(selectionIdx + 1) + '. ' + item}
+                    {toStr((selectionIdx + 1) + '. ', item)}
                 </p>)
             }
         }))
