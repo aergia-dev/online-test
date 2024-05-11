@@ -215,7 +215,7 @@ export async function setFinalizeTestResulttDb(testResult) {
     const target = await userResult.find((result) => result.userInfo.clientId === testResult.userInfo.clientId);
     target['question'] = testResult.question;
     target['userInfo']['score'] = testResult.userInfo.score;
-    target['endTime'] = new Date();
+    target['userInfo']['endTime'] = new Date();
     console.log("target", target)
     db.write();
 }

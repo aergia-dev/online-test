@@ -83,11 +83,11 @@ export default function Monitoring() {
       <table className='table-auto'>
         <thead>
           <tr>
-            <th> name </th>
-            <th> id </th>
-            <th> affiliation </th>
-            <th> selected cnt </th>
-            <th> end? </th>
+            <th> 이름 </th>
+            <th> 교번 </th>
+            <th> 소속 </th>
+            <th> 푼 문제 수/전체 </th>
+            <th> 시험지 제출 여부 </th>
           </tr>
         </thead>
         <tbody>
@@ -107,7 +107,7 @@ export default function Monitoring() {
                 {user.answeredQuestionCnt} / {user.questionCnt}
               </td>
               <td key={idx + '_' + "endTime"}>
-                {user.endTime === undefined ? 'not ' : 'done'}
+                {user.userInfo.endTime === undefined ? '진행중' : '제출'}
               </td>
             </tr>
           ))}
