@@ -14,7 +14,7 @@ function toStr(pre, input) {
          </MathJaxContext>);
     }
     else
-        return input;
+        return pre + input;
 }
 
 export function renderQuestionWithAnswer(questions, onClickQuestion, markingAnswerMultiChoice, markingAnswerEassay) {
