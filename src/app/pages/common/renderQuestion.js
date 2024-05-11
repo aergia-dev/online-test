@@ -2,19 +2,14 @@ import Image from 'next/image';
 import React from 'react';
 import { MathJax, MathJaxContext } from 'better-react-mathjax'
 
-function toStr(pre, input) {
-    const isLatex = input.startsWith('\\(') && input.endsWith('\\)');
-    console.log("input", input);
-    if (isLatex) {
-        return (
-            <MathJaxContext>
+function toStr(input) {
+    console.log(input)
+    return (
+        <MathJaxContext>
             <MathJax>
-                <p>{pre} {input}</p>
+                <p>{input}</p>
             </MathJax>
-         </MathJaxContext>);
-    }
-    else
-        return pre + input;
+        </MathJaxContext>);
 }
 
 export function renderQuestionWithAnswer(questions, onClickQuestion, markingAnswerMultiChoice, markingAnswerEassay) {
@@ -24,13 +19,13 @@ export function renderQuestionWithAnswer(questions, onClickQuestion, markingAnsw
                 return (<p className='text-red-400'
                     key={Quuid + "-" + selectionIdx + '-selection'}
                     onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx) }}>
-                    {toStr((selectionIdx + 1) + '. ', item)}
+                    {toStr(selectionIdx + 1 + '. ' + item)}
                 </p>)
             }
             else {
                 return (<p key={Quuid + "-" + selectionIdx + '-selection'}
                     onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx) }}>
-                    { toStr((selectionIdx + 1) + '. ', item)}
+                    {toStr(selectionIdx + 1 + '. ' + item)}
                 </p>)
             }
         }))
@@ -83,13 +78,13 @@ export function renderQuestionForUser(questions, markingAnswerMultiChoice, marki
                 return (<p className='text-red-400'
                     key={Quuid + "-" + selectionIdx + '-selection'}
                     onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx) }}>
-                    {toStr((selectionIdx + 1) + '. ', item)}
+                    {toStr(selectionIdx + 1 + '. ' + item)}
                 </p>)
             }
             else {
                 return (<p key={Quuid + "-" + selectionIdx + '-selection'}
                     onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx) }}>
-                    {toStr((selectionIdx + 1) + '. ', item)}
+                    {toStr(selectionIdx + 1 + '. ' + item)}
                 </p>)
             }
         }))
