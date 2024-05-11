@@ -59,7 +59,7 @@ export default function CreateTest({ props }) {
 
     return (
         <div className="flex flex-col w-full">
-            <div className="flex flex-row w-full space-x-4 px-4 py-4 justify-center items-stretch">
+           <div className="flex flex-row w-full space-x-4 px-4 py-4 justify-center items-stretch">
                 <div className="flex space-x-4 space-y-4 px-10 py-1 items-center">
                     <div className="relative inline-block text-left">
                         <div className=''>

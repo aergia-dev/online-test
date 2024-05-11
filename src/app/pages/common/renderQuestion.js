@@ -1,6 +1,21 @@
 import Image from 'next/image';
 import React from 'react';
+import { MathJax, MathJaxContext } from 'better-react-mathjax'
 
+function toStr(pre, input) {
+    const isLatex = input.startsWith('\\(') && input.endsWith('\\)');
+    console.log("input", input);
+    if (isLatex) {
+        return (
+            <MathJaxContext>
+            <MathJax>
+                <p>{pre} {input}</p>
+            </MathJax>
+         </MathJaxContext>);
+    }
+    else
+        return input;
+}
 
 export function renderQuestionWithAnswer(questions, onClickQuestion, markingAnswerMultiChoice, markingAnswerEassay) {
     const renderMultChoiceSelction = (Quuid, Qselection, Qanswer) => {
@@ -9,13 +24,13 @@ export function renderQuestionWithAnswer(questions, onClickQuestion, markingAnsw
                 return (<p className='text-red-400'
                     key={Quuid + "-" + selectionIdx + '-selection'}
                     onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx) }}>
-                    {(selectionIdx + 1) + '. ' + item}
+                    {toStr((selectionIdx + 1) + '. ', item)}
                 </p>)
             }
             else {
                 return (<p key={Quuid + "-" + selectionIdx + '-selection'}
                     onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx) }}>
-                    {(selectionIdx + 1) + '. ' + item}
+                    { toStr((selectionIdx + 1) + '. ', item)}
                 </p>)
             }
         }))

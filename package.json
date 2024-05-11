@@ -11,6 +11,7 @@
   "dependencies": {
     "@react-pdf/renderer": "^3.4.4",
     "@reduxjs/toolkit": "^2.2.3",
+    "better-react-mathjax": "^2.0.3",
     "classic-level": "^1.4.1",
     "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.10.1",
