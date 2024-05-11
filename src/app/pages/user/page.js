@@ -1,12 +1,13 @@
 'use client'
 
-import { getTestQuestionForUserDb, setTestResultDb } from "@/component/db";
+import { getTestQuestionForUserDb, setTestResultDb, makeInitialTestResultDb } from "@/component/db";
 import { useState, useEffect } from "react";
 import { getSessionInfo } from "@/app/login/action";
 import marking from './marking'
 import { renderQuestionForUser } from "../common/renderQuestion";
 
 function shuffle(question) {
+    console.log("shuffle", question)
     for (let i = question.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [question[i], question[j]] = [question[j], question[i]];
@@ -23,20 +24,21 @@ export default function TestPage() {
     const [testFinish, setTestFinish] = useState(false);
 
     useEffect(() => {
-        const fetchTest = async () => {
-            const test = await getTestQuestionForUserDb();
-            console.log("test ", test);
-            const testQuestion = test['question'];
+        const fetchCurTest = async () => {
+            const curTest = await getTestQuestionForUserDb();
+            console.log("curTest ", curTest);
+            const testQuestion = curTest['question'];
+            console.log("testQuestion ", testQuestion);
             const question = shuffle(testQuestion);
 
             console.log('question - useeffect', question)
             setQuestions(question);
             const userInfo = await getSessionInfo();
             setSession(userInfo);
-
+            makeInitialTestResultDb(userInfo);
         };
 
-        fetchTest();
+        fetchCurTest();
     }, []);
 
     function markAnswerMultiChoice(Quuid, qIdx) {
@@ -61,8 +63,8 @@ export default function TestPage() {
         }
 
         setQuestions([...newQuestions]);
-        const answer = { Quuid: Quuid, Qtype: 'mutlChoice', userAnswer: realIdx }
-        setTestResultDb(session, answer);
+        const userChoice = { Quuid: Quuid, Qtype: 'mutlChoice', userAnswer: realIdx }
+        setTestResultDb(session, userChoice);
     }
 
     function makrAnswerEssay(Quuid, answerText) {
@@ -89,7 +91,6 @@ export default function TestPage() {
         // setFinishTestDb(session.clientId);
         setTestFinish(true);
         setTestResult(await marking(session));
-
     }
 
     const Footer = () => {

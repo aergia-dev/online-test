@@ -3,6 +3,8 @@
 import { JSONFilePreset } from 'lowdb/node';
 import { loadImage } from './image';
 
+const QuestionDb = './db/questions.json';
+
 const dbTemplate = {
     levels: [
         { level: "beginner", desc: "초급" },
@@ -23,7 +25,7 @@ const dbTemplate = {
 }
 
 export default async function test() {
-    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
+    const db = await JSONFilePreset(QuestionDb, dbTemplate);
 
     if (db.data !== null) {
         db.read();
@@ -32,14 +34,14 @@ export default async function test() {
 }
 
 export async function insertQuestion(level, question) {
-    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
+    const db = await JSONFilePreset(QuestionDb, dbTemplate);
     db.read();
     question.map((e) => { db.data.questionPool[level].push(e); });
     db.write();
 }
 
 export async function getQuestionPool() {
-    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
+    const db = await JSONFilePreset(QuestionDb, dbTemplate);
     db.read();
 
     console.log("is called???");
@@ -118,33 +120,59 @@ export async function getLevelQuestionsDB(level) {
 }
 
 export async function getTestQuestionForUserDb() {
-    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
+    const db = await JSONFilePreset(QuestionDb, dbTemplate);
     db.read();
     const curTitle = db.data.currentTest['title'];
-    const test = await db.data['test'].find((test) => test.title === curTitle);
-    console.log("test ", test);
+    const curTest = await db.data['test'].find((test) => test.title === curTitle);
+    console.log("curTest ", curTest);
 
     //info: remove answer
-    const qWithoutAnswer = test.question.map((q) => {
-        q.Qanswer = {'userAnswer': [], 'answers': [], 'answerCnt': q.Qanswer.answerCnt};
+    const withoutAnswer = curTest.question.map((q) => {
+        q.Qanswer = { 'userAnswer': [], 'answers': [], 'answerCnt': q.Qanswer.answerCnt };
         return q;
     });
 
-    console.log('qWithoutAnswer', qWithoutAnswer)
-    test.question = qWithoutAnswer;
-    return test;
+    curTest.question = withoutAnswer;
+
+    // curTest.question = await Promise.all(withoutAnswer)
+    console.log('getTestQuestionForUserDb', curTest)
+    return curTest;
 }
 
 export async function getCurrentQuestionCnt() {
-    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
+    const db = await JSONFilePreset(QuestionDb, dbTemplate);
     db.read();
     const curTitle = db.data.currentTest['title'];
-    const test = await db.data['test'].find((test) => test.title === curTitle);
-    console.log("test ", test);
-    return test.length;
+    const curTest = await db.data['test'].find((test) => test.title === curTitle);
+    console.log("curTest ", curTest);
+
+    if (curTest === undefined)
+        return 0
+    else
+        return curTest.length;
 }
 
-export async function setTestResultDb(userInfo, answer) {
+export async function makeInitialTestResultDb(userInfo) {
+    const db = await JSONFilePreset(QuestionDb, dbTemplate);
+    db.read();
+
+    const result = await db.data.testResult.userResult?.find((result) => result.userInfo['clientId'] === userInfo.clientId);
+    const curTitle = db.data.currentTest['title'];
+
+    //info: make initial Result data
+    if (result === undefined) {
+        const curTest = await db.data['test'].find((test) => test.title === curTitle);
+        db.data.testResult.userResult.push({
+            userInfo: userInfo,
+            answeredQuestionCnt: 0,
+            questionCnt: curTest.question.length,
+            resultQuestion: curTest
+        });
+    };
+    db.write();
+}
+
+export async function setTestResultDb(userInfo, { Quuid, Qtype, userAnswer }) {
     //result fmt
     // "testResult": 
     //      "testTitle": 111,
@@ -154,28 +182,28 @@ export async function setTestResultDb(userInfo, answer) {
     const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
     const testTitle = db.data.currentTest['title'];
-    const result = await db.data.testResult.userResult?.find((result) => result.userInfo['clientId'] === userInfo.clientId);
+    const userTestResult = await db.data.testResult.userResult?.find((result) => result.userInfo['clientId'] === userInfo.clientId);
 
+    console.log('??result', userTestResult)
+    const question = await userTestResult.resultQuestion.question.find((q) => q.Quuid === Quuid);
 
-    // console.log("!!! answer", answer.uuid, answer.selected);
-    // console.log("set test result: ", result)
-    if (result === undefined) {
-        db.data.testResult.userResult.push({
-            userInfo: userInfo, answer: [
-                { uuid: answer.uuid, answer: answer.selected }
-            ]
-        });
-    } else {
-        const alreadAnswered = await result.answer.find((a) => a.uuid === answer.uuid);
-        if (alreadAnswered === undefined) {
-            result.answer.push({ uuid: answer.uuid, answer: answer.selected });
-        }
-        else {
-            alreadAnswered.answer = answer.selected;
-            console.log("alreadAnswered", alreadAnswered);
-        }
-
+    if (question.Qanswer.userAnswer.length === 0) {
+        userTestResult.answeredQuestionCnt += 1;
+        console.log("cnt inc")
     }
+
+    if (Qtype == 'essay') {
+        question.Qanswer.userAnswer = [];
+        question.Qanswer.userAnswer.push(userAnswer);
+    }
+    else {
+        if (question.Qanswer.answerCnt === question.Qanswer.userAnswer.length) {
+            question.Qanswer.userAnswer = question.Qanswer.userAnswer.slice(1);
+        }
+
+        question.Qanswer.userAnswer.push(userAnswer);
+    }
+
 
     db.write();
 }

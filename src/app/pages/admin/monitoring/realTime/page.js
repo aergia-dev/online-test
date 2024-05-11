@@ -35,8 +35,8 @@ export default function Monitoring() {
 
   const readTestResult = async () => {
     const r = await getTestResultDb();
-    console.log("got result: ", r);
     setTestResult(r['userResult']);
+    console.log("got result: ", r['userResult']);
   }
 
   useEffect(() => {
@@ -91,23 +91,23 @@ export default function Monitoring() {
           </tr>
         </thead>
         <tbody>
-          {testResult && testResult.length > 0 && testResult.map((result, idx) => (
+          {testResult && testResult.length > 0 && testResult.map((user, idx) => (
             <tr className='text-center'
-              key={idx + '_' + result.userInfo.userName + '_' + result.userInfo.userId + '_' + result.userInfo.userAffiliation}>
-              <td key={idx + '_' + result.userInfo.userName}>
-                {result.userInfo.userName}
+              key={idx + '_' + user.userInfo.userName + '_' + user.userInfo.userId + '_' + user.userInfo.userAffiliation}>
+              <td key={idx + '_' + user.userInfo.userName}>
+                {user.userInfo.userName}
               </td>
-              <td key={idx + '_' + result.userInfo.userId}>
-                {result.userInfo.userId}
+              <td key={idx + '_' + user.userInfo.userId}>
+                {user.userInfo.userId}
               </td>
-              <td key={idx + '_' + result.userInfo.userAffiliation}>
-                {result.userInfo.userAffiliation}
+              <td key={idx + '_' + user.userInfo.userAffiliation}>
+                {user.userInfo.userAffiliation}
               </td>
-              <td key={idx + '_' + result.answer.length}>
-                {result.answer.length}
+              <td key={idx + '_' + user.resultQuestion.question.length}>
+                {user.answeredQuestionCnt} / {user.questionCnt}
               </td>
               <td key={idx + '_' + "endTime"}>
-                {result.endTime === undefined ? 'not ' : 'done'}
+                {user.endTime === undefined ? 'not ' : 'done'}
               </td>
             </tr>
           ))}
