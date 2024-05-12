@@ -74,15 +74,15 @@ export default function Survey() {
     return (
         <div className='m-16'>
             {surveyForm ?
-                (<SurveyPriview content={surveyForm}
+                <SurveyPriview content={surveyForm}
                     onAction={onAction}
                     onActionItem2={onActionItem2}
                     onActionItem3={onActionItem3}
                     onActionItem4={onActionItem4}
                     onSave={onSave}
-                />)
+                />
                 :
-                (<div> loading </div>)}
+                <div> loading </div>}
         </div>
     );
 }

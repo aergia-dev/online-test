@@ -181,7 +181,7 @@ export default function TestResult() {
                             </tr>
                         </thead>
                         <tbody className='border border-gray-600'>
-                            {testResult.userResult.length > 0 && testResult.userResult.map(({ userInfo, answer, question, survey, endTime }, idx) => (
+                            {testResult.userResult.length > 0 && testResult.userResult.map(({ userInfo, question, questionCtn, resultQuestion, surveyResult}, idx) => (
                                 <tr className='text-center'
                                     key={idx + '_' + userInfo.userName + '_' + userInfo.userId + '_' + userInfo.userAffiliation}>
                                     <td className='border border-gray-600'
@@ -197,12 +197,12 @@ export default function TestResult() {
                                         {userInfo.userAffiliation}
                                     </td>
                                     <td className='border border-gray-600'
-                                        key={idx + '_' + answer.length}>
-                                        {answer.length}
+                                        key={idx + '_' + resultQuestion.question.length}>
+                                        {resultQuestion.question.length}
                                     </td>
                                     <td className='border border-gray-600'
                                         key={idx + '_' + "endTime"}>
-                                        {endTime === undefined ? 'not ' : 'done'}
+                                        {userInfo.endTime === undefined ? 'not ' : 'done'}
                                     </td>
                                     <td className='border border-gray-600' >
                                         <button type='button'
