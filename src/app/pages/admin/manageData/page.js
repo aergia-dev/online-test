@@ -1,5 +1,5 @@
 
 
 export default function Questions() {
-  return <div> #### admin/questions/page.js Questions ###:</div>;
+  return <div> 왼쪽 메뉴를 선택하세요</div>;
 }

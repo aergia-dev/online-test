@@ -14,7 +14,7 @@ export default function Monitoring() {
   const toggleTestOnGoing = async (status) => {
     if (testTitle) {
       //todo: move into db
-      const minimumScore = 8;
+      const minimumScore = 1;
 
       setTestOnGoing(status);
       setCurretnTestDB(testTitle, status, minimumScore);
@@ -83,11 +83,12 @@ export default function Monitoring() {
       <table className='table-auto'>
         <thead>
           <tr>
-            <th> 이름 </th>
+            <th > 이름 </th>
             <th> 교번 </th>
             <th> 소속 </th>
             <th> 푼 문제 수/전체 </th>
-            <th> 시험지 제출 여부 </th>
+            <th> 시험지 제출 </th>
+            <th> 설문지 제출 </th>
           </tr>
         </thead>
         <tbody>
@@ -108,6 +109,9 @@ export default function Monitoring() {
               </td>
               <td key={idx + '_' + "endTime"}>
                 {user.userInfo.endTime === undefined ? '진행중' : '제출'}
+              </td>
+              <td key={idx + '_' + "survey"}>
+                {user.surveyResult=== undefined ? '진행중' : '제출'}
               </td>
             </tr>
           ))}

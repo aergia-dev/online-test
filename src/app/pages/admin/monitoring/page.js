@@ -1,4 +1,4 @@
 
 export default function monitoring() {
-  return <div> monitoring </div>
+  return <div> 왼쪽 메뉴 선택 </div>
 }
