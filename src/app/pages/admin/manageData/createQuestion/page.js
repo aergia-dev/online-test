@@ -2,6 +2,10 @@
 import { useRef, useState, useEffect } from 'react';
 import { insertQuestion } from '@/component/db';
 import { getLevelDb } from '@/component/db';
+import DropdownMenu from '@/app/pages/common/dropdown';
+// import Uploady from "@rpldy/uploady";
+// import UploadButton from "@rpldy/upload-button";
+import Image from 'next/image';
 
 
 function previewSingleQuestion(question, changeAnswerFn) {
@@ -27,7 +31,7 @@ function previewSingleQuestion(question, changeAnswerFn) {
                     const Ckey = Qkey + "-" + idx + "-C";
                     return (
                         <div className="flex flex-row"
-                             key={Skey + Ckey}>
+                            key={Skey + Ckey}>
                             <input type="checkbox" id={Ckey} onChange={(e) => {
                                 checkboxOnChange(question, idx, e.target.checked);
                             }} />
@@ -154,10 +158,52 @@ export default function CreateQuestion() {
     const [isDropdownOpened, setIsDropdownOpened] = useState();
     const [selectedOption, setSelectedOption] = useState();
 
+    const Qtype = ['only text', 'with image'];
+    const QtypeDefaultStr = 'default str';
+    const [QTypeDropDownSelectedIdx, setQTypeDropDownSelectedIdx] = useState(0);
+    const [isQtypeDropdownOpened, setIsQtypeDropdownOpened] = useState();
+    const [imageBase64, setImageBase64] = useState(null);
+    const [image, setImage] = useState(null);
+    const [imageWidth, setImageWidth] = useState(300);
+    const [imageHeight, setImageHeight] = useState(200);
+
+    const handleQtypeDropdown = () => {
+        setIsQtypeDropdownOpened(!isQtypeDropdownOpened);
+    }
+
+    const QtypeItemOnClick = (idx) => {
+        console.log('QtypeItemOnClick', idx);
+        setQTypeDropDownSelectedIdx(idx);
+        setIsQtypeDropdownOpened(false);
+    }
+
     const handleOptionClick = (selectedLevel) => {
         setSelectedOption(selectedLevel);
         setIsDropdownOpened(false);
     }
+
+    const readImg = (event) => {
+        const file = event.target.files[0]; // 사용자가 선택한 파일
+
+        console.log("file", file)
+        if (file) {
+            const reader = new FileReader(); // FileReader 객체 생성
+            reader.onload = function (e) {
+                setImage(reader.result);
+            };
+            reader.readAsDataURL(file); // 파일을 Data URL로 읽기
+        }
+    }
+    const changeImage = (item, value) => {
+        if(value === '')
+            value = 0;
+        
+        if(item === 'width')
+            setImageWidth(value);
+        else 
+            setImageHeight(value);
+    }
+
 
     useEffect(() => {
         const readQuestinoLevels = async () => {
@@ -219,12 +265,47 @@ export default function CreateQuestion() {
                 <div className="flex w-full">
                     <div className="w-1/2"
                         name="left-half">
-                        <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">문제 입력</label>
-                        <textarea id="rawQuestion" rows="20" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write your thoughts here..."
-                        // defaultValue={testData}
-                        >
+                        <DropdownMenu selectOption={Qtype}
+                            selectedIdx={QTypeDropDownSelectedIdx}
+                            defaultStr={QtypeDefaultStr}
+                            isDropdownOpened={isQtypeDropdownOpened}
+                            handleDropdown={handleQtypeDropdown}
+                            handleItemClick={QtypeItemOnClick}
+                        />
 
-                        </textarea>
+                        {(Qtype[QTypeDropDownSelectedIdx] == 'only text') ?
+                            (
+                                <div>
+                                    <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">문제 입력</label>
+                                    <textarea id="rawQuestion" rows="20" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                                        placeholder="only text - Write your thoughts here..." >
+                                    </textarea>
+                                </div>
+                            )
+                            :
+                            (
+                                <div>
+                                    <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">문제 입력 - 이미지</label>
+                                    <label htmlFor="image" className="block">
+                                        image file:
+                                    </label>
+                                    <input type="file" name="image" className="w-96 p-4"
+                                        onChange={readImg} />
+                                    <label > width </label>
+                                    <input id='width' type='text' onChange={(e) => changeImage('width', e.target.value)} value={imageWidth}/> 
+                                    <label > height </label>
+                                    <input id='height' type='text' onChange={(e) => changeImage('height', e.target.value)} value={imageHeight}/> 
+
+                                    {image && <Image src={image}
+                                        width={imageWidth}
+                                        height={imageHeight}
+                                        alt='images' />}
+                                    <textarea id="rawQuestion" rows="20" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                                        placeholder="with image Write your thoughts here..." >
+                                    </textarea>
+                                </div>
+                            )
+                        }
                     </div>
                     <div name="right-half w-1/2">
                         <div id="questionPreview">
@@ -233,7 +314,7 @@ export default function CreateQuestion() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 
 }
