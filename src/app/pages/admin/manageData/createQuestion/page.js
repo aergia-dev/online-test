@@ -4,7 +4,6 @@ import { insertQuestionDb } from '@/component/db';
 import { getLevelDb } from '@/component/db';
 import Image from 'next/image';
 import { renderQuestionWithAnswer } from '@/app/pages/common/renderQuestion';
-import { XMark } from '@/app/pages/common/icon';
 
 
 function previewSingleQuestion(question, changeAnswerFn) {
@@ -59,7 +58,7 @@ const separator = "__";
 
 function makeQuestion(content) {
     const splited = content.split(separator);
-    const from1to10InCircle = /^\s*[\u{2460}-\u{2469}]\s*/u;
+    const from1to10InCircle = /^\s*[\u{2460}-\u{2469}]\s*/u; //number inside circle
     const regexResult = splited.map((x) => {
         return {
             matchedCnt: from1to10InCircle.exec(x),
@@ -69,11 +68,14 @@ function makeQuestion(content) {
 
     console.log(regexResult);
 
+    const matchedCnt = regexResult.map(item => item.matchedCnt > 0)
+
     let question = new String();
     let selection = new Array();
     let Qtype = '';
-
-    if (regexResult.length > 3) {
+    let answers = []
+    
+    if (matchedCnt > 0) {
         // multi choice
         Qtype = 'multChoice';
         regexResult.map(({ matchedCnt, str }) => {
@@ -88,6 +90,11 @@ function makeQuestion(content) {
     }
     else {
         //essay type
+        const answerStr = regexResult[regexResult.length -1 ].str;
+        const text = regexResult[0].str;
+        answerStr.replace(/[\[\]]/, '');
+        question = text;
+        answers = answerStr.split(',').map((s) => s.trim());
         Qtype = 'essay';
 
     }
@@ -100,7 +107,7 @@ function makeQuestion(content) {
             ...selection,
         ],
         Qanswer: {
-            answers: [],
+            answers: answers,
             answerCnt: 0,
             userAnswer: []
         },

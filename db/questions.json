@@ -245,6 +245,28 @@
           "width": 300,
           "height": 200
         }
+      },
+      {
+        "Quuid": "720cdd06-4e7d-4e1b-94fa-58e1ebac9e67",
+        "Qtype": "essay",
+        "Qtext": "해저퇴적물 시료를 채취하는 장비의 종류 2가지 이상을 작성하시오?(답: 채니기, 드랫지, 박스형코어러, 주상시료코어러, 시추)",
+        "Qselection": [],
+        "Qanswer": {
+          "answers": [
+            "[채니기",
+            "드랫지",
+            "박스형코어러",
+            "주상시료코어러",
+            "시추]"
+          ],
+          "answerCnt": 0,
+          "userAnswer": []
+        },
+        "Qimg": {
+          "content": null,
+          "width": null,
+          "height": null
+        }
       }
     ]
   },
