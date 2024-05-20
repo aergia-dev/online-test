@@ -123,8 +123,8 @@ export default function TestResult() {
     // make total result. file as excel
 
     return (
-        <div className='mx-auto'>
-            <div className='flex flex-row justify-between'>
+        <div className='mx-auto m-8'>
+            <div className='flex flex-row justify-between m-4'>
                 <div className="relative inline-block text-left">
                     <div className=''>
                         <button type="button"
