@@ -13,6 +13,8 @@
     "@reduxjs/toolkit": "^2.2.3",
     "better-react-mathjax": "^2.0.3",
     "classic-level": "^1.4.1",
+    "exceljs": "^4.4.0",
+    "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.10.1",
     "iron-session": "^8.0.1",
