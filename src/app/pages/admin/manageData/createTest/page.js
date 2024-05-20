@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import { saveTest, getLevelQuestionsDB, getLevelDb } from '@/component/db'
+import { saveTestDb, getLevelQuestionsDB, getLevelDb } from '@/component/db'
 import { renderQuestionWithAnswer } from '@/app/pages/common/renderQuestion';
 
 export default function CreateTest({ props }) {
@@ -49,9 +49,14 @@ export default function CreateTest({ props }) {
         setSelectedQ(removed);
     }
 
-    const saveTestOnClick = () => {
+    const saveTestOnClick = async () => {
         console.log("save", nthTest, " - ", selectedQ);
-        saveTest(nthTest, selectedQ);
+        if (nthTest.trim() === '')
+            alert('시험 이름 필요')
+        else {
+            await saveTestDb(nthTest, selectedQ);
+            alert("시험 문제 선택 완료");
+        }
     }
     const inputOnChange = (event) => {
         setNthTest(event.target.value);
@@ -59,7 +64,7 @@ export default function CreateTest({ props }) {
 
     return (
         <div className="flex flex-col w-full">
-           <div className="flex flex-row w-full space-x-4 px-4 py-4 justify-center items-stretch">
+            <div className="flex flex-row w-full space-x-4 px-4 py-4 justify-center items-stretch">
                 <div className="flex space-x-4 space-y-4 px-10 py-1 items-center">
                     <div className="relative inline-block text-left">
                         <div className=''>

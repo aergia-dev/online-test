@@ -350,30 +350,6 @@
       "title": "001 회차",
       "question": [
         {
-          "Quuid": "f4fb924e-11f7-4d93-add1-9680cf13f9cc",
-          "Qtype": "multChoice",
-          "Qtext": "음향측심기는 음파가 반사되어 다시 수신기에 도달하는 시간을 측정하여 수심을 측정한다. 다음 중 수심을 구하는 식은?",
-          "Qimg": {
-            "file": null,
-            "width": null,
-            "height": null,
-            "content": null
-          },
-          "Qselection": [
-            "\\(D=(\\frac{1}{2})vt\\)",
-            "\\(D=vt\\)",
-            "\\(d=2vt\\)",
-            "\\(D=(\\frac{1}{4})vt\\)"
-          ],
-          "Qanswer": {
-            "answers": [
-              2
-            ],
-            "answerCnt": 1,
-            "userAnswer": []
-          }
-        },
-        {
           "Quuid": "d4fb924e-11f7-4d93-add1-9680cf13f9bb",
           "Qtype": "multChoice",
           "Qtext": "초급 문제 - 1  /  답: 3",
@@ -392,6 +368,30 @@
           "Qanswer": {
             "answers": [
               3
+            ],
+            "answerCnt": 1,
+            "userAnswer": []
+          }
+        },
+        {
+          "Quuid": "f4fb924e-11f7-4d93-add1-9680cf13f9cc",
+          "Qtype": "multChoice",
+          "Qtext": "음향측심기는 음파가 반사되어 다시 수신기에 도달하는 시간을 측정하여 수심을 측정한다. 다음 중 수심을 구하는 식은?",
+          "Qimg": {
+            "file": null,
+            "width": null,
+            "height": null,
+            "content": null
+          },
+          "Qselection": [
+            "\\(D=(\\frac{1}{2})vt\\)",
+            "\\(D=vt\\)",
+            "\\(d=2vt\\)",
+            "\\(D=(\\frac{1}{4})vt\\)"
+          ],
+          "Qanswer": {
+            "answers": [
+              2
             ],
             "answerCnt": 1,
             "userAnswer": []
@@ -420,8 +420,12 @@
   ],
   "currentTest": {
     "title": "001 회차",
-    "onGoing": false,
+    "onGoing": true,
     "minScore": 1
   },
-  "testResult": {}
+  "testResult": {
+    "title": "001 회차",
+    "startTime": "2024-05-20T04:39:15.056Z",
+    "userResult": []
+  }
 }

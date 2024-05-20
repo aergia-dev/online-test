@@ -58,9 +58,18 @@ export async function getQuestionPool() {
 //     return data;
 // }
 
-export async function saveTest(title, question) {
+export async function saveTestDb(title, question) {
     const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
+    const isExist = db.data.testList.findIndex((str) => title === str);
+
+    if (isExist !== -1) {
+        db.data.testList.splice(isExist);
+        const testIdx = db.data.test.findIndex((test) => test.title === title);
+        if (testIdx !== -1)
+            db.data.test.splice(testIdx)
+    }
+
     db.update(({ testList }) => testList.push(title));
     db.update(({ test }) => test.push({ title: title, question: question }))
 }
