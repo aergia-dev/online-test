@@ -1,6 +1,6 @@
 'use client'
 
-import SurveyPriview from "@/component/surveyPreview";
+import SurveyPreview from "@/component/surveyPreview";
 import { useState, useEffect, Link } from "react";
 import { getSurveyDb, setSurveyResultDb } from '@/component/db'
 import { getSession } from "@/app/login/action";
@@ -9,11 +9,27 @@ export default function Survey() {
     const [surveyForm, setSurveyForm] = useState(null);
     const [fin, setFin] = useState(false);
 
-    const onAction = ({ key, rowIdx, colIdx, choiceIdx, uuid }) => {
+    const onActionItem1 = ({ key, rowIdx, colIdx, choiceIdx, uuid }) => {
         console.log("onAction", key, rowIdx, colIdx, choiceIdx, uuid);
+        const answerIdx = choiceIdx + 1;
         const newSurveyForm = { ...surveyForm };
+
+        console.log('survey', key)
+        console.log('survey', newSurveyForm[key])
+
         const foundIdx = newSurveyForm[key].findIndex((item) => item['uuid'] === uuid);
-        newSurveyForm[key][foundIdx].answer = choiceIdx + 1;
+        const existIdx = newSurveyForm[key][foundIdx].answer.findIndex(answer => answer === answerIdx);
+
+        console.log('existIdx', existIdx)
+        if (existIdx !== -1) {
+            console.log("$$", newSurveyForm[key][foundIdx].answer)
+            newSurveyForm[key][foundIdx].answer.splice(existIdx, 1);
+            console.log("$$%%", newSurveyForm[key][foundIdx].answer)
+        }
+        else {
+            newSurveyForm[key][foundIdx].answer.push(choiceIdx + 1);
+        }
+
         setSurveyForm(newSurveyForm);
     }
 
@@ -61,28 +77,28 @@ export default function Survey() {
     useEffect(() => {
         const updateInitVal = async () => {
             const survey = await getSurveyDb();
-            console.log("####", survey);
+            // console.log("####", survey);
             setSurveyForm(survey);
         }
 
         updateInitVal();
     }, []);
 
-    if(fin)
+    if (fin)
         return (<div> fin.. close window</div>)
     else
-    return (
-        <div className='m-16'>
-            {surveyForm ?
-                <SurveyPriview content={surveyForm}
-                    onAction={onAction}
-                    onActionItem2={onActionItem2}
-                    onActionItem3={onActionItem3}
-                    onActionItem4={onActionItem4}
-                    onSave={onSave}
-                />
-                :
-                <div> loading </div>}
-        </div>
-    );
+        return (
+            <div className='m-16'>
+                {surveyForm ?
+                    <SurveyPreview content={surveyForm}
+                        onAction={onActionItem1}
+                        onActionItem2={onActionItem2}
+                        onActionItem3={onActionItem3}
+                        onActionItem4={onActionItem4}
+                        onSave={onSave}
+                    />
+                    :
+                    <div> loading </div>}
+            </div>
+        );
 }

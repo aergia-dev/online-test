@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, { Fragment } from 'react';
 
 export default function SurveyPreview({ content, onAction, onActionItem2, onActionItem3, onActionItem4, onSave }) {
     const { title, head, item1, item1Row, item2Desc, item2Col, item2Row, item3Desc, item3Col, item3Row, item4Desc, item4Input, commonSelection } = content;
@@ -57,22 +57,67 @@ function Item1Preview(item1Row, item1, onAction) {
                                     </div>
                                     {
                                         selection.map((item, idx) => {
-                                            if (idx + 1 === answer) {
-                                                return (<div className='bg-blue-500 rounded text-white font-bold'
-                                                    key={item + idx}>
-                                                    {item}
-                                                </div>)
+                                            // console.log('###', /\(__\)/.exec(item))
+                                            //info: for normal
+                                            if (/\(__\)/.exec(item) === null) {
+                                                if (answer.includes(idx + 1)) {
+                                                    return (<div className='bg-blue-500 rounded text-white font-bold'
+                                                        key={item + idx}
+                                                        onClick={() => onAction({
+                                                            key: 'item1',
+                                                            rowIdx: rowIdx,
+                                                            uuid: uuid,
+                                                            choiceIdx: idx
+                                                        })}>
+                                                        {item}
+                                                    </div>)
+                                                }
+                                                else
+                                                    return <div className=''
+                                                        key={item + idx}
+                                                        onClick={() => onAction({
+                                                            key: 'item1',
+                                                            rowIdx: rowIdx,
+                                                            uuid: uuid,
+                                                            choiceIdx: idx
+                                                        })}>
+                                                        {item} </div>
                                             }
-                                            else
-                                                return <div className=''
-                                                    key={item + idx}
-                                                    onClick={() => onAction({
-                                                        key: 'item1',
-                                                        rowIdx: rowIdx,
-                                                        uuid: uuid,
-                                                        choiceIdx: idx
-                                                    })}>
-                                                    {item} </div>
+                                            else { //info: for item with input
+                                                const text = item.replace(/\(__\)/, '');
+                                                console.log("text", text);
+                                                console.log("text2", answer.includes(idx + 1));
+                                                if (answer.includes(idx + 1)) {
+                                                    return (
+                                                        <Fragment key={item + idx + 'fragment'}>
+                                                            <div className='bg-blue-500 rounded text-white font-bold'
+                                                                key={item + idx}
+                                                                onClick={() => onAction({
+                                                                    key: 'item1',
+                                                                    rowIdx: rowIdx,
+                                                                    uuid: uuid,
+                                                                    choiceIdx: idx
+                                                                })}>
+                                                                {text}
+                                                            </div>
+                                                            <input key={item + idx + 'input'} className='border' type='text'></input>
+                                                        </Fragment>)
+                                                }
+                                                else {
+                                                    return (<Fragment key={item + idx + 'fragment'}>
+                                                        <div className=''
+                                                            key={item + idx}
+                                                            onClick={() => onAction({
+                                                                key: 'item1',
+                                                                rowIdx: rowIdx,
+                                                                uuid: uuid,
+                                                                choiceIdx: idx
+                                                            })}>
+                                                            {text} </div>
+                                                        <input key={item + idx + 'input'} className='border' type='text'></input>
+                                                    </Fragment>)
+                                                }
+                                            }
                                         })
                                     }
                                 </div>)

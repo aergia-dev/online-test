@@ -497,93 +497,9 @@ const surveySample = [{
     }
 }];
 
-function formDefault(survey) {
+function makeForm1(survey) {
     //info: "item1" in survey
     const item1 = survey.map((userSurvey, idx) => {
-        // "item1": [
-        //     {
-        //         "itemName": "성별",
-        //         "uuid": "f7b656ba-17ca-47ae-a8f1-61f4803e1bb8",
-        //         "selection": [
-        //             " 남",
-        //             " 여"
-        //         ],
-        //         "answer": 2
-        //     },
-        // {
-        //     "itemName": "연령",
-        //     "uuid": "6315e384-9cc9-4e44-8909-9d698b607495",
-        //     "selection": [
-        //         "  30세 이하",
-        //         " 31~35세",
-        //         " 36~40세",
-        //         " 41~45세",
-        //         " 46~50세",
-        //         "51세 이상"
-        //     ],
-        //     "answer": 2
-        // },
-        // {
-        //     "itemName": "최종 학력",
-        //     "uuid": "97fe2787-b5ad-4897-93eb-c14f0f9b5923",
-        //     "selection": [
-        //         "  고등학교졸업",
-        //         " 전문학사",
-        //         " 학사",
-        //         " 석사",
-        //         " 박사"
-        //     ],
-        //     "answer": 1
-        // },
-        // {
-        //     "itemName": "소속 기관",
-        //     "uuid": "83d41ba5-a591-48d3-be65-815b5fd5660f",
-        //     "selection": [
-        //         "  수로측량업체",
-        //         " 해양관측업체",
-        //         " 해도제작업체",
-        //         " 그 외(__)"
-        //     ],
-        //     "answer": 3
-        // },
-        // {
-        //     "itemName": "직위",
-        //     "uuid": "de82f06f-14de-4908-bfbe-8b994e38d6fa",
-        //     "selection": [
-        //         "  사원",
-        //         " 대리",
-        //         " 과장",
-        //         " 차장",
-        //         " 부장",
-        //         " 임원"
-        //     ],
-        //     "answer": 2
-        // },
-        // {
-        //     "itemName": "수로분야 기술등급",
-        //     "uuid": "ab551977-c488-4c5c-ad62-5d761ac061a8",
-        //     "selection": [
-        //         "  초급",
-        //         " 중급",
-        //         " 고급",
-        //         " 특급"
-        //     ],
-        //     "answer": 1
-        // },
-        // {
-        //     "itemName": "총근무년수",
-        //     "uuid": "38445c36-2a98-4012-989b-5c1102429f58",
-        //     "selection": [
-        //         "  1년 이하",
-        //         " 2~5년",
-        //         " 6~10년",
-        //         " 11~15년",
-        //         " 16~20년",
-        //         " 21년 이상"
-        //     ],
-        //     "answer": 4
-        // }
-
         const itemList = userSurvey.item1.map((item) => item.itemName);
 
         const result = itemList.map((itemName) => {
@@ -597,12 +513,27 @@ function formDefault(survey) {
             acc[k] = result[idx];
             return acc;
         }, new Map());
-
     })
 
     console.log('item1', item1)
     return item1;
 }
+
+function makeForm2(survey) {
+    const userCnt = survey.length;
+    //info: "item1" in survey
+    const item1 = survey.map((userSurvey, idx) => {
+        const itemList = userSurvey.item1.map((item) => item.itemName);
+        const result = itemList.map((itemName) => {
+            const objs = userSurvey.item1.filter((item) => item.itemName === itemName);
+            const obj = objs[0]
+            return obj.selection[obj.answer - 1];
+        });
+
+
+    })
+}
+
 
 export default async function makeSurveyResult(survey) {
 
@@ -629,11 +560,11 @@ export default async function makeSurveyResult(survey) {
     ];
 
 
-    const ws_default_vals = formDefault(survey);
+    const ws_default_vals = makeForm1(survey);
     console.log('ws_default_vals', ws_default_vals);
     ws_default_vals.map(({ sex, age, educationLevel, belongs, position, techLevel, yearOfService }, order) => {
         console.log("idx", order)
-        ws_default.addRow({order: order+1, sex, age, educationLevel, belongs, position, techLevel, yearOfService })
+        ws_default.addRow({ order: order + 1, sex, age, educationLevel, belongs, position, techLevel, yearOfService })
     })
 
     const buffer = await workbook.xlsx.writeBuffer();
