@@ -33,9 +33,10 @@ export default async function test() {
     }
 }
 
-export async function insertQuestion(level, question) {
+export async function insertQuestionDb(level, question) {
     const db = await JSONFilePreset(QuestionDb, dbTemplate);
     db.read();
+    console.log('insertQuestion', question, level);
     question.map((e) => { db.data.questionPool[level].push(e); });
     db.write();
 }

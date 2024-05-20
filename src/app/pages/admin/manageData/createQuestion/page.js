@@ -1,11 +1,10 @@
 'use client'
-import { useRef, useState, useEffect } from 'react';
-import { insertQuestion } from '@/component/db';
+import { useRef, useState, useEffect, Fragment } from 'react';
+import { insertQuestionDb } from '@/component/db';
 import { getLevelDb } from '@/component/db';
-import DropdownMenu from '@/app/pages/common/dropdown';
-// import Uploady from "@rpldy/uploady";
-// import UploadButton from "@rpldy/upload-button";
 import Image from 'next/image';
+import { renderQuestionWithAnswer } from '@/app/pages/common/renderQuestion';
+import { XMark } from '@/app/pages/common/icon';
 
 
 function previewSingleQuestion(question, changeAnswerFn) {
@@ -21,12 +20,13 @@ function previewSingleQuestion(question, changeAnswerFn) {
         changeAnswerFn(q, idx, value);
     };
 
+    console.log('previewSingleQuestion', question)
     return (
         <div key={Qkey}>
-            <p>Q. {question["question"]}</p>
+            <p>Q. {question.Qtext}</p>
             <p>S.  </p>
             <ul key={Ulkey}>
-                {question["selection"].map(({ idx, item }) => {
+                {question.Qselection.map(({ idx, item }) => {
                     const Skey = Qkey + "-" + idx;
                     const Ckey = Qkey + "-" + idx + "-C";
                     return (
@@ -47,10 +47,9 @@ function previewSingleQuestion(question, changeAnswerFn) {
 }
 
 function previewQuestion(content, changeAnswerFn) {
-    const preview = content.map((q) => { return previewSingleQuestion(q, changeAnswerFn) });
     return (
         <div>
-            {preview}
+            {renderQuestionWithAnswer(content, null, null, null)}
         </div>
     )
 }
@@ -69,33 +68,54 @@ function makeQuestion(content) {
     });
 
     console.log(regexResult);
+
     let question = new String();
     let selection = new Array();
+    let Qtype = '';
 
-    regexResult.map(({ matchedCnt, str }) => {
-        if (matchedCnt === null) {
-            question += str.replace(/\s*\d+\.\s*/, "");
-        }
-        else {
-            selection.push(str.trim().replace(from1to10InCircle, ""));
-        }
-    });
+    if (regexResult.length > 3) {
+        // multi choice
+        Qtype = 'multChoice';
+        regexResult.map(({ matchedCnt, str }) => {
+            if (matchedCnt === null) {
+                question += str.replace(/\s*\d+\.\s*/, "");
+            }
+            else {
+                selection.push(str.trim().replace(from1to10InCircle, ""));
+            }
+        });
 
-    const idxSelection = selection.map((itm, idx) => { return { idx: idx + 1, item: itm }; });
+    }
+    else {
+        //essay type
+        Qtype = 'essay';
+
+    }
 
     const fmt = {
-        uuid: crypto.randomUUID(),
-        question: question,
-        selection: [
-            ...idxSelection,
+        Quuid: crypto.randomUUID(),
+        Qtype: Qtype,
+        Qtext: question,
+        Qselection: [
+            ...selection,
         ],
-        answer: 'none', //has selction index
+        Qanswer: {
+            answers: [],
+            answerCnt: 0,
+            userAnswer: []
+        },
+        Qimg: {
+            content: null,
+            width: null,
+            height: null,
+        }
     };
 
+    console.log("fmt", fmt);
     return fmt;
 }
 
-function parsing(content) {
+function parsing(content, imgInfo) {
     const trimed = content.trim();
     const splited = trimed.split("\n");
     let questionStr = new Array();
@@ -113,41 +133,57 @@ function parsing(content) {
         }
     }
 
-    const makeQuestionFn = makeQuestion.bind(separator);
-    const question = questionStr.map(makeQuestionFn);
+    if (questionStr.length > 1 && imgInfo.content) {
+        alert("이미지가 있는 문제는 1개만 입력 가능");
+        return;
+    }
+    const question = questionStr.map(item => makeQuestion(item));
 
+    if (imgInfo.content) {
+        question[0].Qimg = {
+            content: imgInfo.content,
+            width: imgInfo.width,
+            height: imgInfo.height,
+        }
+    }
+
+    console.log('all', question)
     return question;
 }
 
 
-function makePreview(content, setPreview, setRawQuestion) {
-    const question = parsing(content);
-    const replaceQuestion = (oldItm, newItm) => {
-        console.log("replaceQuestion: ", oldItm);
-        if (oldItm.uuid === newItm.uuid) {
-            return newItm;
+function makePreview(content, imgInfo, setPreview, setRawQuestion) {
+    const question = parsing(content, imgInfo);
+    const setMultiChoiceAnswer = (Quuid, selectionIdx) => {
+        //filter question
+        const qIdx = question.findIndex((q) => q.Quuid === Quuid);
+        const qTarget = question[qIdx];
+        console.log('qTarget', qTarget);
+        //set add answer
+        if (qTarget.Qanswer.answers.includes(selectionIdx)) {
+            //remove Qanswer.userAnwer, dec answerCnt
+            qTarget.Qanswer.answers = qTarget.Qanswer.answers.filter((answer) => answer !== selectionIdx)
+            qTarget.Qanswer.answerCnt -= 1;
         }
         else {
-            return oldItm;
+            qTarget.Qanswer.answers.push(selectionIdx);
+            qTarget.Qanswer.answerCnt += 1;
         }
-    };
 
-    const changeAnswer = (Aquestion, answerIdx, value) => {
-        const changedQ = Aquestion;
-        changedQ["answer"] = value ? answerIdx : 'none';
-        const changedQuestion = question.map((q) => { return replaceQuestion(q, changedQ) });
-        console.log("changedQuestion:", changedQuestion);
-        // localStorage.setItem("questions", changedQuestion);
-        // const d = localStorage.getItem('questions');
-        // console.log("read localstorage: ", d);
-        setRawQuestion(changedQuestion);
-        setPreview(previewQuestion(changedQuestion, changeAnswer));
-    };
+        console.log('after qTarget', qTarget);
+        question[qIdx] = qTarget;
 
-    // localStorage.setItem("questions", question);
+        const newQeustion = [...question];
+
+        // setRawQuestion(newQeustion);
+
+        setPreview(renderQuestionWithAnswer(newQeustion, null, setMultiChoiceAnswer, null));
+    }
 
     setRawQuestion(question);
-    setPreview(previewQuestion(question, changeAnswer));
+
+    //change to useeffect .
+    setPreview(renderQuestionWithAnswer(question, null, setMultiChoiceAnswer, null));
 }
 
 export default function CreateQuestion() {
@@ -156,36 +192,21 @@ export default function CreateQuestion() {
     const [rawQuestion, setRawQuestion] = useState("null");
     const [levels, setLevels] = useState();
     const [isDropdownOpened, setIsDropdownOpened] = useState();
-    const [selectedOption, setSelectedOption] = useState();
+    const [selectedLevel, setSelectedLevel] = useState(null);
 
-    const Qtype = ['only text', 'with image'];
-    const QtypeDefaultStr = 'default str';
-    const [QTypeDropDownSelectedIdx, setQTypeDropDownSelectedIdx] = useState(0);
-    const [isQtypeDropdownOpened, setIsQtypeDropdownOpened] = useState();
-    const [imageBase64, setImageBase64] = useState(null);
     const [image, setImage] = useState(null);
     const [imageWidth, setImageWidth] = useState(300);
     const [imageHeight, setImageHeight] = useState(200);
 
-    const handleQtypeDropdown = () => {
-        setIsQtypeDropdownOpened(!isQtypeDropdownOpened);
-    }
-
-    const QtypeItemOnClick = (idx) => {
-        console.log('QtypeItemOnClick', idx);
-        setQTypeDropDownSelectedIdx(idx);
-        setIsQtypeDropdownOpened(false);
-    }
-
     const handleOptionClick = (selectedLevel) => {
-        setSelectedOption(selectedLevel);
+        setSelectedLevel(selectedLevel);
         setIsDropdownOpened(false);
     }
 
     const readImg = (event) => {
         const file = event.target.files[0]; // 사용자가 선택한 파일
 
-        console.log("file", file)
+        // console.log("file", file)
         if (file) {
             const reader = new FileReader(); // FileReader 객체 생성
             reader.onload = function (e) {
@@ -195,15 +216,14 @@ export default function CreateQuestion() {
         }
     }
     const changeImage = (item, value) => {
-        if(value === '')
+        if (value === '')
             value = 0;
-        
-        if(item === 'width')
+
+        if (item === 'width')
             setImageWidth(value);
-        else 
+        else
             setImageHeight(value);
     }
-
 
     useEffect(() => {
         const readQuestinoLevels = async () => {
@@ -213,6 +233,49 @@ export default function CreateQuestion() {
         }
         readQuestinoLevels();
     }, [])
+
+    const insertQuestion = async (selectedLevel, Q) => {
+        if (selectedLevel) {
+            await insertQuestionDb(selectedLevel.level, Q)
+            alert("저장 완료");
+        }
+        else {
+            alert("등급 선택 필요");
+        }
+    }
+
+    const ImageComponent = () => {
+        return (<div>
+            {image ?
+                <div className='flex flex-row'>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6" onClick={() => setImage(null)}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                    <Image src={image}
+                        width={imageWidth}
+                        height={imageHeight}
+                        className='m-4'
+                        alt='images' />
+                </div>
+                :
+                <Fragment>
+                    <div className='flex flex-col'>
+                        <label>image 첨부시에는 한 문제만 입력 가능</label>
+                    </div>
+                    <input type="file" name="image" className="w-96 p-4"
+                        onChange={readImg} />
+                    <label > width </label>
+                    <input className='border' id='width' type='text' onChange={(e) => changeImage('width', e.target.value)} value={imageWidth} />
+                    <label > height </label>
+                    <input className='border' id='height' type='text' onChange={(e) => changeImage('height', e.target.value)} value={imageHeight} />
+                </Fragment>
+            }
+
+            <textarea id="rawQuestion" rows="20" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="with image Write your thoughts here..." >
+            </textarea>
+        </div>)
+    }
 
     return (
         <div className="flex flex-col w-full">
@@ -226,7 +289,7 @@ export default function CreateQuestion() {
                                 aria-expanded="true"
                                 aria-haspopup="true"
                                 onClick={() => setIsDropdownOpened(!isDropdownOpened)}>
-                                {selectedOption ? selectedOption['desc'] : "시험 등급 선택"}
+                                {selectedLevel ? selectedLevel['desc'] : "시험 등급 선택"}
                                 <svg className="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
                                 </svg>
@@ -250,13 +313,16 @@ export default function CreateQuestion() {
                         )}
                     </div>
                     <button type="button"
-                        className="bg-blue-600 text-white rounded-full  px-4 py-1"
-                        onClick={() => makePreview(document.getElementById("rawQuestion").value, setPreview, setRawQuestion)}>
+                        className="bg-blue-597 text-white rounded-full  px-4 py-1"
+                        onClick={() => makePreview(document.getElementById("rawQuestion").value, {
+                            content: image, width: imageWidth, height
+                                : imageHeight
+                        }, setPreview, setRawQuestion)}>
                         변환
                     </button>
                     <button type="button"
                         className="bg-blue-600 text-white rounded-full px-4 py-1"
-                        onClick={() => insertQuestion('expert', rawQuestion)}>
+                        onClick={() => insertQuestion(selectedLevel, rawQuestion)}>
                         저장
                     </button>
                 </div>
@@ -265,47 +331,7 @@ export default function CreateQuestion() {
                 <div className="flex w-full">
                     <div className="w-1/2"
                         name="left-half">
-                        <DropdownMenu selectOption={Qtype}
-                            selectedIdx={QTypeDropDownSelectedIdx}
-                            defaultStr={QtypeDefaultStr}
-                            isDropdownOpened={isQtypeDropdownOpened}
-                            handleDropdown={handleQtypeDropdown}
-                            handleItemClick={QtypeItemOnClick}
-                        />
-
-                        {(Qtype[QTypeDropDownSelectedIdx] == 'only text') ?
-                            (
-                                <div>
-                                    <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">문제 입력</label>
-                                    <textarea id="rawQuestion" rows="20" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                                        placeholder="only text - Write your thoughts here..." >
-                                    </textarea>
-                                </div>
-                            )
-                            :
-                            (
-                                <div>
-                                    <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">문제 입력 - 이미지</label>
-                                    <label htmlFor="image" className="block">
-                                        image file:
-                                    </label>
-                                    <input type="file" name="image" className="w-96 p-4"
-                                        onChange={readImg} />
-                                    <label > width </label>
-                                    <input id='width' type='text' onChange={(e) => changeImage('width', e.target.value)} value={imageWidth}/> 
-                                    <label > height </label>
-                                    <input id='height' type='text' onChange={(e) => changeImage('height', e.target.value)} value={imageHeight}/> 
-
-                                    {image && <Image src={image}
-                                        width={imageWidth}
-                                        height={imageHeight}
-                                        alt='images' />}
-                                    <textarea id="rawQuestion" rows="20" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                                        placeholder="with image Write your thoughts here..." >
-                                    </textarea>
-                                </div>
-                            )
-                        }
+                        <ImageComponent />
                     </div>
                     <div name="right-half w-1/2">
                         <div id="questionPreview">

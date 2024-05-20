@@ -1,13 +1,19 @@
 import Image from 'next/image';
-import React from 'react';
+import React, {Fragment} from 'react';
 import { MathJax, MathJaxContext } from 'better-react-mathjax'
 
-function toStr(input) {
+function toStr(input, isAnswer) {
     console.log(input)
+    let answerColor = null;
+
+    if(isAnswer)
+        answerColor='text-red-400'
+
+    console.log('selection color', answerColor)
     return (
         <MathJaxContext>
             <MathJax>
-                <p>{input}</p>
+                <p className={answerColor}>{input}</p>
             </MathJax>
         </MathJaxContext>);
 }
@@ -16,17 +22,17 @@ export function renderQuestionWithAnswer(questions, onClickQuestion, markingAnsw
     const renderMultChoiceSelction = (Quuid, Qselection, Qanswer) => {
         return (Qselection.map((item, selectionIdx) => {
             if (Qanswer.length !== 0 && Qanswer.answers.includes(selectionIdx + 1)) {
-                return (<p className='text-red-400'
+                return (<div className='text-red-400 pl-8'
                     key={Quuid + "-" + selectionIdx + '-selection'}
-                    onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx) }}>
-                    {toStr(selectionIdx + 1 + '. ' + item)}
-                </p>)
+                    onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx+1) }}>
+                    {toStr(selectionIdx + 1 + '. ' + item, true)}
+                </div>)
             }
             else {
-                return (<p key={Quuid + "-" + selectionIdx + '-selection'}
-                    onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx) }}>
-                    {toStr(selectionIdx + 1 + '. ' + item)}
-                </p>)
+                return (<div className='pl-8' key={Quuid + "-" + selectionIdx + '-selection'}
+                    onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx+1) }}>
+                    {toStr(selectionIdx + 1 + '. ' + item, false)}
+                </div>)
             }
         }))
     }
@@ -50,11 +56,12 @@ export function renderQuestionWithAnswer(questions, onClickQuestion, markingAnsw
 
     const renderSingleQ = ({ Quuid, Qtype, Qtext, Qimg, Qselection, Qanswer }, qIdx) => {
         const isMultChoice = Qtype === 'multChoice';
+        console.log('img', Qimg);
         return (<div className='border border-gray-300 border-2 px-2 py-2'
             onClick={() => { onClickQuestion && onClickQuestion(Quuid, Qtype, Qtext, Qimg, Qselection, Qanswer); }}
             key={Quuid}>
             <p key={Quuid + '-text'}>{qIdx + '. ' + Qtext}</p>
-            {Qimg.content !== null && <Image src={Qimg.content} width={Qimg.width} height={Qimg.height} alt='images' />}
+            {Qimg.content && <Image src={Qimg.content} width={Qimg.width} height={Qimg.height} alt='images' />}
             {isMultChoice ?
                 (renderMultChoiceSelction(Quuid, Qselection, Qanswer))
                 :
@@ -113,8 +120,8 @@ export function renderQuestionForUser(questions, markingAnswerMultiChoice, marki
     }
 
     return (
-        <React.Fragment>
+        <Fragment>
             {questions && questions.map((question, idx) => (renderSingleQ(question, idx + 1)))}
-        </React.Fragment>
+        </Fragment>
     )
 }
