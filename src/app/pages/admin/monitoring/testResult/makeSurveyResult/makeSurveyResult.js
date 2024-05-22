@@ -4,6 +4,7 @@ import makeForm1Data from './makeForm1Data';
 import makeForm2Data from './makeForm2Data';
 import makeForm3Data from './makeForm3Data';
 import makeForm4Data from './makeForm4Data';
+import makeForm5Data from './makeForm5Data';
 import { alignmentSheet } from '../fomattingCell';
 
 
@@ -19,6 +20,7 @@ export default async function makeSurveyResult(survey) {
     const wsForm2 = workbook.addWorksheet('기본 항목 - 그래프');
     const wsForm3 = workbook.addWorksheet('교육 평가');
     const wsForm4 = workbook.addWorksheet('강사 평가');
+    const wsForm5 = workbook.addWorksheet('개선 사항');
 
     wsForm1.columns = [
         { header: "순서", key: 'order', width: 10 },
@@ -58,19 +60,28 @@ export default async function makeSurveyResult(survey) {
         const startIdx = 2;
         const cellIdx = startIdx + i * mergeCellSz;
         wsForm4.mergeCells(1, cellIdx, 1, cellIdx + mergeCellSz - 1);
-        row.getCell(cellIdx+mergeCellSz-1).value = wsForm4Data.col1stHead[i];
+        row.getCell(cellIdx + mergeCellSz - 1).value = wsForm4Data.col1stHead[i];
     }
-
 
     wsForm4.addRow(wsForm4Data.col2ndHead);
     wsForm4Data.score.map((userScore, idx) => {
         wsForm4.addRow(userScore);
     });
-
     alignmentSheet(wsForm4, 'center', 'center');
 
 
+    const wsForm5Data = makeForm5Data(survey);
+    console.log('wsForm5Data', wsForm5Data);
 
+    wsForm5.mergeCells(1, 1, 1, 2);
+    const wsFrom5Row = wsForm5.getRow(1);
+    wsFrom5Row.getCell(2).value = wsForm5Data.head;
+
+    wsForm5Data.content.map((item) => {
+        wsForm5.addRow(item);
+    })
+
+    alignmentSheet(wsForm5, 'center', 'center');
 
     const buffer = await workbook.xlsx.writeBuffer();
     const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
