@@ -7,7 +7,7 @@ import NewWindow from "react-new-window";
 import html2canvas from "html2canvas";
 import { MakeQuestionPreview2, makeQuestionPreview } from "./makePdf";
 import jsPDF from "jspdf";
-import makeSurveyResult from "./makeSurveyResult";
+import makeSurveyResult from "./makeSurveyResult/makeSurveyResult";
 
 
 export default function TestResult() {
