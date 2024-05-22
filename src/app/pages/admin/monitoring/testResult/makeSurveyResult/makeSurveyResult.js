@@ -3,7 +3,8 @@ import { saveAs } from 'file-saver';
 import makeForm1Data from './makeForm1Data';
 import makeForm2Data from './makeForm2Data';
 import makeForm3Data from './makeForm3Data';
-
+import makeForm4Data from './makeForm4Data';
+import { alignmentSheet } from '../fomattingCell';
 
 
 export default async function makeSurveyResult(survey) {
@@ -16,7 +17,8 @@ export default async function makeSurveyResult(survey) {
 
     const wsForm1 = workbook.addWorksheet('기본 항목');
     const wsForm2 = workbook.addWorksheet('기본 항목 - 그래프');
-    const wsForm3 = workbook.addWorksheet('교육 훈련');
+    const wsForm3 = workbook.addWorksheet('교육 평가');
+    const wsForm4 = workbook.addWorksheet('강사 평가');
 
     wsForm1.columns = [
         { header: "순서", key: 'order', width: 10 },
@@ -35,40 +37,38 @@ export default async function makeSurveyResult(survey) {
         console.log("idx", order)
         wsForm1.addRow({ order: order + 1, sex, age, educationLevel, belongs, position, techLevel, yearOfService })
     })
+    alignmentSheet(wsForm1, 'center', 'center');
 
     //todo: later
     // const wsForm2Data = makeForm2(survey);
     wsForm2.getColumn(1).values = [1, 2, 3, 4, 5];
-
+    alignmentSheet(wsForm2, 'center', 'center');
 
     const wsForm3Data = makeForm3Data(survey);
     wsForm3.addRow(wsForm3Data.colHead);
-
     wsForm3Data.score.map((userScore, idx) => {
-        // const score = userScore.map(item => item.score);
-        // const scoreSum = score.reduce((acc, cur) => acc += cur, 0)
-        // console.log('score', score, score / score.length)
-
-        // wsForm3.addRow([idx, ...score, scoreSum / score.length]);
         wsForm3.addRow(userScore);
     });
+    alignmentSheet(wsForm3, 'center', 'center');
+
+    const wsForm4Data = makeForm4Data(survey);
+    const mergeCellSz = 4;
+    const row = wsForm4.getRow(1);
+    for (let i = 0; i < wsForm4Data.col1stHead.length; i++) {
+        const startIdx = 2;
+        const cellIdx = startIdx + i * mergeCellSz;
+        wsForm4.mergeCells(1, cellIdx, 1, cellIdx + mergeCellSz - 1);
+        row.getCell(cellIdx+mergeCellSz-1).value = wsForm4Data.col1stHead[i];
+    }
 
 
-    // const scores = wsForm3Data.score.reduce((acc, userScore) => {
-    //     console.log('userscore', userScore.map(item => item.score))
-    //     acc.push(userScore.map(item => item.score));
-    //     return acc;
-    // }, []);
+    wsForm4.addRow(wsForm4Data.col2ndHead);
+    wsForm4Data.score.map((userScore, idx) => {
+        wsForm4.addRow(userScore);
+    });
 
-//    wsForm3.addRow()
+    alignmentSheet(wsForm4, 'center', 'center');
 
-    //alignment of wsForm3
-    const rowCnt = wsForm3Data.score.length;
-    wsForm3.eachRow((row, rowNumber) => {
-        row.eachCell((cell, cellNumbeer) => {
-            cell.alignment = { horizontal: 'center', vertical: 'center' }
-        })
-    })
 
 
 

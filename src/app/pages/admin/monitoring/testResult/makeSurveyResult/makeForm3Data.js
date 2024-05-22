@@ -1,3 +1,5 @@
+import {avg, verticalAvg } from './calcFn'
+
 export default function makeForm3Data(survey) {
     //item2
     // "item2Row": [
@@ -61,26 +63,5 @@ export default function makeForm3Data(survey) {
     resultWithIdx.push(aAvg);
 
     return { colHead: colHead, score: resultWithIdx };
-}
-
-function avg(scoreArr) {
-    return scoreArr.reduce((acc, cur) => acc +=cur, 0) / scoreArr.length;
-} 
-
-function verticalAvg(scoreArr) {
-    const verticalAvg = [];
-    const verticalSum = new Array(scoreArr[0].length).fill(0);
-
-    for (let i = 0; i < scoreArr.length; i++) {
-        for (let j = 0; j < scoreArr[i].length; j++) {
-            verticalSum[j] += scoreArr[i][j];
-        }
-    }
-
-    for (let j = 0; j < verticalSum.length; j++) {
-        verticalAvg[j] = (verticalSum[j] / scoreArr.length);
-    }
-
-    return ['avg', ...verticalAvg];
 }
 

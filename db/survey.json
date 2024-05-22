@@ -395,16 +395,6 @@
       "uuid": "4bee9076-7991-4f72-a6cf-42646fcb6a1e"
     },
     {
-      "str": "전자해도",
-      "choice": [],
-      "uuid": "ae220002-b980-4387-bdee-8f5666dc2e00"
-    },
-    {
-      "str": "해양 조사법규",
-      "choice": [],
-      "uuid": "74195d3d-d562-491a-86be-ad3c41e9a21e"
-    },
-    {
       "str": "해양 조사정책",
       "choice": [],
       "uuid": "43c99ffa-6058-4615-acbc-3b4f5385b05d"
