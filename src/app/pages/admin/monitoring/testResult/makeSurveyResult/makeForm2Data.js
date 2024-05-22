@@ -1,5 +1,6 @@
 export default function makeForm2Data(survey) {
-    console.log('survey', survey)
+    console.log('makeForm2Data');
+    console.log('survey', survey);
     const userCnt = survey.length;
 
     //info: "item1" in survey
@@ -31,20 +32,43 @@ export default function makeForm2Data(survey) {
         idx += 1;
         const selection = item1.filter(s => s.itemName === item)[0].selection;
         console.log('selection', selection);
-        const eachCnt = selection.map((srcStr) => {
-            const filtered = survey.filter((userSurvey) => {
-                console.log('userSurvey', userSurvey)
-                return userSurvey.item1.selection[userSurvey.item1.answer - 1] === srcStr
-            }
-            );
 
-            console.log('filtered', filtered)
 
-        })
+        const selectionMap = selection.reduce((acc, e, idx) => {
+            acc.push({
+                str: e,
+                idx: idx,
+                cnt: 0,
+                percent: 0
 
-        console.log("eachCnt", eachCnt);
-    });
+            })
+            return acc;
+        }, []);
+
+        const userResult = {itemName: item, data: selectionMap};
+        console.log('userResult', userResult);
+
+        const filtered = survey.map((userSurvey) => {
+            return userSurvey.item1.filter(ele => ele.itemName === item);
+        }
+        );
+
+        for (let i = 0; i < selection.length; i++) {
+            userResult.data[i].cnt = (filtered.filter(item => {
+                // console.log("item.answer", item[0].answer, i)
+                return item[0].answer.includes(i + 1);
+            })).length;
+            userResult.data[i].percent = userResult.data[i].cnt / userCnt * 100;
+        }
+
+        console.log('userResult', userResult);
+        return userResult;
+    })
+
+    console.log('result', result);
 
     console.log("makeform2 ", userSelections);
+
+    return result;
 }
 

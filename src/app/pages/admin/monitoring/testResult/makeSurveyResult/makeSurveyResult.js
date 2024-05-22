@@ -42,8 +42,21 @@ export default async function makeSurveyResult(survey) {
     alignmentSheet(wsForm1, 'center', 'center');
 
     //todo: later
-    // const wsForm2Data = makeForm2(survey);
-    wsForm2.getColumn(1).values = [1, 2, 3, 4, 5];
+    const wsForm2Data = makeForm2Data(survey);
+    wsForm2Data.map(items => {
+        console.log(
+            'items', items
+        )
+        wsForm2.addRow([items.itemName]);
+        items.data.map(item =>
+            wsForm2.addRow(['', item.str, item.cnt, item.percent]));
+
+        wsForm2.addRow([]);
+        wsForm2.addRow([]);
+    });
+
+
+    // wsForm2.getColumn(1).values = [1, 2, 3, 4, 5];
     alignmentSheet(wsForm2, 'center', 'center');
 
     const wsForm3Data = makeForm3Data(survey);

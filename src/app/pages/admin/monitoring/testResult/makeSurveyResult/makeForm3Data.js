@@ -43,7 +43,7 @@ export default function makeForm3Data(survey) {
     const result = survey.map((userSurvey) => {
         const item2Row = userSurvey.item2Row;
         const userResult = item2Row.reduce((acc, items, idx) => {
-            console.log('items', items);
+            // console.log('items', items);
             const itemResult = items.secondRow.map((item) => {
                 const scoreIdx = item.choice - 1;
                 // return { str: item.str, choice: item.choice, score: score[scoreIdx] }
@@ -53,7 +53,7 @@ export default function makeForm3Data(survey) {
             return acc;
         }, []);
 
-        console.log("userResult", userResult);
+        // console.log("userResult", userResult);
         return [...userResult, avg(userResult)];
     });
 
