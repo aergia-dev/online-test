@@ -14,7 +14,7 @@ export default function Sidebar() {
                         </a>
                     </li>
                     <li>
-                        <a href="/adminPage/admin/manageData/survey" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <a href="/adminPage/manageData/survey" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <span className="ms-3">설문지 수정</span>
                         </a>
                     </li>
