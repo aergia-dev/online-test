@@ -319,12 +319,25 @@ export async function getAllTestResultDb(title) {
     return testReslut;
 }
 
-export async function getAllTestResultTilesDb() {
+export async function getAllTestResultTitlesDb() {
     const resultDb = await JSONFilePreset('./db/testResult.json', {});
     resultDb.read();
     console.log('resultDb', resultDb.data);
     const titles = resultDb.data['testResult'].map((result) => result.title)
 
     return titles;
+}
+
+export async function deleteTitleDb(title) {
+    console.log('delete title', title);
+    const db = await JSONFilePreset('./db/testResult.json', {});
+    db.read();
+    const idx = db.data.testResult.findIndex((result) => result.title === title);
+    // const newResult = db.data['testResult'].filter(result => result.title !== title);
+    console.log("found idx", idx);
+    db.data['testResult'].splice(idx, 1);
+    console.log("aa", db.data['testResult'])
+    db.data['testResult'].map(result => console.log(result.title));
+    db.write();
 }
 
