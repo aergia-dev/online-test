@@ -3,12 +3,16 @@ import { getAllTestResultTitlesDb, getAllTestResultDb, deleteTitleDb } from "@/l
 import { useRef, useState, useEffect } from "react"
 import ReactPDF from "@react-pdf/renderer";
 import NewWindow from "react-new-window";
-// import { makeQuestionPdf, makeSurveyPdf } from "./makePdf";
 import html2canvas from "html2canvas";
 import { MakeQuestionPreview2, makeQuestionPreview } from "./makePdf";
 import jsPDF from "jspdf";
 import makeSurveyResult from "./makeSurveyResult/makeSurveyResult";
 
+
+//     {testResult: 
+//         {title: '',
+//     starTime: 'time',
+// userResult: []}
 
 export default function TestResult() {
     const [titles, setTitles] = useState();
@@ -17,19 +21,6 @@ export default function TestResult() {
     const [testResult, setTestResult] = useState();
     const questionPdf = useRef();
     const [questionPreview, setQuestionPreview] = useState(null);
-    //     {testResult: 
-    //         {title: '',
-    //     starTime: 'time',
-    // userResult: []}
-
-
-    //     function makeQuestionPdf(userInfo, questions, answer) {
-    //         const qp = makeQuestionPreview(userInfo, questions.question, answer);
-    //         setQuestionPreview(qp);
-    //         // document.body.appendChild(r);
-    //    }
-
-
     useEffect(() => {
         const readTitles = async () => {
             const readTitles = await getAllTestResultTitlesDb();
@@ -121,6 +112,9 @@ export default function TestResult() {
     }
 
 
+    const makeDocs = (survey, question) =>  {
+
+    }
     //dropdown menu of  test tile
     //show in editable table of testResult.json
     // make question. file as pdf 
@@ -128,7 +122,7 @@ export default function TestResult() {
     // make total result. file as excel
 
     return (
-        <div className='mx-auto m-8'>
+        <div className='mx-auto m-8 space-y-8'>
             <div id="managingTestResult"
                 className="flex flex-col">
                 <p className='font-bold'>시험 결과 리스트</p>
@@ -137,7 +131,7 @@ export default function TestResult() {
                         <div className='flex flex-row space-x-4'
                             key={title + 'div'}>
                             <button key={title + 'delBtn'}
-                                onClick={() => { handleRemoveTtile(title)}}>
+                                onClick={() => { handleRemoveTtile(title) }}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                                 </svg>
@@ -150,16 +144,18 @@ export default function TestResult() {
                 })}
             </div>
             {testResult && (
-                <div id='testResultTable'>
+                <div id='testResultTable'
+                    className='space-y-4'>
                     <table className='table-auto  border border-gray-600'>
                         <thead className='border border-gray-600'>
                             <tr>
-                                <th className='border border-gray-600'> name </th>
-                                <th className='border border-gray-600'> id </th>
-                                <th className='border border-gray-600'> affiliation </th>
-                                <th className='border border-gray-600'> selected cnt </th>
-                                <th className='border border-gray-600'> end? </th>
-                                <th className='border border-gray-600'> download question/survey </th>
+                                <th className='border border-gray-600'> 이름 </th>
+                                <th className='border border-gray-600'> 교번 </th>
+                                <th className='border border-gray-600'> 소속 </th>
+                                <th className='border border-gray-600'> 시험 결과 </th>
+                                <th className='border border-gray-600'> 시험지 제출 </th>
+                                <th className='border border-gray-600'> 설문지 제출 </th>
+                                <th className='border border-gray-600'> 다운로드 </th>
                             </tr>
                         </thead>
                         <tbody className='border border-gray-600'>
@@ -184,18 +180,15 @@ export default function TestResult() {
                                     </td>
                                     <td className='border border-gray-600'
                                         key={idx + '_' + "endTime"}>
-                                        {userInfo.endTime === undefined ? 'not ' : 'done'}
+                                        {userInfo.endTime === undefined ? '미제출 ' : '제출'}
                                     </td>
-                                    <td className='border border-gray-600' >
-                                        <button type='button'
-                                            onClick={() => makeQuestionPdf(userInfo, question, answer)}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                                            </svg>
-                                        </button>
-                                        <button type='button'
-                                            onClick={() => makeSurveyPdf(userInfo, survey, answer)}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                    <td className='border border-gray-600'
+                                        key={idx + '_' + "survey"}>
+                                        {surveyResult === undefined ? '미제출 ' : '제출'}
+                                    </td>
+                                    <td className='border border-gray-600 px-4'>
+                                        <button >
+                                            <svg onClick={() => makeDocs(surveyResult, resultQuestion)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                                             </svg>
                                         </button>
@@ -204,11 +197,21 @@ export default function TestResult() {
                             ))}
                         </tbody>
                     </table>
+                    <div className='flex flex-row space-x-4'>
+                        설문지 정리 다운로드
+                        <button>
+                            <svg onClick={() => makeSurveyResult(testResult.userResult.map(item => item.surveyResult))} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                            </svg>
+                        </button>
+                    </div>
+
                     <div id='questionPdf'
                         style={{ position: 'absolute', left: '-9999px' }}
                         ref={questionPdf}>
                         {questionPreview}
                     </div>
-                </div>)}
-        </div>);
+                </div >)
+            }
+        </div >);
 }
