@@ -2,9 +2,12 @@
 
 import { getTestQuestionForUserDb, setTestResultDb, makeInitialTestResultDb } from "@/component/db";
 import { useState, useEffect } from "react";
-import { getSessionInfo } from "@/app/login/action";
+import { getSession } from "@/app/login/action";
 import marking from './marking'
 import { renderQuestionForUser } from "../common/renderQuestion";
+import UserInfo from "../common/userInfo";
+import { useRouter } from "next/navigation";
+import { isLogIn } from "@/app/login/checkSession";
 
 function shuffle(question) {
     console.log("shuffle", question)
@@ -19,9 +22,10 @@ function shuffle(question) {
 
 export default function TestPage() {
     const [questions, setQuestions] = useState([]);
-    const [session, setSession] = useState();
+    const [session, setSession] = useState(null);
     const [testResult, setTestResult] = useState({});
     const [testFinish, setTestFinish] = useState(false);
+    const route = useRouter();
 
     useEffect(() => {
         const fetchCurTest = async () => {
@@ -30,10 +34,9 @@ export default function TestPage() {
             const testQuestion = curTest['question'];
             console.log("testQuestion ", testQuestion);
             const question = shuffle(testQuestion);
-
-            console.log('question - useeffect', question)
+            // console.log('question - useeffect', question)
             setQuestions(question);
-            const userInfo = await getSessionInfo();
+            const userInfo = await getSession();
             setSession(userInfo);
             makeInitialTestResultDb(userInfo);
         };
@@ -53,7 +56,7 @@ export default function TestPage() {
 
             //info: remove when already exist 
             if (newQuestions[foundIdx]['Qanswer']['userAnswer'].includes(realIdx)) {
-               newQuestions[foundIdx]['Qanswer']['userAnswer'] = newQuestions[foundIdx]['Qanswer']['userAnswer'].filter((a) => a !== realIdx);
+                newQuestions[foundIdx]['Qanswer']['userAnswer'] = newQuestions[foundIdx]['Qanswer']['userAnswer'].filter((a) => a !== realIdx);
             }
             else {
                 newQuestions[foundIdx]['Qanswer']['userAnswer'].push(realIdx);
@@ -71,14 +74,14 @@ export default function TestPage() {
         const newQuestions = questions;
         const foundIdx = newQuestions.findIndex(q => q.Quuid === Quuid);
 
-            console.log(Quuid);
+        console.log(Quuid);
         if (foundIdx !== -1) {
-        newQuestions[foundIdx]['Qanswer']['userAnwser'] = [];
-        newQuestions[foundIdx]['Qanswer']['userAnwser'].push(answerText)
+            newQuestions[foundIdx]['Qanswer']['userAnwser'] = [];
+            newQuestions[foundIdx]['Qanswer']['userAnwser'].push(answerText)
 
-        setQuestions([...newQuestions]);
-        const answer = { Quuid: Quuid, Qtype: 'essay', userAnswer: answerText }
-        setTestResultDb(session, answer);
+            setQuestions([...newQuestions]);
+            const answer = { Quuid: Quuid, Qtype: 'essay', userAnswer: answerText }
+            setTestResultDb(session, answer);
         }
         else {
             console.log("makrAnswerEssay err");
@@ -96,8 +99,8 @@ export default function TestPage() {
     const Footer = () => {
         if (testFinish === false) {
             return (
-                <div className='mx-auto'>
-                    <button className='bg-blue-500 rounded-full w-32 h-8 mx-8'
+                <div className='flex mx-auto justify-center'>
+                    <button className='bg-blue-500 text-white rounded-full w-32 h-8 mx-8'
                         onClick={setTestEnd}> 제 출 </button>
                 </div>
             )
@@ -112,23 +115,34 @@ export default function TestPage() {
                         </a>
                     ) : (
                         <div> .... </div>
-                   )}
+                    )}
                 </div>
             )
         }
     }
 
-    return (
-        <div className="flex flex-col">
-            <div className='mx-auto'>
-                {session?.userName + ' ' + session?.userAffiliation};
-            </div>
-            <div className='py-4 space-y-4 mx-auto'>
-                {renderQuestionForUser(questions, markAnswerMultiChoice, makrAnswerEssay)}
-               <div className="justify-items-center">
-                    <Footer />
+    if (session === null) {
+        return <div> Loading. </div>
+    }
+    else {
+        if (!isLogIn(session)) {
+            route.push('/');
+        }
+        else {
+            return (
+                <div className="flex flex-col">
+                    <div className='flex mx-auto justify-center'>
+                        {/* {session?.userName + ' ' + session?.userAffiliation}; */}
+                        <UserInfo session={session} />
+                    </div>
+                    <div className='py-4 space-y-4 mx-auto'>
+                        {renderQuestionForUser(questions, markAnswerMultiChoice, makrAnswerEssay)}
+                        <div className="justify-items-center">
+                            <Footer />
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    );
+            );
+        }
+    }
 }

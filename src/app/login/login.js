@@ -1,24 +1,7 @@
-'use client'
-import { redirect } from "next/navigation";
-import { login, getSession } from "./action";
+import { login, logout } from "./action";
+import { useRouter } from "next/navigation";
 
-export default async function LoginFrom() {
-
-  // getSession().then(session => {
-  //   console.log(session);
-  // }).catch(error => {
-  //   console.error(error);
-  // }) 
-  
-  // console.log("login ", s);
-  return <Login />
-}
-
-
-function Login() {
-  // const loginFn = () {
-  // }
-  
+export function LoginForm() {
   return (
     <form
       action={login}
@@ -73,25 +56,45 @@ function Login() {
         <div className="md:w-2/3">
           <button className="shadow bg-blue-200 hover:bg-blue-300 focus:shoadow-outline focuse:outline-none text-black font-bold py-2 px-4 rounded"
             type="submit">
-            제출 </button>
+            로그인 </button>
         </div>
       </div>
     </form >
   );
 }
 
+export function ShowLoginInfo({ session, setSession }) {
+  const router = useRouter();
 
-// function LogoutButton() {
-//   const { logout } = useSession();
+  const loggedInNextReq = async () => {
+    await loginRedirect(session);
+  }
 
-//   return (
-//     <p>
-//       <a className=""
-//         onClick={(event) => {
-//           event.preventDefault();
-//           logout(null, { optimisticData: DefaultSession, });
-//         }}
-//       > log out</a>
-//     </p>
-//   )
-// }
+  const logoutReq = async () => {
+    try {
+      await logout();
+      setSession({});
+      // router.push(window.location.pathname);
+      // router.push('/');
+    } catch (e) {
+      console.log('err logout()', e);
+    }
+  }
+
+  return (
+    <div>
+      <p> 교번: {session.userId} </p>
+      <p> 교번: {session.userAffiliation} </p>
+      <p> 이름: {session.userName} </p>
+      <div className="flex items-center m-4">
+        <div className="space-x-4">
+          <button className="shadow bg-blue-200 hover:bg-blue-300 focus:shoadow-outline focuse:outline-none text-black font-bold py-2 px-4 rounded"
+            onClick={() => { loggedInNextReq(session) }}>
+            다음 </button>
+          <button className="shadow bg-blue-200 hover:bg-blue-300 focus:shoadow-outline focuse:outline-none text-black font-bold py-2 px-4 rounded"
+            onClick={() => { logoutReq() }}>
+            로그 아웃 </button>
+        </div>
+      </div>
+    </div>);
+}
