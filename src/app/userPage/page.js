@@ -39,6 +39,7 @@ export default function TestPage() {
             const userInfo = await getSession();
             setSession(userInfo);
             makeInitialTestResultDb(userInfo);
+            //set test Finish
         };
 
         fetchCurTest();

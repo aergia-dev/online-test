@@ -50,8 +50,6 @@ export async function login(formData) {
         session.isAdmin = true;
 
     await session.save();
-    //todo: search other way to routing? not in login page
-    // loginRedirect(session);
 
     if (session.isAdmin)
         redirect('/adminPage');
