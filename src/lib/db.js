@@ -334,10 +334,21 @@ export async function deleteTitleDb(title) {
     db.read();
     const idx = db.data.testResult.findIndex((result) => result.title === title);
     // const newResult = db.data['testResult'].filter(result => result.title !== title);
-    console.log("found idx", idx);
+    // console.log("found idx", idx);
     db.data['testResult'].splice(idx, 1);
-    console.log("aa", db.data['testResult'])
-    db.data['testResult'].map(result => console.log(result.title));
+    // console.log("aa", db.data['testResult'])
+    // db.data['testResult'].map(result => console.log(result.title));
     db.write();
 }
 
+
+export async function deleteUserTestResultDb(title, clientId) {
+    const db = await JSONFilePreset('./db/testResult.json', {});
+    db.read();
+    const testResult = db.data.testResult.filter((result) => result.title === title);
+    console.log(testResult);
+    console.log(testResult[0].userResult);
+    const idx = testResult[0].userResult.findIndex((result) => result.userInfo.clientId === clientId);
+    testResult[0].userResult.splice(idx, 1);
+    db.write();
+}
