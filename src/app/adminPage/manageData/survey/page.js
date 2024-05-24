@@ -5,7 +5,7 @@ import toJson from './toJson';
 import { dumData } from './dummy';
 import { Saira_Extra_Condensed } from "next/font/google";
 import { setSurveyDB, getSurveyDb } from "@/lib/db"
-import SurveyPreview from "@/component/surveyPreview";
+import SurveyPreview from "@/app/component/surveyPreview";
 
 export default function Survey() {
     const [preview, setPreview] = useState();

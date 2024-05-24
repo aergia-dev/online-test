@@ -7,6 +7,7 @@ import html2canvas from "html2canvas";
 import { MakeQuestionPreview2, makeQuestionPreview } from "./makePdf";
 import jsPDF from "jspdf";
 import makeSurveyResult from "./makeSurveyResult/makeSurveyResult";
+import { DeleteConfirmDialog } from "@/app/component/confirmDialog";
 
 
 //     {testResult: 
@@ -21,6 +22,12 @@ export default function TestResult() {
     const [testResult, setTestResult] = useState();
     const questionPdf = useRef();
     const [questionPreview, setQuestionPreview] = useState(null);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [dialogMsg, setDialogMsg] = useState(null);
+    const [dialogOnDeleteFn, setDialogOnDeleteFn] = useState(null);
+
+
+
     useEffect(() => {
         const readTitles = async () => {
             const readTitles = await getAllTestResultTitlesDb();
@@ -96,27 +103,39 @@ export default function TestResult() {
         if (title) {
             const testResult = await getAllTestResultDb(title);
             setTestResult(testResult);
-            console.log("rrrr", testResult);
         }
     }
 
+
     const handleRemoveTitle = async (title) => {
-        console.log("33", title)
-        await deleteTitleDb(title);
-        const newTitle = titles.filter(v => v !== title);
-        console.log("newTitle", newTitle)
-        setTitles([...newTitle]);
+        const onDeleteTitle = async (title) => {
+            await deleteTitleDb(title);
+            const newTitle = titles.filter(v => v !== title);
+            setTitles([...newTitle]);
+            setIsDialogOpen(false);
+        }
+        setDialogMsg('"' + title + '" 시험 결과를 삭제하시겠습니까?');
+        setDialogOnDeleteFn(() => () => onDeleteTitle(title));
+        setIsDialogOpen(true);
     }
 
+
     const handleRemoveUserInfo = async (selectedTitle, userInfo) => {
-        await deleteUserTestResultDb(selectedTitle, userInfo.clientId);
-        setTestResult((prev) => {
-            const newUserResult = prev.userResult.filter(result => result.userInfo.clientId !== userInfo.clientId);
-            return {
-                ...prev,
-                "userResult": newUserResult
-            }
-        });
+        const onDeleteUserResult = async (selectedTitle, userInfo) => {
+            await deleteUserTestResultDb(selectedTitle, userInfo.clientId);
+            setTestResult((prev) => {
+                const newUserResult = prev.userResult.filter(result => result.userInfo.clientId !== userInfo.clientId);
+                return {
+                    ...prev,
+                    "userResult": newUserResult
+                }
+            });
+            setIsDialogOpen(false);
+        }
+        setDialogMsg('" 교번: ' + userInfo.userId + ', 이름:' + userInfo.userName + ', 소속:' + userInfo.userAffiliation + '" 시험 결과를 삭제하시겠습니까?');
+        setDialogOnDeleteFn(() => () => onDeleteUserResult(selectedTitle, userInfo));
+        setIsDialogOpen(true);
+
     }
 
     const makeQuestionPdf = (userInfo, questions, answer) => {
@@ -136,6 +155,12 @@ export default function TestResult() {
 
     return (
         <div className='mx-auto m-8 space-y-8'>
+            <div className='flex justify-center'>
+                <DeleteConfirmDialog msg={dialogMsg}
+                    isOpen={isDialogOpen}
+                    onCancel={() => setIsDialogOpen(false)}
+                    onConfirm={dialogOnDeleteFn} />
+            </div>
             <div id="managingTestResult"
                 className="flex flex-col">
                 <p className='font-bold'>시험 결과 리스트</p>

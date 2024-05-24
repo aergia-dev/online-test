@@ -1,6 +1,6 @@
 'use client'
 
-import SurveyPreview from "@/component/surveyPreview";
+import SurveyPreview from "@/app/component/surveyPreview";
 import { useState, useEffect, Link } from "react";
 import { getSurveyDb, setSurveyResultDb } from '@/lib/db'
 import { getSession } from "@/app/loginPage/action";
