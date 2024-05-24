@@ -1,9 +1,9 @@
 'use client'
 import { useRef, useState, useEffect, Fragment } from 'react';
-import { insertQuestionDb } from '@/component/db';
-import { getLevelDb } from '@/component/db';
+import { insertQuestionDb } from '@/lib/db';
+import { getLevelDb } from '@/lib/db';
 import Image from 'next/image';
-import { renderQuestionWithAnswer } from '@/app/pages/common/renderQuestion';
+import { renderQuestionWithAnswer } from '@/app/common/renderQuestion';
 
 
 function previewSingleQuestion(question, changeAnswerFn) {

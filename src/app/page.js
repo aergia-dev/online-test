@@ -1,6 +1,6 @@
 'use client'
-import { LoginForm, ShowLoginInfo } from './login/login';
-import { getSession } from './login/action';
+import { LoginForm, ShowLoginInfo } from './loginPage/login';
+import { getSession } from './loginPage/action';
 import { useEffect, useState } from 'react';
 
 export default function MainPage() {

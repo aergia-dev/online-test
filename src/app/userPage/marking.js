@@ -1,6 +1,6 @@
 'use server'
 
-import { getCurrentTestDB, setFinalizeTestResulttDb, getUserTestResultDb, getTestQuestionForUserDb } from "@/component/db"
+import { getCurrentTestDB, setFinalizeTestResulttDb, getUserTestResultDb, getTestQuestionForUserDb } from "@/lib/db"
 
 export default async function marking(session) {
     console.log(session)

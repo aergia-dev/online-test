@@ -1,5 +1,5 @@
 'use client'
-import { getAllTestResultTilesDb, getAllTestResultDb } from "@/component/db"
+import { getAllTestResultTilesDb, getAllTestResultDb } from "@/lib/db"
 import { useRef, useState, useEffect } from "react"
 import ReactPDF from "@react-pdf/renderer";
 import NewWindow from "react-new-window";

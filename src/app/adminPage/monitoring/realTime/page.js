@@ -2,7 +2,7 @@
 
 import SelectTest from './selectTest'
 import { useState, useEffect } from 'react'
-import { setEndTestDb, setCurretnTestDB, getCurrentTestDB, getTestResultDb, getCurrentQuestionCnt, getTestOnGoing } from '@/component/db'
+import { setEndTestDb, setCurretnTestDB, getCurrentTestDB, getTestResultDb, getCurrentQuestionCnt, getTestOnGoing } from '@/lib/db'
 
 export default function Monitoring() {
   const [testOnGoing, setTestOnGoing] = useState();

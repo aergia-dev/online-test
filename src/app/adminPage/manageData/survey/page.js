@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import toJson from './toJson';
 import { dumData } from './dummy';
 import { Saira_Extra_Condensed } from "next/font/google";
-import { setSurveyDB, getSurveyDb } from "@/component/db"
+import { setSurveyDB, getSurveyDb } from "@/lib/db"
 import SurveyPreview from "@/component/surveyPreview";
 
 export default function Survey() {

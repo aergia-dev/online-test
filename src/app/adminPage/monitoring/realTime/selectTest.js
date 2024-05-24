@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react';
-import { loadTestList } from '@/component/db';
+import { loadTestList } from '@/lib/db';
 
 // select test and click "start test" -> user can get a test page
 // show client status

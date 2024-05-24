@@ -54,9 +54,16 @@ export async function login(formData) {
     // loginRedirect(session);
 
     if (session.isAdmin)
-        redirect('/pages/admin');
+        redirect('/adminPage');
     else
-        redirect('/pages/user');
+        redirect('/userPage');
+}
+
+export async function loginRedirect(session){
+    if (session.isAdmin)
+        redirect('/adminPage');
+    else
+        redirect('/userPage');
 }
 
 export async function logout() {

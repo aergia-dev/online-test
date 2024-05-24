@@ -1,13 +1,13 @@
 'use client'
 
-import { getTestQuestionForUserDb, setTestResultDb, makeInitialTestResultDb } from "@/component/db";
+import { getTestQuestionForUserDb, setTestResultDb, makeInitialTestResultDb } from "@/lib/db";
 import { useState, useEffect } from "react";
-import { getSession } from "@/app/login/action";
+import { getSession } from "@/app/loginPage/action";
 import marking from './marking'
 import { renderQuestionForUser } from "../common/renderQuestion";
 import UserInfo from "../common/userInfo";
 import { useRouter } from "next/navigation";
-import { isLogIn } from "@/app/login/checkSession";
+import { isLogIn } from "@/app/loginPage/checkSession";
 
 function shuffle(question) {
     console.log("shuffle", question)

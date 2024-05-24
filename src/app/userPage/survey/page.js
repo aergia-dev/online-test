@@ -2,8 +2,8 @@
 
 import SurveyPreview from "@/component/surveyPreview";
 import { useState, useEffect, Link } from "react";
-import { getSurveyDb, setSurveyResultDb } from '@/component/db'
-import { getSession } from "@/app/login/action";
+import { getSurveyDb, setSurveyResultDb } from '@/lib/db'
+import { getSession } from "@/app/loginPage/action";
 
 export default function Survey() {
     const [surveyForm, setSurveyForm] = useState(null);

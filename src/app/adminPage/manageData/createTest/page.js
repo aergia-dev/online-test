@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import { saveTestDb, getLevelQuestionsDB, getLevelDb } from '@/component/db'
-import { renderQuestionWithAnswer } from '@/app/pages/common/renderQuestion';
+import { saveTestDb, getLevelQuestionsDB, getLevelDb } from '@/lib/db'
+import { renderQuestionWithAnswer } from '@/app/common/renderQuestion';
 
 export default function CreateTest({ props }) {
     const [levels, setLevels] = useState({});

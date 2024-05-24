@@ -1,4 +1,4 @@
-import { login, logout } from "./action";
+import { login, logout, loginRedirect } from "./action";
 import { useRouter } from "next/navigation";
 
 export function LoginForm() {
@@ -74,8 +74,6 @@ export function ShowLoginInfo({ session, setSession }) {
     try {
       await logout();
       setSession({});
-      // router.push(window.location.pathname);
-      // router.push('/');
     } catch (e) {
       console.log('err logout()', e);
     }
