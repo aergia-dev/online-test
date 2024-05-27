@@ -61,7 +61,7 @@ export async function getQuestionPool() {
 // }
 
 export async function saveTestDb(title, question) {
-    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
+    const db = await JSONFilePreset(QuestionDb, dbTemplate);
     db.read();
     const isExist = db.data.testList.findIndex((str) => title === str);
 
@@ -77,13 +77,14 @@ export async function saveTestDb(title, question) {
 }
 
 export async function loadTestList() {
-    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
+    const db = await JSONFilePreset(QuestionDb, dbTemplate);
     db.read();
     return db.data.testList;
 }
 
-export async function setCurrentTestDb(title, onGoing, minimumScore) {
-    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
+export async function setCurretnTestDB(title, onGoing, minimumScore) {
+    const db = await JSONFilePreset(QuestionDb, dbTemplate);
+    const testResultDb = await JSONFilePreset(TestResultDb, dbTemplate);
     db.read();
     db.data.currentTest = { title: title, onGoing: onGoing, minScore: minimumScore };
     db.write();
@@ -105,13 +106,13 @@ export async function setCurrentTestDb(title, onGoing, minimumScore) {
 }
 
 export async function getCurrentTestDB() {
-    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
+    const db = await JSONFilePreset(QuestionDb, dbTemplate);
     db.read();
     return db.data.currentTest;
 }
 
 export async function getLevelQuestionsDB(level) {
-    const db = await JSONFilePreset('./db/questions.json', dbTemplate);
+    const db = await JSONFilePreset(QuestionDb, dbTemplate);
     db.read();
     const questions = db.data.questionPool[level];
     const newQuestionPromise = questions.map(async (q) => {
@@ -388,4 +389,3 @@ export async function deleteQuestiondb(level, QuuidLst) {
     console.log('after', newQuestionPool);
     db.write();
 }
-
