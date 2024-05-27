@@ -308,7 +308,9 @@ export async function setEndTestDb() {
         resultDb.data['testResult'].push(db.data.testResult);
         resultDb.write();
     }
+
     db.data.testResult = {};
+    db.data.currentTest = {};
     db.write();
 }
 

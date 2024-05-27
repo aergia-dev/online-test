@@ -3,6 +3,7 @@
 import SelectTest from './selectTest'
 import { useState, useEffect } from 'react'
 import { setEndTestDb, setCurretnTestDB, getCurrentTestDB, getTestResultDb, getCurrentQuestionCnt, getTestOnGoing } from '@/lib/db'
+import { Dialog } from '@/app/component/confirmDialog'
 
 export default function Monitoring() {
   const [testOnGoing, setTestOnGoing] = useState();
@@ -11,22 +12,42 @@ export default function Monitoring() {
   const [testResult, setTestResult] = useState([]);
   const [quesitonCnt, setQuestionCnt] = useState();
 
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [dialogMsg, setDialogMsg] = useState('');
+  const [dialogConfirmFn, setDialogConfirmFn] = useState(null);
+
+
+  const startTest = async () => {
+    //todo: move into db
+    const minimumScore = 1;
+
+    const confirmFn = async () => {
+      setTestOnGoing(true);
+      await setCurretnTestDB(testTitle, true, minimumScore);
+      setReadingDb(true);
+      setIsDialogOpen(false);
+    }
+    setDialogMsg({ title: '시험을 시작합니다.', content: '' })
+    setDialogConfirmFn(() => () => confirmFn());
+  }
+
+  const endTest = async () => {
+    console.log('?? end test')
+    const confirmFn = async () => {
+      console.log('endTest confirm')
+      setTestOnGoing(false);
+      await setEndTestDb();
+      setIsDialogOpen(false);
+    }
+    setDialogMsg({ title: '시험을 종료합니다.', content: '' })
+    setDialogConfirmFn(() => () => confirmFn());
+  }
+
   const toggleTestOnGoing = async (status) => {
+    console.log('status', status);
     if (testTitle) {
-      //todo: move into db
-      const minimumScore = 1;
-
-      setTestOnGoing(status);
-      setCurretnTestDB(testTitle, status, minimumScore);
-      setReadingDb(status);
-
-      console.log('status', status);
-      //info: end of test
-      if(status === false)
-      {
-        //move testResult in db to testResult.json
-        await setEndTestDb();
-      }
+      status ? startTest() : endTest();
+      setIsDialogOpen(true);
     }
     else {
       alert("should select test");
@@ -58,23 +79,29 @@ export default function Monitoring() {
 
   useEffect(() => {
     let intervalId;
-    // if (readingDb) {
-      intervalId = setInterval(() => {
-        readTestResult();
-      }, 1000);
-    // }
+    intervalId = setInterval(() => {
+      readTestResult();
+    }, 1000);
 
     return () => clearInterval(intervalId);
   }, [readingDb]);
 
   return (
     <div className='flex flex-col w-full'>
+      <Dialog
+        isOpen={isDialogOpen}
+        msg={dialogMsg}
+        onCancel={() => setIsDialogOpen(false)}
+        onConfirm={dialogConfirmFn} />
       <div className='flex flex-row gap-8 px-4 py-4 justify-center'>
-        <SelectTest setTestTitle={setTestTitle} defaultVal={'choose'}> </SelectTest>
-        <p> test: {testOnGoing ? "시험 중" : "시험 종료"}</p>
-        <button className='rounded bg-blue-400'
+        {testOnGoing ?
+          '' :
+          <SelectTest setTestTitle={setTestTitle} defaultVal={'choose'}> </SelectTest>
+        }
+        <p>  {testOnGoing ? "시험 중" : "시험 종료"}</p>
+        <button className='rounded bg-blue-400 w-16'
           onClick={() => toggleTestOnGoing(!testOnGoing)}>
-          {testOnGoing ? "stop" : "start"}
+          {testOnGoing ? "종료" : "시작"}
         </button>
       </div>
       <div className='flex justify-center'>
@@ -92,26 +119,26 @@ export default function Monitoring() {
           </tr>
         </thead>
         <tbody>
-          {testResult && testResult.length > 0 && testResult.map((user, idx) => (
+          {testResult && testResult.map((user, idx) => (
             <tr className='text-center'
-              key={idx + '_' + user.userInfo.userName + '_' + user.userInfo.userId + '_' + user.userInfo.userAffiliation}>
-              <td key={idx + '_' + user.userInfo.userName}>
+              key={idx}>
+              <td key={idx + '_userName_' + user.userInfo.userName}>
                 {user.userInfo.userName}
               </td>
-              <td key={idx + '_' + user.userInfo.userId}>
+              <td key={idx + '_userId_' + user.userInfo.userId}>
                 {user.userInfo.userId}
               </td>
-              <td key={idx + '_' + user.userInfo.userAffiliation}>
+              <td key={idx + '_userAffiliation_' + user.userInfo.userAffiliation}>
                 {user.userInfo.userAffiliation}
               </td>
-              <td key={idx + '_' + user.resultQuestion.question.length}>
+              <td key={idx + '_question' + user.resultQuestion.question.length}>
                 {user.answeredQuestionCnt} / {user.questionCnt}
               </td>
               <td key={idx + '_' + "endTime"}>
                 {user.userInfo.endTime === undefined ? '진행중' : '제출'}
               </td>
               <td key={idx + '_' + "survey"}>
-                {user.surveyResult=== undefined ? '진행중' : '제출'}
+                {user.surveyResult === undefined ? '진행중' : '제출'}
               </td>
             </tr>
           ))}
