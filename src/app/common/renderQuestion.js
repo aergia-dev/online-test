@@ -10,7 +10,6 @@ const options = {
     },
 };
 
-
 function toStr(input, isAnswer) {
     console.log(input)
     let answerColor = null;
@@ -36,13 +35,13 @@ export function renderQuestionWithAnswer(questions, onClickQuestion, markingAnsw
                 return (<div className='text-red-400 pl-8'
                     key={Quuid + "-" + selectionIdx + '-selection'}
                     onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx + 1) }}>
-                    (toStr(selectionIdx + 1 + '. ' + item, true))
+                    {toStr(selectionIdx + 1 + '. ' + item, true)}
                 </div>)
             }
             else {
                 return (<div className='pl-8' key={Quuid + "-" + selectionIdx + '-selection'}
                     onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx + 1) }}>
-                    (toStr(selectionIdx + 1 + '. ' + item, false))
+                    {toStr(selectionIdx + 1 + '. ' + item, false)}
                 </div>)
             }
         }))
@@ -82,9 +81,9 @@ export function renderQuestionWithAnswer(questions, onClickQuestion, markingAnsw
     }
 
     return (
-        <React.Fragment>
+        <MathJaxContext>
             {questions && questions.map((question, idx) => (renderSingleQ(question, idx + 1)))}
-        </React.Fragment>
+        </MathJaxContext>
     )
 }
 
@@ -131,9 +130,9 @@ export function renderQuestionForUser(questions, markingAnswerMultiChoice, marki
     }
 
     return (
-        <Fragment>
+        <MathJaxContext>
             {questions && questions.map((question, idx) => (renderSingleQ(question, idx + 1)))}
-        </Fragment>
+        </MathJaxContext>
     )
 }
 
