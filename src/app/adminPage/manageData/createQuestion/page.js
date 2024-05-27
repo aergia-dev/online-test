@@ -74,7 +74,7 @@ function makeQuestion(content) {
     let selection = new Array();
     let Qtype = '';
     let answers = []
-    
+
     if (matchedCnt > 0) {
         // multi choice
         Qtype = 'multChoice';
@@ -90,7 +90,7 @@ function makeQuestion(content) {
     }
     else {
         //essay type
-        const answerStr = regexResult[regexResult.length -1 ].str;
+        const answerStr = regexResult[regexResult.length - 1].str;
         const text = regexResult[0].str;
         answerStr.replace(/[\[\]]/, '');
         question = text;
@@ -195,7 +195,7 @@ function makePreview(content, imgInfo, setPreview, setRawQuestion) {
 
 export default function CreateQuestion() {
     const ref = useRef(null);
-    const [preview, setPreview] = useState("null");
+    const [preview, setPreview] = useState(null);
     const [rawQuestion, setRawQuestion] = useState("null");
     const [levels, setLevels] = useState();
     const [isDropdownOpened, setIsDropdownOpened] = useState();
@@ -272,9 +272,9 @@ export default function CreateQuestion() {
                     <input type="file" name="image" className="w-96 p-4"
                         onChange={readImg} />
                     <label > width </label>
-                    <input className='border' id='width' type='text' onChange={(e) => changeImage('width', e.target.value)} value={imageWidth} />
+                    <input className='border w-16' id='width' type='text' onChange={(e) => changeImage('width', e.target.value)} value={imageWidth} />
                     <label > height </label>
-                    <input className='border' id='height' type='text' onChange={(e) => changeImage('height', e.target.value)} value={imageHeight} />
+                    <input className='border w-16' id='height' type='text' onChange={(e) => changeImage('height', e.target.value)} value={imageHeight} />
                 </Fragment>
             }
 
@@ -285,9 +285,9 @@ export default function CreateQuestion() {
     }
 
     return (
-        <div className="flex flex-col w-full">
-            <div className="flex space-x-4 space-y-4 px-10 py-4 justify-center items-stretch">
-                <div className="flex space-x-4">
+        <div className="flex flex-col w-full m-4">
+            <div className="flex flex-col space-x-4 space-y-4 px-10 py-4 justify-center items-stretch">
+                <div className="flex space-x-4 justify-center">
                     <div className="relative inline-block text-center">
                         <div>
                             <button type="button"
@@ -319,6 +319,8 @@ export default function CreateQuestion() {
                             </div>
                         )}
                     </div>
+                </div>
+                <div className='flex justify-center space-x-8'>
                     <button type="button"
                         className="bg-blue-500 text-white rounded-full  px-4 py-1"
                         onClick={() => makePreview(document.getElementById("rawQuestion").value, {
@@ -342,7 +344,7 @@ export default function CreateQuestion() {
                     </div>
                     <div name="right-half w-1/2">
                         <div id="questionPreview">
-                            {preview}
+                            {(preview === null) ? '' : preview}
                         </div>
                     </div>
                 </div>
