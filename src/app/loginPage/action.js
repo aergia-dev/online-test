@@ -29,7 +29,8 @@ export async function getSession() {
         userId: session.userId,
         userName: session.userName,
         userAffiliation: session.userAffiliation,
-        clientId: session.clientId
+        clientId: session.clientId,
+        isAdmin: session.isAdmin
     }
 
     return sessionData;
