@@ -1,13 +1,16 @@
 'use client'
 
 import SurveyPreview from "@/app/component/surveyPreview";
-import { useState, useEffect, Link } from "react";
-import { getSurveyDb, setSurveyResultDb } from '@/lib/db'
+import { useState, useEffect } from "react";
+import { getSurveyDb, setSurveyResultDb, getSubmitStatus } from '@/lib/db'
 import { getSession } from "@/app/loginPage/action";
+import { useRouter } from "next/navigation";
 
 export default function Survey() {
     const [surveyForm, setSurveyForm] = useState(null);
-    const [fin, setFin] = useState(false);
+    const [session, setSession] = useState(null);
+    const [status, setStatus] = useState(null);
+    const router = useRouter();
 
     const onActionItem1 = ({ key, rowIdx, colIdx, choiceIdx, uuid }) => {
         const answerIdx = choiceIdx + 1;
@@ -61,7 +64,7 @@ export default function Survey() {
 
         const ret = item1NotAnswered.length === 0 &&
             item2NotAnswered.length === 0 &&
-            item3NotAnswered.length === 0; 
+            item3NotAnswered.length === 0;
 
         return ret;
     }
@@ -70,7 +73,7 @@ export default function Survey() {
         if (validation(surveyForm)) {
             const userInfo = await getSession();
             await setSurveyResultDb(userInfo, surveyForm);
-            setFin(true);
+            router.push('/userPage/finalize')
         }
         else {
             alert("there is not selected item");
@@ -78,30 +81,41 @@ export default function Survey() {
     }
 
     useEffect(() => {
-        const updateInitVal = async () => {
+        const init = async () => {
+            const session = await getSession();
+            setSession(session);
             const survey = await getSurveyDb();
-            // console.log("####", survey);
             setSurveyForm(survey);
+            const status = await getSubmitStatus(session);
+            console.log('survye', status);
+            setStatus(status);
         }
 
-        updateInitVal();
+        init();
     }, []);
 
-    if (fin)
-        return (<div> fin.. close window</div>)
-    else
-        return (
-            <div className='m-16'>
-                {surveyForm ?
-                    <SurveyPreview content={surveyForm}
-                        onAction={onActionItem1}
-                        onActionItem2={onActionItem2}
-                        onActionItem3={onActionItem3}
-                        onActionItem4={onActionItem4}
-                        onSave={onSave}
-                    />
-                    :
-                    <div> loading </div>}
-            </div>
-        );
+    if (session === null || status === null) {
+        return <div> Loading. </div>
+    }
+    else {
+        if (status.submitSurvey) {
+            router.push('/userPage/finalize')
+        }
+        else {
+            return (
+                <div className='m-16'>
+                    {surveyForm ?
+                        <SurveyPreview content={surveyForm}
+                            onAction={onActionItem1}
+                            onActionItem2={onActionItem2}
+                            onActionItem3={onActionItem3}
+                            onActionItem4={onActionItem4}
+                            onSave={onSave}
+                        />
+                        :
+                        <div> loading </div>}
+                </div>
+            );
+        }
+    }
 }

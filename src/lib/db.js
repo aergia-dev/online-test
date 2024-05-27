@@ -175,7 +175,7 @@ export async function getCurrentQuestionCnt() {
         return curTest.length;
 }
 
-export async function isAlreadySubmitQuestionDb(userInfo) {
+export async function getSubmitStatus(userInfo) {
     const db = await JSONFilePreset(QuestionDb, dbTemplate);
     db.read();
 
@@ -184,7 +184,7 @@ export async function isAlreadySubmitQuestionDb(userInfo) {
 
     return {
         submitTest: result.userInfo.testEndTime ? true : false,
-        submitSurvey: result.userInfo.surveyEndtime ? true : false
+        submitSurvey: result.userInfo.surveyEndTime ? true : false
     };
 }
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { isAlreadySubmitQuestionDb, getTestQuestionForUserDb, setTestResultDb, makeInitialTestResultDb } from "@/lib/db";
+import { getSubmitStatus, getTestQuestionForUserDb, setTestResultDb, makeInitialTestResultDb } from "@/lib/db";
 import { useState, useEffect } from "react";
 import { getSession } from "@/app/loginPage/action";
 import marking from './marking'
@@ -33,24 +33,17 @@ export default function TestPage() {
             console.log("curTest ", curTest);
             if (curTest) {
                 const testQuestion = curTest['question'];
-                console.log("testQuestion ", testQuestion);
                 const question = shuffle(testQuestion);
-                // console.log('question - useeffect', question)
                 setQuestions(question);
-                console.log('2222222222222222');
             }
             //set test Finish
         };
         const init = async () => {
             const session = await getSession();
             setSession(session);
-
             await makeInitialTestResultDb(session);
-
-            const submit = await isAlreadySubmitQuestionDb(session);
+            const submit = await getSubmitStatus(session);
             setStatus(submit);
-
-
         }
         init();
         fetchCurTest();
