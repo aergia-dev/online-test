@@ -2,7 +2,7 @@
 
 import SelectTest from './selectTest'
 import { useState, useEffect } from 'react'
-import { setEndTestDb, setCurrentTestDb, getCurrentTestDB, getTestResultDb, getCurrentQuestionCnt, getTestOnGoing } from '@/lib/db'
+import { deleteTitleDb, isExistTestResultDb, setEndTestDb, setCurrentTestDb, getCurrentTestDB, getTestResultDb, getCurrentQuestionCnt, getTestOnGoing } from '@/lib/db'
 import { Dialog } from '@/app/component/confirmDialog'
 
 export default function Monitoring() {
@@ -21,15 +21,34 @@ export default function Monitoring() {
     //todo: move into db
     const minimumScore = 1;
 
+
     const confirmFn = async () => {
       setTestOnGoing(true);
       await setCurrentTestDb(testTitle, true, minimumScore);
+
       setReadingDb(true);
       setIsDialogOpen(false);
     }
 
-    setDialogMsg({ title: '시험을 시작합니다.', content: '' })
-    setDialogConfirmFn(() => () => confirmFn());
+    const confirmWithRemoveFn = async () => {
+      setTestOnGoing(true);
+      await setCurrentTestDb(testTitle, true, minimumScore);
+
+      setReadingDb(true);
+      setIsDialogOpen(false);
+    }
+
+    const isExist = isExistTestResultDb(testTitle);
+    if (isExist) {
+      await deleteTitleDb(testTitle);
+      setDialogMsg({ title: '시험 결과가 이미 있습니다. 삭제 후 새로 생성하시겠습니까?.', content: '' })
+      setDialogConfirmFn(() => () => confirmWithRemoveFn());
+    }
+    else {
+      setDialogMsg({ title: '시험을 시작합니다.', content: '' })
+      setDialogConfirmFn(() => () => confirmFn());
+    }
+
   }
 
   const endTest = async () => {
@@ -84,7 +103,7 @@ export default function Monitoring() {
       readTestResult();
     }, 1000);
 
-    return () => {clearInterval(intervalId); readTestResult();};
+    return () => { clearInterval(intervalId); readTestResult(); };
   }, [readingDb]);
 
   return (

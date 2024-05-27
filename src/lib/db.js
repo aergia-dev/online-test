@@ -82,9 +82,19 @@ export async function loadTestList() {
     return db.data.testList;
 }
 
-export async function setCurretnTestDB(title, onGoing, minimumScore) {
-    const db = await JSONFilePreset(QuestionDb, dbTemplate);
+export async function isExistTestResultDb(title) {
     const testResultDb = await JSONFilePreset(TestResultDb, dbTemplate);
+    const exist = testResultDb.data.testResult.filter(test => test.title === title);
+
+    return (exist.length > 0);
+}
+
+export async function removeTestResultDb(title) {
+
+}
+
+export async function setCurrentTestDb(title, onGoing, minimumScore) {
+    const db = await JSONFilePreset(QuestionDb, dbTemplate);
     db.read();
     db.data.currentTest = { title: title, onGoing: onGoing, minScore: minimumScore };
     db.write();
@@ -100,9 +110,7 @@ export async function setCurretnTestDB(title, onGoing, minimumScore) {
     }
 
     db.write();
-    // const restResult = db.data.testResult.push({})
-    // await db.update(({testResult}) => testResult.push("ASdf"));
-    // console.log("testdb ", restResult);
+    return true;
 }
 
 export async function getCurrentTestDB() {
@@ -174,8 +182,10 @@ export async function isAlreadySubmitQuestionDb(userInfo) {
     const clientId = userInfo.clientId;
     const result = await db.data.testResult.userResult?.find((result) => result.userInfo['clientId'] === clientId);
 
-    return { submitTest: result.userInfo.testEndTime ? true : false,
-             submitSurvey: result.userInfo.surveyEndtime ? true : false };
+    return {
+        submitTest: result.userInfo.testEndTime ? true : false,
+        submitSurvey: result.userInfo.surveyEndtime ? true : false
+    };
 }
 
 export async function makeInitialTestResultDb(userInfo) {
