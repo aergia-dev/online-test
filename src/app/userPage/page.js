@@ -1,6 +1,6 @@
 'use client'
 
-import { getTestQuestionForUserDb, setTestResultDb, makeInitialTestResultDb } from "@/lib/db";
+import { isAlreadySubmitQuestionDb, getTestQuestionForUserDb, setTestResultDb, makeInitialTestResultDb } from "@/lib/db";
 import { useState, useEffect } from "react";
 import { getSession } from "@/app/loginPage/action";
 import marking from './marking'
@@ -19,31 +19,43 @@ function shuffle(question) {
     return question;
 }
 
-
 export default function TestPage() {
-    const [questions, setQuestions] = useState([]);
+    const [questions, setQuestions] = useState(null);
     const [session, setSession] = useState(null);
     const [testResult, setTestResult] = useState({});
     const [testFinish, setTestFinish] = useState(false);
+    const [status, setStatus] = useState(null);
     const route = useRouter();
 
     useEffect(() => {
         const fetchCurTest = async () => {
             const curTest = await getTestQuestionForUserDb();
             console.log("curTest ", curTest);
-            const testQuestion = curTest['question'];
-            console.log("testQuestion ", testQuestion);
-            const question = shuffle(testQuestion);
-            // console.log('question - useeffect', question)
-            setQuestions(question);
-            const userInfo = await getSession();
-            setSession(userInfo);
-            makeInitialTestResultDb(userInfo);
+            if (curTest) {
+                const testQuestion = curTest['question'];
+                console.log("testQuestion ", testQuestion);
+                const question = shuffle(testQuestion);
+                // console.log('question - useeffect', question)
+                setQuestions(question);
+                console.log('2222222222222222');
+            }
             //set test Finish
         };
+        const init = async () => {
+            const session = await getSession();
+            setSession(session);
 
+            await makeInitialTestResultDb(session);
+
+            const submit = await isAlreadySubmitQuestionDb(session);
+            setStatus(submit);
+
+
+        }
+        init();
         fetchCurTest();
     }, []);
+
 
     function markAnswerMultiChoice(Quuid, qIdx) {
         const newQuestions = questions;
@@ -111,7 +123,7 @@ export default function TestPage() {
                     <p> score: {testResult.score}</p>
                     <p> pass : {testResult.passed ? "시험 통과함" : "시험 통과하지 못함"}</p>
                     {testResult.passed ? (
-                        <a href="/pages/user/survey" className="bg-blue-500 block mt-4 lg:inline-block lg:mt-0 font-bold  mr-4">
+                        <a href="/userPage/survey" className="bg-blue-500 block mt-4 lg:inline-block lg:mt-0 font-bold  mr-4">
                             go to survey
                         </a>
                     ) : (
@@ -122,7 +134,7 @@ export default function TestPage() {
         }
     }
 
-    if (session === null) {
+    if (session === null || status === null) {
         return <div> Loading. </div>
     }
     else {
@@ -130,20 +142,42 @@ export default function TestPage() {
             route.push('/');
         }
         else {
-            return (
-                <div className="flex flex-col">
-                    <div className='flex mx-auto justify-center'>
-                        {/* {session?.userName + ' ' + session?.userAffiliation}; */}
-                        <UserInfo session={session} />
-                    </div>
-                    <div className='py-4 space-y-4 mx-auto'>
-                        {renderQuestionForUser(questions, markAnswerMultiChoice, makrAnswerEssay)}
-                        <div className="justify-items-center">
-                            <Footer />
+            console.log('submit', status)
+            if (status.submitTest) {
+                if (status.submitSurvey) {
+                    return (
+                        <div>
+                            <div> 이미 시험지, 설문지를 제출하셨습니다. </div>
+                        </div>)
+                } else {
+                    return (<div>
+                        <div> 이미 시험지를 제출하셨습니다. </div>
+                        <a href="/userPage/survey" className="bg-blue-500 block mt-4 lg:inline-block lg:mt-0 font-bold  mr-4">
+                            설문지로 이동합니다.
+                        </a>
+                    </div>)
+                }
+            }
+            if (questions) {
+                return (
+                    <div className="flex flex-col">
+                        <div className='flex mx-auto justify-center'>
+                            {/* {session?.userName + ' ' + session?.userAffiliation}; */}
+                            <UserInfo session={session} />
+                        </div>
+                        <div className='py-4 space-y-4 mx-auto'>
+                            {renderQuestionForUser(questions, markAnswerMultiChoice, makrAnswerEssay)}
+                            <div className="justify-items-center">
+                                <Footer />
+                            </div>
                         </div>
                     </div>
-                </div>
-            );
+                );
+            }
+            else {
+                return <div className='flex justify-center m-32 font-bold'> 시험이 시작되지 않았습니다. </div>
+            }
+
         }
     }
 }

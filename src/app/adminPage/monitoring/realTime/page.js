@@ -83,7 +83,7 @@ export default function Monitoring() {
       readTestResult();
     }, 1000);
 
-    return () => clearInterval(intervalId);
+    return () => {clearInterval(intervalId); readTestResult();};
   }, [readingDb]);
 
   return (
@@ -134,11 +134,11 @@ export default function Monitoring() {
               <td key={idx + '_question' + user.resultQuestion.question.length}>
                 {user.answeredQuestionCnt} / {user.questionCnt}
               </td>
-              <td key={idx + '_' + "endTime"}>
-                {user.userInfo.endTime === undefined ? '진행중' : '제출'}
+              <td key={idx + '_' + "testEndTime"}>
+                {user.userInfo.testEndTime === undefined ? '진행중' : '제출'}
               </td>
               <td key={idx + '_' + "survey"}>
-                {user.surveyResult === undefined ? '진행중' : '제출'}
+                {user.userInfo.surveyEndTime === undefined ? '진행중' : '제출'}
               </td>
             </tr>
           ))}

@@ -138,16 +138,18 @@ export async function getTestQuestionForUserDb() {
     const curTest = await db.data['test'].find((test) => test.title === curTitle);
     console.log("curTest ", curTest);
 
-    //info: remove answer
-    const withoutAnswer = curTest.question.map((q) => {
-        q.Qanswer = { 'userAnswer': [], 'answers': [], 'answerCnt': q.Qanswer.answerCnt };
-        return q;
-    });
+    if (curTest) {
+        //info: remove answer
+        const withoutAnswer = curTest.question.map((q) => {
+            q.Qanswer = { 'userAnswer': [], 'answers': [], 'answerCnt': q.Qanswer.answerCnt };
+            return q;
+        });
 
-    curTest.question = withoutAnswer;
+        curTest.question = withoutAnswer;
+        console.log('getTestQuestionForUserDb', curTest)
+    }
 
     // curTest.question = await Promise.all(withoutAnswer)
-    console.log('getTestQuestionForUserDb', curTest)
     return curTest;
 }
 
@@ -164,24 +166,40 @@ export async function getCurrentQuestionCnt() {
         return curTest.length;
 }
 
+export async function isAlreadySubmitQuestionDb(userInfo) {
+    const db = await JSONFilePreset(QuestionDb, dbTemplate);
+    db.read();
+
+    const clientId = userInfo.clientId;
+    const result = await db.data.testResult.userResult?.find((result) => result.userInfo['clientId'] === clientId);
+
+    return { submitTest: result.userInfo.testEndTime ? true : false,
+             submitSurvey: result.userInfo.surveyEndtime ? true : false };
+}
+
 export async function makeInitialTestResultDb(userInfo) {
     const db = await JSONFilePreset(QuestionDb, dbTemplate);
     db.read();
 
-    const result = await db.data.testResult.userResult?.find((result) => result.userInfo['clientId'] === userInfo.clientId);
-    const curTitle = db.data.currentTest['title'];
+    if (userInfo) {
+        const result = await db.data.testResult.userResult?.find((result) => result.userInfo['clientId'] === userInfo.clientId);
+        const curTitle = db.data.currentTest['title'];
 
-    //info: make initial Result data
-    if (result === undefined) {
-        const curTest = await db.data['test'].find((test) => test.title === curTitle);
-        db.data.testResult.userResult.push({
-            userInfo: userInfo,
-            answeredQuestionCnt: 0,
-            questionCnt: curTest.question.length,
-            resultQuestion: curTest
-        });
-    };
-    db.write();
+        //info: make initial Result data
+        if (result === undefined) {
+            const curTest = await db.data['test'].find((test) => test.title === curTitle);
+            db.data.testResult.userResult.push({
+                userInfo: userInfo,
+                answeredQuestionCnt: 0,
+                questionCnt: curTest.question.length,
+                resultQuestion: curTest
+            });
+        };
+        db.write();
+    }
+    else {
+        console.log('userinfo is null')
+    }
 }
 
 export async function setTestResultDb(userInfo, { Quuid, Qtype, userAnswer }) {
@@ -227,7 +245,7 @@ export async function setFinalizeTestResulttDb(testResult) {
     const target = await userResult.find((result) => result.userInfo.clientId === testResult.userInfo.clientId);
     target['question'] = testResult.question;
     target['userInfo']['score'] = testResult.userInfo.score;
-    target['userInfo']['endTime'] = new Date();
+    target['userInfo']['testEndTime'] = new Date();
     console.log("target", target)
     db.write();
 }
@@ -271,6 +289,7 @@ export async function setSurveyResultDb(userInfo, survey) {
     const userResult = db.data.testResult.userResult;
     const target = await userResult.find((result) => result.userInfo.clientId === userInfo.clientId);
     console.log("##### ", userInfo.clientId, target);
+    target.userInfo.surveyEndTime = new Date();
     target['surveyResult'] = survey;
     db.write();
 }
