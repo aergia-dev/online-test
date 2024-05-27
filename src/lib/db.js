@@ -82,7 +82,7 @@ export async function loadTestList() {
     return db.data.testList;
 }
 
-export async function setCurretnTestDB(title, onGoing, minimumScore) {
+export async function setCurrentTestDb(title, onGoing, minimumScore) {
     const db = await JSONFilePreset('./db/questions.json', dbTemplate);
     db.read();
     db.data.currentTest = { title: title, onGoing: onGoing, minScore: minimumScore };
@@ -388,3 +388,4 @@ export async function deleteQuestiondb(level, QuuidLst) {
     console.log('after', newQuestionPool);
     db.write();
 }
+

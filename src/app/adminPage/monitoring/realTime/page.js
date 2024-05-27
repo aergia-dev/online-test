@@ -2,7 +2,7 @@
 
 import SelectTest from './selectTest'
 import { useState, useEffect } from 'react'
-import { setEndTestDb, setCurretnTestDB, getCurrentTestDB, getTestResultDb, getCurrentQuestionCnt, getTestOnGoing } from '@/lib/db'
+import { setEndTestDb, setCurrentTestDb, getCurrentTestDB, getTestResultDb, getCurrentQuestionCnt, getTestOnGoing } from '@/lib/db'
 import { Dialog } from '@/app/component/confirmDialog'
 
 export default function Monitoring() {
@@ -23,10 +23,11 @@ export default function Monitoring() {
 
     const confirmFn = async () => {
       setTestOnGoing(true);
-      await setCurretnTestDB(testTitle, true, minimumScore);
+      await setCurrentTestDb(testTitle, true, minimumScore);
       setReadingDb(true);
       setIsDialogOpen(false);
     }
+
     setDialogMsg({ title: '시험을 시작합니다.', content: '' })
     setDialogConfirmFn(() => () => confirmFn());
   }
