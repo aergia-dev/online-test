@@ -320,7 +320,7 @@ export default function CreateQuestion() {
                         )}
                     </div>
                     <button type="button"
-                        className="bg-blue-597 text-white rounded-full  px-4 py-1"
+                        className="bg-blue-500 text-white rounded-full  px-4 py-1"
                         onClick={() => makePreview(document.getElementById("rawQuestion").value, {
                             content: image, width: imageWidth, height
                                 : imageHeight
@@ -328,7 +328,7 @@ export default function CreateQuestion() {
                         변환
                     </button>
                     <button type="button"
-                        className="bg-blue-600 text-white rounded-full px-4 py-1"
+                        className="bg-blue-500 text-white rounded-full px-4 py-1"
                         onClick={() => insertQuestion(selectedLevel, rawQuestion)}>
                         저장
                     </button>
