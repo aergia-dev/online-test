@@ -1,6 +1,6 @@
 'use client'
 import { getAllTestResultTitlesDb, getAllTestResultDb, deleteTitleDb, deleteUserTestResultDb } from "@/lib/db"
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, useContext } from "react"
 import ReactPDF from "@react-pdf/renderer";
 import NewWindow from "react-new-window";
 import html2canvas from "html2canvas";
@@ -8,7 +8,9 @@ import { MakeQuestionPreview2, makeQuestionPreview } from "./makePdf";
 import jsPDF from "jspdf";
 import makeSurveyResult from "./makeSurveyResult/makeSurveyResult";
 import { DeleteConfirmDialog } from "@/app/component/confirmDialog";
-
+import { makeQuestionPdf, makeSurveyPdf } from "./makePdf";
+import { RenderQuestionPrint } from "@/app/common/renderQuestion";
+import { MathJaxBaseContext, MathJaxContext, MathJax } from 'better-react-mathjax'
 
 //     {testResult: 
 //         {title: '',
@@ -25,7 +27,38 @@ export default function TestResult() {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [dialogMsg, setDialogMsg] = useState(null);
     const [dialogOnDeleteFn, setDialogOnDeleteFn] = useState(null);
+    const questionPreviewRef = useRef('');
+    const surveyPreviewRef = useRef('');
+    const [qPreview, setQPreview] = useState('');
 
+
+const loadMathJax = () => {
+    return new Promise((resolve, reject) => {
+      if (window.MathJax) {
+        resolve(window.MathJax);
+      } else {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+        script.async = true;
+        script.onload = () => {
+          if (window.MathJax) {
+            resolve(window.MathJax);
+          } else {
+            reject(new Error('MathJax failed to initialize'));
+          }
+        };
+        script.onerror = () => reject(new Error('MathJax failed to load'));
+        document.head.appendChild(script);
+      }
+    });
+  };
+
+
+    useEffect(() => {
+        if (typeof window?.MathJax !== "undefined") {
+            window.MathJax.typeset()
+        }
+    }, [])
 
 
     useEffect(() => {
@@ -93,10 +126,6 @@ export default function TestResult() {
         }
     }, [questionPreview]);
 
-    // const readTestResultByTitle = async (title) => {
-    //     return await getAllTestResultDb(title);
-    // }
-
     const handleTitleClick = async (title) => {
         setSelectedTitle(title);
         setIsDropdownOpened(!isDropdownOpened)
@@ -138,15 +167,47 @@ export default function TestResult() {
 
     }
 
-    const makeQuestionPdf = (userInfo, questions, answer) => {
-        const qeustionPdf = makeQuestionPreview(userInfo, questions.question, answer);
-        setQuestionPreview(qeustionPdf);
+    // const makeQuestionPdf = (userInfo, questions, answer) => {
+    //     const qeustionPdf = makeQuestionPreview(userInfo, questions.question, answer);
+    //     setQuestionPreview(qeustionPdf);
+    // }
+
+    // ???
+    // const mjxContext = useContext(MathJaxBaseContext);
+
+    useEffect(() => {
+        console.log('useeffect of questionPreviewRef', qPreview)
+
+        console.log("qPreview === ''", qPreview === '')
+        if (qPreview === '') {
+            console.log("initial")
+        }
+        else {
+            console.log('@@@', window.MathJax)
+            //     window.MathJax.typesetPromise()
+            //   .then(() => {
+            //     console.log('MathJax rendering complete.');
+            //     makeQuestionPdf(null, null, document.getElementById('questionPreview'));
+            //   })
+            //   .catch((err) => console.error('MathJax rendering error:', err));
+            makeQuestionPdf(null, null, document.getElementById('questionPreview'));
+        }
+    }, [qPreview]);
+
+    const makeDocs = (userInfo, survey, questions, questionEle) => {
+        // questionPreviewRef.current = '<div> asdfasdfasdf </div>'
+        console.log('makeDocs');
+        setQPreview((prev) => {
+            return RenderQuestionPrint(questions.question);
+        });
+
+        // console.log('makeDocs');
+        // console.log(questions.question);
+        // console.log(survey);
+
+        // makeSurveyPdf(userInfo, survey);
     }
 
-
-    const makeDocs = (survey, question) => {
-
-    }
     //dropdown menu of  test tile
     //show in editable table of testResult.json
     // make question. file as pdf 
@@ -160,6 +221,15 @@ export default function TestResult() {
                     isOpen={isDialogOpen}
                     onCancel={() => setIsDialogOpen(false)}
                     onConfirm={dialogOnDeleteFn} />
+            </div>
+            <div id='questionPreview'
+                ref={questionPreviewRef}
+            // style={{position:'absolute', top:'500px', left:'-1000px'}}
+            >
+                {qPreview}
+            </div>
+            <div id='surveyPreview'>
+
             </div>
             <div id="managingTestResult"
                 className="flex flex-col">
@@ -198,7 +268,7 @@ export default function TestResult() {
                             </tr>
                         </thead>
                         <tbody className='border border-gray-600'>
-                            {testResult.userResult.length > 0 && testResult.userResult.map(({ userInfo, question, questionCtn, resultQuestion, surveyResult }, idx) => (
+                            {testResult.userResult.length > 0 && testResult.userResult.map(({ userInfo, questionCnt, resultQuestion, surveyResult }, idx) => (
                                 <tr className='text-center'
                                     key={idx + '_' + userInfo.userName + '_' + userInfo.userId + '_' + userInfo.userAffiliation}>
 
@@ -237,7 +307,8 @@ export default function TestResult() {
                                     </td>
                                     <td className='border border-gray-600 px-4'>
                                         <button >
-                                            <svg onClick={() => makeDocs(surveyResult, resultQuestion)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                            <svg onClick={() => makeDocs(userInfo, surveyResult, resultQuestion, questionPreviewRef)}
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                                             </svg>
                                         </button>
