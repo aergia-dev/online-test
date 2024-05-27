@@ -1,26 +1,5 @@
 import React from 'react';
 
-export function ConfirmModal({ msg, isOpen, onClose, onDelete }) {
-  if (!isOpen) return null;
-
-  return (
-    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white rounded-lg overflow-hidden shadow-xl max-w-md w-full">
-        <div className="p-4 border-b">
-          <h2 className="text-xl font-bold">Confirm Deletion</h2>
-        </div>
-        <div className="p-4">
-          <p>{msg}</p>
-        </div>
-        <div className="p-4 border-t flex justify-end space-x-2">
-          <button onClick={onClose} className="px-4 py-2 bg-gray-500 text-white rounded">Cancel</button>
-          <button onClick={onDelete} className="px-4 py-2 bg-red-500 text-white rounded">Delete</button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 export function DeleteConfirmDialog({ isOpen, msg, onCancel, onConfirm }) {
   if (!isOpen)
     return null;

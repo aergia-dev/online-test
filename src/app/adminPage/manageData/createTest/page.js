@@ -1,35 +1,47 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import { saveTestDb, getLevelQuestionsDB, getLevelDb } from '@/lib/db'
+import { saveTestDb, getLevelQuestionsDB, getLevelDb, deleteQuestiondb } from '@/lib/db'
 import { renderQuestionWithAnswer } from '@/app/common/renderQuestion';
+import { DeleteConfirmDialog } from '@/app/component/confirmDialog';
 
 export default function CreateTest({ props }) {
     const [levels, setLevels] = useState({});
     const [isDropdownOpened, setIsDropdownOpened] = useState(false);
-    const [selectedOption, setSelectedOption] = useState();
+    const [selectedLevel, setSelectedLevel] = useState();
     const [question, setQuestion] = useState();
     const [selectedQ, setSelectedQ] = useState([]);
     const [nthTest, setNthTest] = useState("");
 
-    const readQuestions = async () => {
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [dialogMsg, setDialogMsg] = useState(null);
+    const [dialogOnDeleteFn, setDialogOnDeleteFn] = useState(null);
+
+    const readLevel = async () => {
         const levels = await getLevelDb();
         setLevels(levels);
         console.log('levels', levels);
     }
 
 
+    const clearSelectedQ = () => {
+        setSelectedQ([]);
+    }
+
     useEffect(() => {
-        readQuestions();
+        readLevel();
     }, []);
 
-    const handleOptionClick = async (selectedLevel) => {
-        setSelectedOption(selectedLevel);
-        setIsDropdownOpened(false);
-        console.log('selectedLevel', selectedLevel);
-        const question = await getLevelQuestionsDB(selectedLevel['level'])
-        console.log("question", question);
+    const readLevelQuestion = async (levelKey) => {
+        const question = await getLevelQuestionsDB(levelKey)
         setQuestion(question);
     }
+
+    const handleOptionClick = async (selectedLevel) => {
+        setSelectedLevel(selectedLevel);
+        setIsDropdownOpened(false);
+        console.log('selectedLevel', selectedLevel);
+        readLevelQuestion(selectedLevel['level']);
+   }
 
     const selectQuestion = (Quuid, Qtype, Qtext, Qimg, Qselection, Qanswer) => {
         const curSelectedQ = selectedQ;
@@ -58,12 +70,32 @@ export default function CreateTest({ props }) {
             alert("시험 문제 선택 완료");
         }
     }
+    const deleteQuestion = async (level, QuuidLst) => {
+        console.log('deletefn', level, QuuidLst);
+        await deleteQuestiondb(level, QuuidLst);
+        readLevelQuestion(level);
+        clearSelectedQ();
+        setIsDialogOpen(false);
+    }
+
+    const deleteTestOnClick = async () => {
+        console.log('delete', selectedLevel.level);
+        const QuuidLst = selectedQ.map(q => q.Quuid);
+        setDialogMsg('선택된 시험 문제를 삭제합니다.');
+        setDialogOnDeleteFn(() => async () => await deleteQuestion(selectedLevel.level, QuuidLst));
+        setIsDialogOpen(true);
+    }
+
     const inputOnChange = (event) => {
         setNthTest(event.target.value);
     }
 
     return (
         <div className="flex flex-col w-full">
+            <DeleteConfirmDialog msg={dialogMsg}
+                isOpen={isDialogOpen}
+                onCancel={() => setIsDialogOpen(false)}
+                onConfirm={dialogOnDeleteFn} />
             <div className="flex flex-row w-full space-x-4 px-4 py-4 justify-center items-stretch">
                 <div className="flex space-x-4 space-y-4 px-10 py-1 items-center">
                     <div className="relative inline-block text-left">
@@ -74,7 +106,7 @@ export default function CreateTest({ props }) {
                                 aria-expanded="true"
                                 aria-haspopup="true"
                                 onClick={() => setIsDropdownOpened(!isDropdownOpened)}>
-                                {selectedOption ? selectedOption['desc'] : "등급 선택"}
+                                {selectedLevel ? selectedLevel['desc'] : "등급 선택"}
                                 <svg className="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
                                 </svg>
@@ -106,9 +138,13 @@ export default function CreateTest({ props }) {
                         onChange={inputOnChange}>
                     </input>
                 </div>
-                <button className='bg-blue-600 text-white px-4 py-1 w-24 rounded-full'
+                <button className='bg-blue-600 text-white px-4 py-1 w-16 rounded-full'
                     onClick={() => { saveTestOnClick(); }}>
                     저장
+                </button>
+                <button className='bg-blue-600 text-white px-4 py-1 w-16 rounded-full'
+                    onClick={() => { deleteTestOnClick(); }}>
+                    삭제
                 </button>
             </div>
             <div className='flex flex-row w-full'>

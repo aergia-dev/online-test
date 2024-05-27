@@ -4,6 +4,7 @@ import { JSONFilePreset } from 'lowdb/node';
 import { loadImage } from './image';
 
 const QuestionDb = './db/questions.json';
+const TestResultDb = './db/testResult.json';
 
 const dbTemplate = {
     levels: [
@@ -23,6 +24,7 @@ const dbTemplate = {
     test: [
     ]
 }
+
 
 export default async function test() {
     const db = await JSONFilePreset(QuestionDb, dbTemplate);
@@ -301,7 +303,7 @@ export async function setEndTestDb() {
 
     //only save when there is test result
     if (db.data.testResult.userResult.length > 0) {
-        const resultDb = await JSONFilePreset('./db/testResult.json', {});
+        const resultDb = await JSONFilePreset(TestResultDb, {});
         resultDb.read();
         resultDb.data['testResult'].push(db.data.testResult);
         resultDb.write();
@@ -311,7 +313,7 @@ export async function setEndTestDb() {
 }
 
 export async function getAllTestResultDb(title) {
-    const resultDb = await JSONFilePreset('./db/testResult.json', {});
+    const resultDb = await JSONFilePreset(TestResultDb, {});
     resultDb.read();
 
     const testReslut = await resultDb.data['testResult'].find((a) => a.title === title);
@@ -320,7 +322,7 @@ export async function getAllTestResultDb(title) {
 }
 
 export async function getAllTestResultTitlesDb() {
-    const resultDb = await JSONFilePreset('./db/testResult.json', {});
+    const resultDb = await JSONFilePreset(TestResultDb, {});
     resultDb.read();
     console.log('resultDb', resultDb.data);
     const titles = resultDb.data['testResult'].map((result) => result.title)
@@ -330,7 +332,7 @@ export async function getAllTestResultTitlesDb() {
 
 export async function deleteTitleDb(title) {
     console.log('delete title', title);
-    const db = await JSONFilePreset('./db/testResult.json', {});
+    const db = await JSONFilePreset(TestResultDb, {});
     db.read();
     const idx = db.data.testResult.findIndex((result) => result.title === title);
     // const newResult = db.data['testResult'].filter(result => result.title !== title);
@@ -343,12 +345,25 @@ export async function deleteTitleDb(title) {
 
 
 export async function deleteUserTestResultDb(title, clientId) {
-    const db = await JSONFilePreset('./db/testResult.json', {});
+    const db = await JSONFilePreset(TestResultDb, {});
     db.read();
     const testResult = db.data.testResult.filter((result) => result.title === title);
     console.log(testResult);
     console.log(testResult[0].userResult);
     const idx = testResult[0].userResult.findIndex((result) => result.userInfo.clientId === clientId);
     testResult[0].userResult.splice(idx, 1);
+    db.write();
+}
+
+export async function deleteQuestiondb(level, QuuidLst) {
+    // console.log('quuidList', level, QuuidLst);
+    const db = await JSONFilePreset(QuestionDb, {});
+    db.read();
+    const questionPool = db.data.questionPool[level];
+    console.log('before', questionPool);
+    const newQuestionPool = questionPool.filter(q => !QuuidLst.includes(q.Quuid));
+    db.data.questionPool[level] = newQuestionPool;
+
+    console.log('after', newQuestionPool);
     db.write();
 }

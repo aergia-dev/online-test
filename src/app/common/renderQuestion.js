@@ -11,7 +11,7 @@ const options = {
 };
 
 function toStr(input, isAnswer) {
-    console.log(input)
+    // console.log(input)
     let answerColor = null;
 
     if (isAnswer)
@@ -48,7 +48,7 @@ export function renderQuestionWithAnswer(questions, onClickQuestion, markingAnsw
     }
 
     const renderEssayAnswer = (Quuid, Qanswer) => {
-        console.log('Qanswer', Qanswer)
+        // console.log('Qanswer', Qanswer)
         if (Qanswer.answers.length !== 0) {
             return (<p key={Quuid + "-essay"}> 답 목록 :
                 {Qanswer.answers.join(', ')}
@@ -66,7 +66,7 @@ export function renderQuestionWithAnswer(questions, onClickQuestion, markingAnsw
 
     const renderSingleQ = ({ Quuid, Qtype, Qtext, Qimg, Qselection, Qanswer }, qIdx) => {
         const isMultChoice = Qtype === 'multChoice';
-        console.log('img', Qimg);
+        // console.log('img', Qimg);
         return (<div className='border border-gray-300 border-2 px-2 py-2'
             onClick={() => { onClickQuestion && onClickQuestion(Quuid, Qtype, Qtext, Qimg, Qselection, Qanswer); }}
             key={Quuid}>
