@@ -153,7 +153,7 @@ export default function TestPage() {
             }
             if (questions) {
                 return (
-                    <div className="flex flex-col">
+                    <div className="flex flex-colm m-16">
                         <div className='flex mx-auto justify-center'>
                             {/* {session?.userName + ' ' + session?.userAffiliation}; */}
                             <UserInfo session={session} />
