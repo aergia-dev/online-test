@@ -514,6 +514,14 @@
       ]
     }
   ],
-  "currentTest": {},
-  "testResult": {}
+  "currentTest": {
+    "title": "000 회차",
+    "onGoing": true,
+    "minScore": 1
+  },
+  "testResult": {
+    "title": "000 회차",
+    "startTime": "2024-05-28T02:21:56.152Z",
+    "userResult": []
+  }
 }

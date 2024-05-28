@@ -4,6 +4,7 @@ import SelectTest from './selectTest'
 import { useState, useEffect } from 'react'
 import { getAllTestResultDb, deleteTitleDb, isExistTestResultDb, setEndTestDb, setCurrentTestDb, getCurrentTestDB, getTestResultDb, getCurrentQuestionCnt, getTestOnGoing } from '@/lib/db'
 import { Dialog } from '@/app/component/confirmDialog'
+import ShowTime from '@/app/component/elapsedTime'
 
 export default function Monitoring() {
   const [testOnGoing, setTestOnGoing] = useState();
@@ -13,6 +14,22 @@ export default function Monitoring() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogMsg, setDialogMsg] = useState('');
   const [dialogConfirmFn, setDialogConfirmFn] = useState(null);
+  const [elapsedTime, setElapsedTime] = useState(0);
+
+  useEffect(() => {
+    if (testOnGoing) {
+      const startTime = Date.now();
+      const intervalId = setInterval(() => {
+        const s = Math.floor((Date.now() - startTime) / 1000);
+        setElapsedTime({
+        });
+
+        setElapsedTime(Math.floor((Date.now() - startTime) / 1000));
+      }, 1000);
+
+      return () => clearInterval(intervalId);
+    }
+  }, [testOnGoing]);
 
   const startTest = async () => {
     //todo: move into db
@@ -118,27 +135,35 @@ export default function Monitoring() {
         msg={dialogMsg}
         onCancel={() => setIsDialogOpen(false)}
         onConfirm={dialogConfirmFn} />
+
       <div className='flex flex-row gap-8 px-4 py-4 justify-center'>
         {testOnGoing ?
           '' :
           <SelectTest setTestTitle={setTestTitle} defaultVal={'choose'}> </SelectTest>
         }
-        <p>  {testOnGoing ? "시험 중" : "시험 종료"}</p>
+        <p> {testOnGoing ? "시험 중" : "시험 종료"}</p>
         <button className='rounded bg-blue-400 w-16'
           onClick={() => toggleTestOnGoing(!testOnGoing)}>
           {testOnGoing ? "종료" : "시작"}
         </button>
       </div>
-      <div className='flex justify-center'>
-       {testTitle ?  (<p> {testTitle} 시험 현황  </p>) : <p></p>}
+
+      <div className='flex justify-center items-center m-2'>
+        <div className='flex-grow text-center font-bold'>
+          {testTitle ? (<p> {testTitle} 시험 현황  </p>) : <p></p>}
+        </div>
+        <div className='justify-end'>
+          <ShowTime preStr='경과 시간' second={elapsedTime} />
+        </div>
       </div>
+      <div className="border-t border-gray-300 my-4"></div>
       <table className='table-auto'>
         <thead>
           <tr>
             <th > 이름 </th>
             <th> 교번 </th>
             <th> 소속 </th>
-            <th> 푼 문제 수/전체 </th>
+            <th> 제출 문제 수/전체 </th>
             <th> 시험지 제출 </th>
             <th> 설문지 제출 </th>
           </tr>
