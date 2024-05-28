@@ -112,12 +112,12 @@ export default function TestPage() {
             )
         } else {
             return (
-                <div>
+                <div className='flex flex-col justify-center text-center'>
                     <p> score: {testResult.score}</p>
-                    <p> pass : {testResult.passed ? "시험 통과함" : "시험 통과하지 못함"}</p>
+                    <p className='font-bold'> pass : {testResult.passed ? "시험 통과함" : "시험 통과하지 못함"}</p>
                     {testResult.passed ? (
                         <a href="/userPage/survey" className="bg-blue-500 block mt-4 lg:inline-block lg:mt-0 font-bold  mr-4">
-                            go to survey
+                            설문지로 이동 
                         </a>
                     ) : (
                         <div> .... </div>

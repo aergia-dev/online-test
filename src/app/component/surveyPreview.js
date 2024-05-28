@@ -29,9 +29,9 @@ export default function SurveyPreview({ content, onAction, onActionItem2, onActi
             <div id='item4 mb-8'>
                 {Item4Preview(item4Desc, item4Input, onActionItem4)}
             </div>
-            <div className=''
+            <div className='flex justify-center items-center m-8'
                 id='submit'>
-                <button className='bg-blue-500'
+                <button className='bg-blue-500 rounded w-16 text-white'
                     onClick={() => onSave()}> 제출
                 </button>
             </div>
