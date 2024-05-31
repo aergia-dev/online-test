@@ -1,3 +1,5 @@
+'use client'
+
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import ReactDOMServer from 'react-dom/server'
@@ -278,3 +280,41 @@ export async function makeSurveyPdf(userInfo, survey) {
 // export function makeSurveyPdf(userInfo, survey) {
 
 // }
+
+export async function mqp(userInfo, element) {
+  console.log("1", document.getElementById('questionPdf'))
+  console.log("2", element)
+
+  // .forEach(el =>
+  //   el.style.setProperty("display", "none", "important"));
+
+  const canvas = await html2canvas(element, { logging: true, allowTaint: true, useCORS: true });
+  const imgData = canvas.toDataURL('image/png');
+
+  var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+  // here is the most important part because if you dont replace you will get a DOM 18 exception.
+  window.location.href = image;
+
+  const pdf = new jsPDF('p', 'mm', 'a4');
+  const pdfWidth = pdf.internal.pageSize.getWidth();
+  const pdfHeight = pdf.internal.pageSize.getHeight();
+  const imgProps = pdf.getImageProperties(imgData);
+
+  console.log('img width,height', imgProps.width, imgProps.height);
+  console.log('pdf width,height', pdfWidth, pdfHeight);
+
+  const scaleFactor = Math.min(pdfWidth / imgProps.width, pdfHeight / imgProps.height) * 0.5;
+  const newImgWidth = imgProps.width * scaleFactor;
+  const newImgHeight = imgProps.height * scaleFactor;
+
+  const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+  let heightLeft = imgHeight;
+  let position = 0;
+
+  pdf.addImage(imgData, 'PNG', 0, position, newImgWidth, newImgHeight);
+  heightLeft -= pdfHeight;
+  const fileName = 'question'; //userInfo.userName;
+  pdf.save(fileName + '.pdf');
+}
+

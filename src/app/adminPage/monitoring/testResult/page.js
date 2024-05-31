@@ -3,10 +3,11 @@ import { getAllTestResultTitlesDb, getAllTestResultDb, deleteTitleDb, deleteUser
 import { useRef, useState, useEffect, useContext } from "react"
 import makeSurveyResult from "./makeSurveyResult/makeSurveyResult";
 import { DeleteConfirmDialog } from "@/app/component/confirmDialog";
-import { makeQuestionPdf, makeSurveyPdf } from "./makePdf";
+import { makeQuestionPdf, makeSurveyPdf, mqp } from "./makePdf";
 import { MathJaxBaseContext, MathJaxContext, MathJax } from 'better-react-mathjax'
 import Script from "next/script";
 import Head from 'next/head';
+import { RenderQuestionPrint } from "@/app/common/renderQuestion";
 
 //     {testResult: 
 //         {title: '',
@@ -18,13 +19,14 @@ export default function TestResult() {
     const [selectedTitle, setSelectedTitle] = useState();
     const [isDropdownOpened, setIsDropdownOpened] = useState();
     const [testResult, setTestResult] = useState();
-    const questionPdf = useRef();
+    const questionRef = useRef();
     const [questionPreview, setQuestionPreview] = useState(null);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [dialogMsg, setDialogMsg] = useState(null);
     const [dialogOnDeleteFn, setDialogOnDeleteFn] = useState(null);
     const questionPreviewRef = useRef('');
     const [qPreview, setQPreview] = useState('');
+    const [isMathjaxReady, setIsMathjaxReady] = useState(false);
 
     useEffect(() => {
         const readTitles = async () => {
@@ -34,30 +36,6 @@ export default function TestResult() {
         }
 
         readTitles();
-
-
-        // const loadMathJax = async () => {
-        //     window.MathJax = {
-        //         tex: {
-        //             inlineMath: [['$', '$'], ['\\(', '\\)']]
-        //         },
-        //         svg: {
-        //             fontCache: 'global'
-        //         }
-        //     };
-
-        //     var script = document.createElement('script');
-        //     script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
-        //     script.async = true;
-        //     document.head.appendChild(script);
-        // }
-        //     var script = document.createElement('script');
-        //     script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es6/tex-mml-chtml.js';
-        //     document.head.appendChild(script);
-        // }
-
-        // loadMathJax();
-
     }, []);
 
     const handleTitleClick = async (title) => {
@@ -100,16 +78,58 @@ export default function TestResult() {
 
     }
 
+    useEffect(() => {
+        if (questionPreview) {
+            // mqp(null, document.querySelector('#questionPdf'));
+            setTimeout(() => mqp(null, document.getElementById('questionPdf')), 5000);
+        }
+        else {
+            console.log("questionPreview is null");
+        }
+
+    }, [questionPreview])
+
+    // useEffect(() => {
+    //     const aaaa = async () => {
+    //         if (window.MathJax) {
+    //             // await window.MathJax.typesetPromise();
+    //             // setIsMathjax`Ready(t);
+
+    //         mqp(null, questionRef.current);
+    //         }
+    //         else {console.log("????????????????/")}
+    //     };
+
+    //     if (isMathjaxReady) {
+    //         aaaa();
+    //     }
+    //     else {
+    //         console.log("isMathjaxReady is false")
+    //     }
+
+    // }, [isMathjaxReady]);
+
+    useEffect(() => {
+        const checkMathJax = async () => {
+            if (window.MathJax) {
+                await window.MathJax.typesetPromise();
+                // setIsMathjaxReady(t);
+            }
+        };
+        checkMathJax();
+    }, []);
+
     const makeDocs = async (userInfo, survey, questions, questionEle) => {
         console.log('makeDocs');
-        await makeQuestionPdf(userInfo, questions);
-        await makeSurveyPdf(userInfo, survey)
+        setQuestionPreview(RenderQuestionPrint(questions.question, null, null))
+        // await makeQuestionPdf(userInfo, questions);
+        // await makeSurveyPdf(userInfo, survey)
     }
 
     return (
         <div className='mx-auto m-8 space-y-8'>
 
-            <Script src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js'
+            <Script src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js'
                 strategy='beforeInteractive' />
             <div className='flex justify-center'>
                 <DeleteConfirmDialog msg={dialogMsg}
@@ -214,8 +234,8 @@ export default function TestResult() {
                     </div>
 
                     <div id='questionPdf'
-                        style={{ position: 'absolute', left: '-9999px' }}
-                        ref={questionPdf}>
+                        // style={{ position: 'absolute', left: '-9999px' }}
+                        ref={questionRef}>
                         {questionPreview}
                     </div>
                 </div >)

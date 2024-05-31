@@ -9,7 +9,7 @@ function toStr(input, isAnswer) {
         answerColor = 'text-red-400'
 
     return (
-        <MathJax >
+        <MathJax>
             {input}
         </MathJax>
     );
@@ -168,30 +168,41 @@ export function RenderQuestionPrint(questions, markingAnswerMultiChoice, marking
     }
 
     const mathJaxConfig = {
-        loader: { load: ['input/tex', 'output/svg'] },
+        loader: { load: ['input/tex', 'output/chtml'] },
         startup: {
             typeset: true,
-            pageReady: () => {
-                return window.MathJax.startup.defaultPageReady().then(() => {
-                  alert('MathJax initial typesetting complete');
-                //   testFn(document.getElementById('mathJaxContext'));
-                });
-       },
-        tex: {
-            inlineMath: [['$', '$'], ['\\(', '\\)']],
-            displayMath: [['$$', '$$'], ['\\[', '\\]']],
-            processEscapes: true,
-          },
-       svg: {
-            fontCache: 'global',
-        },
-    }
-};
+            //         pageReady: () => {
+            //             return window.MathJax.startup.defaultPageReady().then(() => {
+            //               alert('MathJax initial typesetting complete');
+            //             });
+            //    },
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+            },
+            svg: {
+                scale: 1,                      // global scaling factor for all expressions
+                minScale: .5,                  // smallest scaling factor to use
+                mtextInheritFont: false,       // true to make mtext elements use surrounding font
+                merrorInheritFont: true,       // true to make merror text use surrounding font
+                mathmlSpacing: false,          // true for MathML spacing rules, false for TeX rules
+                skipAttributes: {},            // RFDa and other attributes NOT to copy to the output
+                exFactor: .5,                  // default size of ex in em units
+                displayAlign: 'center',        // default for indentalign when set to 'auto'
+                displayIndent: '0',            // default for indentshift when set to 'auto'
+                fontCache: 'local',            // or 'global' or 'none'
+                localID: null,                 // ID to use for local font cache (for single equation processing)
+                internalSpeechTitles: true,    // insert <title> tags with speech content
+                titleID: 0                     // initial id number to use for aria-labeledby titles
+            }
+        }
+    };
 
     return (
         <div id='mathJaxContext'>
             <MathJaxContext
-                version={3}
+                version={2}
                 config={mathJaxConfig} >
                 <div style={{ width: '210mm', height: '297mm', padding: '20mm' }}>
                     {questions && questions.map((question, idx) => (renderSingleQ(question, idx + 1)))}
