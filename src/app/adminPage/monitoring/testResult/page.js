@@ -1,16 +1,12 @@
 'use client'
 import { getAllTestResultTitlesDb, getAllTestResultDb, deleteTitleDb, deleteUserTestResultDb } from "@/lib/db"
 import { useRef, useState, useEffect, useContext } from "react"
-import ReactPDF from "@react-pdf/renderer";
-import NewWindow from "react-new-window";
-import html2canvas from "html2canvas";
-import { MakeQuestionPreview2, makeQuestionPreview } from "./makePdf";
-import jsPDF from "jspdf";
 import makeSurveyResult from "./makeSurveyResult/makeSurveyResult";
 import { DeleteConfirmDialog } from "@/app/component/confirmDialog";
 import { makeQuestionPdf, makeSurveyPdf } from "./makePdf";
-import { RenderQuestionPrint } from "@/app/common/renderQuestion";
 import { MathJaxBaseContext, MathJaxContext, MathJax } from 'better-react-mathjax'
+import Script from "next/script";
+import Head from 'next/head';
 
 //     {testResult: 
 //         {title: '',
@@ -28,38 +24,7 @@ export default function TestResult() {
     const [dialogMsg, setDialogMsg] = useState(null);
     const [dialogOnDeleteFn, setDialogOnDeleteFn] = useState(null);
     const questionPreviewRef = useRef('');
-    const surveyPreviewRef = useRef('');
     const [qPreview, setQPreview] = useState('');
-
-
-    const loadMathJax = () => {
-        return new Promise((resolve, reject) => {
-            if (window.MathJax) {
-                resolve(window.MathJax);
-            } else {
-                const script = document.createElement('script');
-                script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-                script.async = true;
-                script.onload = () => {
-                    if (window.MathJax) {
-                        resolve(window.MathJax);
-                    } else {
-                        reject(new Error('MathJax failed to initialize'));
-                    }
-                };
-                script.onerror = () => reject(new Error('MathJax failed to load'));
-                document.head.appendChild(script);
-            }
-        });
-    };
-
-
-    useEffect(() => {
-        if (typeof window?.MathJax !== "undefined") {
-            window.MathJax.typeset()
-        }
-    }, [])
-
 
     useEffect(() => {
         const readTitles = async () => {
@@ -69,62 +34,31 @@ export default function TestResult() {
         }
 
         readTitles();
+
+
+        // const loadMathJax = async () => {
+        //     window.MathJax = {
+        //         tex: {
+        //             inlineMath: [['$', '$'], ['\\(', '\\)']]
+        //         },
+        //         svg: {
+        //             fontCache: 'global'
+        //         }
+        //     };
+
+        //     var script = document.createElement('script');
+        //     script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
+        //     script.async = true;
+        //     document.head.appendChild(script);
+        // }
+        //     var script = document.createElement('script');
+        //     script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es6/tex-mml-chtml.js';
+        //     document.head.appendChild(script);
+        // }
+
+        // loadMathJax();
+
     }, []);
-
-    useEffect(() => {
-        if (questionPreview !== null) {
-            var doc = new jsPDF('p', 'mm', 'a4');
-            const rr = questionPreview;
-            console.log("rr", rr);
-
-            function canvasToPdf(canvas) {
-
-                var imgData = canvas.toDataURL('image/png');
-
-                var imgWidth = doc.internal.pageSize.getWidth();
-                var pageHeight = doc.internal.pageSize.getHeight();  // 출력 페이지 세로 길이 계산 A4 기준
-                var imgHeight = canvas.height * imgWidth / canvas.width;
-                var heightLeft = imgHeight;
-
-                var position = 0;
-
-                // 첫 페이지 출력
-                doc.addImage(imgData, 'PNG', 0, position, imgWidth / 5, imgHeight / 5);
-                heightLeft -= pageHeight;
-
-                // 한 페이지 이상일 경우 루프 돌면서 출력
-                while (heightLeft >= 20) {
-                    position = heightLeft - imgHeight;
-                    doc.addPage();
-                    doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                    heightLeft -= pageHeight;
-                }
-
-
-                // const doc = new jsPDF('p', 'mm', 'a4');
-                // const imgWidth = 210;
-                // const pageHeight = 295;
-                // let position = 0;
-                // const imgHeight = canvas.height * imgWidth / canvas.width;
-                // let heightLeft = imgHeight;
-                // const imgData = canvas.toDataURL('image/jpeg');
-                // doc.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-                // heightLeft -= pageHeight;
-                // while (heightLeft >= 0) {
-                //     position = heightLeft - imgHeight;
-                //     doc.addPage();
-                //     doc.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-                //     heightLeft -= pageHeight;
-                // }
-                doc.save('example.pdf');
-            }
-
-            const ele = document.getElementById('questionPdf');
-            html2canvas(ele).then(canvas => {
-                canvasToPdf(canvas);
-            })
-        }
-    }, [questionPreview]);
 
     const handleTitleClick = async (title) => {
         setSelectedTitle(title);
@@ -134,7 +68,6 @@ export default function TestResult() {
             setTestResult(testResult);
         }
     }
-
 
     const handleRemoveTitle = async (title) => {
         const onDeleteTitle = async (title) => {
@@ -167,69 +100,22 @@ export default function TestResult() {
 
     }
 
-    // const makeQuestionPdf = (userInfo, questions, answer) => {
-    //     const qeustionPdf = makeQuestionPreview(userInfo, questions.question, answer);
-    //     setQuestionPreview(qeustionPdf);
-    // }
-
-    // ???
-    // const mjxContext = useContext(MathJaxBaseContext);
-
-    useEffect(() => {
-        console.log('useeffect of questionPreviewRef', qPreview)
-
-        console.log("qPreview === ''", qPreview === '')
-        if (qPreview === '') {
-            console.log("initial")
-        }
-        else {
-            console.log('@@@', window.MathJax)
-            //     window.MathJax.typesetPromise()
-            //   .then(() => {
-            //     console.log('MathJax rendering complete.');
-            //     makeQuestionPdf(null, null, document.getElementById('questionPreview'));
-            //   })
-            //   .catch((err) => console.error('MathJax rendering error:', err));
-            makeQuestionPdf(null, null, document.getElementById('questionPreview'));
-        }
-    }, [qPreview]);
-
-    const makeDocs = (userInfo, survey, questions, questionEle) => {
-        // questionPreviewRef.current = '<div> asdfasdfasdf </div>'
+    const makeDocs = async (userInfo, survey, questions, questionEle) => {
         console.log('makeDocs');
-        setQPreview((prev) => {
-            return RenderQuestionPrint(questions.question);
-        });
-
-        // console.log('makeDocs');
-        // console.log(questions.question);
-        // console.log(survey);
-
-        // makeSurveyPdf(userInfo, survey);
+        await makeQuestionPdf(userInfo, questions);
+        await makeSurveyPdf(userInfo, survey)
     }
-
-    //dropdown menu of  test tile
-    //show in editable table of testResult.json
-    // make question. file as pdf 
-    // make survey. file as pdf
-    // make total result. file as excel
 
     return (
         <div className='mx-auto m-8 space-y-8'>
+
+            <Script src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js'
+                strategy='beforeInteractive' />
             <div className='flex justify-center'>
                 <DeleteConfirmDialog msg={dialogMsg}
                     isOpen={isDialogOpen}
                     onCancel={() => setIsDialogOpen(false)}
                     onConfirm={dialogOnDeleteFn} />
-            </div>
-            <div id='questionPreview'
-                ref={questionPreviewRef}
-            // style={{position:'absolute', top:'500px', left:'-1000px'}}
-            >
-                {qPreview}
-            </div>
-            <div id='surveyPreview'>
-
             </div>
             <div id="managingTestResult"
                 className="flex flex-col">

@@ -231,7 +231,7 @@ function Item3Preview(item3Desc, item3Col, item3Row, onActionItem3) {
     const choiceCommon = item3Col.slice(1).map(({ uuid, common }) => { return { colUuid: uuid, common: common } })
 
     return (
-        <div className='mb-8'>
+        <div className='mb-16'>
             <p className='font-bold mb-2'>{item3Desc}</p>
             <table className='w-full border border-collapse border-solid border-gray-800'>
                 <thead>

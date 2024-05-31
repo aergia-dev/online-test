@@ -19,16 +19,15 @@ export default function MainPage() {
     bringSession();
   }, []);
 
-
   if (session === null)
     return <div>loading..</div>
   else {
     return (
       <div className='flex items-center h-screen justify-center'>
         {session.clientId ?
-          (<ShowLoginInfo session={session} setSession={setSession}/>)
+          (<ShowLoginInfo session={session} setSession={setSession} />)
           :
-          (<LoginForm setSession={setSession}/>)}
+          (<LoginForm setSession={setSession} />)}
       </div>
     );
   }

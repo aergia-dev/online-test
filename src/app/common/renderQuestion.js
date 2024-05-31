@@ -1,30 +1,17 @@
 import Image from 'next/image';
 import React, { Fragment } from 'react';
-import { MathJax, MathJaxContext } from 'better-react-mathjax'
-
-const options = {
-    output: 'SVG', // MathJax 결과물을 SVG 형식으로 설정합니다.
-    tex: {
-        inlineMath: [['$', '$']],
-        displayMath: [['$$', '$$']],
-    },
-};
+import { MathJax, MathJaxContext, MathJaxBaseContext } from 'better-react-mathjax'
 
 function toStr(input, isAnswer) {
-    // console.log(input)
     let answerColor = null;
 
     if (isAnswer)
         answerColor = 'text-red-400'
 
-    // console.log('selection color', answerColor)
     return (
-        <MathJax hideUntilTypeset={"first"}
-            inline
-            dynamic
-            typesettingOptions='tex2svgPromise' >
+        <MathJax >
             {input}
-        </MathJax >
+        </MathJax>
     );
 }
 
@@ -137,7 +124,7 @@ export function renderQuestionForUser(questions, markingAnswerMultiChoice, marki
 }
 
 // export function renderQuestionPrint(questions, markingAnswerMultiChoice, markingAnswerEassay) {
-export function RenderQuestionPrint(questions, markingAnswerMultiChoice, markingAnswerEassay) {
+export function RenderQuestionPrint(questions, markingAnswerMultiChoice, markingAnswerEassay, testFn) {
     const renderMultChoiceSelction = (Quuid, Qselection, Qanswer) => {
         return (<div>
             {Qselection.map((item, selectionIdx) => {
@@ -182,28 +169,34 @@ export function RenderQuestionPrint(questions, markingAnswerMultiChoice, marking
 
     const mathJaxConfig = {
         loader: { load: ['input/tex', 'output/svg'] },
+        startup: {
+            typeset: true,
+            pageReady: () => {
+                return window.MathJax.startup.defaultPageReady().then(() => {
+                  alert('MathJax initial typesetting complete');
+                //   testFn(document.getElementById('mathJaxContext'));
+                });
+       },
         tex: {
             inlineMath: [['$', '$'], ['\\(', '\\)']],
             displayMath: [['$$', '$$'], ['\\[', '\\]']],
             processEscapes: true,
-        },
-        svg: {
+          },
+       svg: {
             fontCache: 'global',
         },
-    };
+    }
+};
 
     return (
-        <Fragment>
-            {/* <MathJaxContext config={mathJaxConfig} > */}
+        <div id='mathJaxContext'>
             <MathJaxContext
-                version={2}
-                config={options}
-                onStartup={(mathJax) => (mathJax.Hub.processSectionDelay = 0)}
-            >
+                version={3}
+                config={mathJaxConfig} >
                 <div style={{ width: '210mm', height: '297mm', padding: '20mm' }}>
                     {questions && questions.map((question, idx) => (renderSingleQ(question, idx + 1)))}
                 </div>
             </MathJaxContext>
-        </Fragment>
+        </div>
     )
 }
