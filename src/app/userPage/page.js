@@ -4,8 +4,8 @@ import { getSubmitStatus, getTestQuestionForUserDb, setTestResultDb, makeInitial
 import { useState, useEffect } from "react";
 import { getSession } from "@/app/loginPage/action";
 import marking from './marking'
-import { renderQuestionForUser } from "../common/renderQuestion";
-import UserInfo from "../common/userInfo";
+import { renderQuestionForUser } from "@/app/component/renderQuestion";
+import UserInfo from "../funcs/userInfo";
 import { useRouter } from "next/navigation";
 import { isLogIn } from "@/app/loginPage/checkSession";
 

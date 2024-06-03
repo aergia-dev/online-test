@@ -2,9 +2,12 @@
 
 import SelectTest from './selectTest'
 import { useState, useEffect } from 'react'
-import { getAllTestResultDb, deleteTitleDb, isExistTestResultDb, setEndTestDb, setCurrentTestDb, getCurrentTestDB, getTestResultDb, getCurrentQuestionCnt, getTestOnGoing } from '@/lib/db'
+import {  deleteTitleDb, isExistTestResultDb, setEndTestDb, setCurrentTestDb, getCurrentTestDB, getTestResultDb,  getTestOnGoing } from '@/lib/db'
 import { Dialog } from '@/app/component/confirmDialog'
 import ShowTime from '@/app/component/elapsedTime'
+import { useRouter } from "next/navigation";
+import { getSession } from '@/app/loginPage/action'
+import { isAdmin } from '@/app/loginPage/checkSession'
 
 export default function Monitoring() {
   const [testOnGoing, setTestOnGoing] = useState();
@@ -15,6 +18,30 @@ export default function Monitoring() {
   const [dialogMsg, setDialogMsg] = useState('');
   const [dialogConfirmFn, setDialogConfirmFn] = useState(null);
   const [elapsedTime, setElapsedTime] = useState(0);
+  const [session, setSession] = useState(null);
+  const route = useRouter();
+
+  useEffect(() => {
+    const prep = async () => {
+      const session = await getSession();
+      setSession(session);
+    };
+
+    const updateInitValue = async () => {
+      const onGoing = await getTestOnGoing();
+      setTestOnGoing(onGoing);
+
+      if (onGoing) {
+        const currentTest = await getCurrentTestDB();
+        console.log("currentTest", currentTest);
+        setTestTitle(currentTest.title);
+      }
+    }
+ 
+    prep();
+    updateInitValue();
+  }, [])
+
 
   useEffect(() => {
     if (testOnGoing) {
@@ -78,12 +105,10 @@ export default function Monitoring() {
 
     setDialogMsg({ title: '시험을 종료합니다.', content: '' })
     setDialogConfirmFn(() => () => confirmFn());
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@')
     // setReadingDb(false)
   }
 
   const toggleTestOnGoing = async (status) => {
-    console.log('status', status);
     if (testTitle) {
       status ? startTest() : endTest();
       setIsDialogOpen(true);
@@ -100,21 +125,6 @@ export default function Monitoring() {
   }
 
   useEffect(() => {
-    const updateInitValue = async () => {
-      const onGoing = await getTestOnGoing();
-      setTestOnGoing(onGoing);
-
-      if (onGoing) {
-        const currentTest = await getCurrentTestDB();
-        console.log("currentTest", currentTest);
-        setTestTitle(currentTest.title);
-      }
-    }
-
-    updateInitValue();
-  }, []);
-
-  useEffect(() => {
     let intervalId;
     if (readingDb) {
       intervalId = setInterval(() => {
@@ -128,6 +138,11 @@ export default function Monitoring() {
     }
   }, [readingDb]);
 
+if (session) {
+    if (!isAdmin(session)) {
+      route.push('/');
+    }
+  }
   return (
     <div className='flex flex-col w-full'>
       <Dialog

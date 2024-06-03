@@ -1,15 +1,14 @@
 'use client'
 import { getAllTestResultTitlesDb, getAllTestResultDb, deleteTitleDb, deleteUserTestResultDb } from "@/lib/db"
-import { useRef, useState, useEffect, useContext } from "react"
+import { useRef, useState, useEffect } from "react"
+import { useRouter } from "next/navigation";
 import makeSurveyResult from "./makeSurveyResult/makeSurveyResult";
 import { DeleteConfirmDialog } from "@/app/component/confirmDialog";
 import SurveyPreview from "@/app/component/surveyPreview";
 import { makeQuestionPdf, makeSurveyPdf } from "./makePdf";
-// import { MathJaxBaseContext, MathJaxContext, MathJax } from 'better-react-mathjax'
-// import Script from "next/script";
-// import Head from 'next/head';
 import { RenderQuestionPrint } from "@/app/component/renderQuestion";
-
+import { isAdmin } from "@/app/loginPage/checkSession";
+import { getSession } from "@/app/loginPage/action";
 
 //     {testResult: 
 //         {title: '',
@@ -21,16 +20,23 @@ export default function TestResult() {
     const [selectedTitle, setSelectedTitle] = useState();
     const [isDropdownOpened, setIsDropdownOpened] = useState();
     const [testResult, setTestResult] = useState();
-    const [questionPreview, setQuestionPreview] = useState({rendering: null, userInfo: null});
-    const [surveyPreview, setSurveyPreview] = useState({rendering: null, userInfo: null});
+    const [questionPreview, setQuestionPreview] = useState({ rendering: null, userInfo: null });
+    const [surveyPreview, setSurveyPreview] = useState({ rendering: null, userInfo: null });
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [dialogMsg, setDialogMsg] = useState(null);
     const [dialogOnDeleteFn, setDialogOnDeleteFn] = useState(null);
     const questionPreviewRef = useRef('');
     const [mathJaxTest, setmathJaxTest] = useState(null);
-    const [ makePdf, setMakePdf] = useState(false);
+    const [makePdf, setMakePdf] = useState(false);
+    const [session, setSession] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
+        const prep = async () => {
+            const session = await getSession();
+            setSession(session);
+        };
+
         const storeMathJax = async () => {
             if (window.MathJax) {
                 setmathJaxTest(window.MathJax);
@@ -45,6 +51,7 @@ export default function TestResult() {
             setTitles(readTitles);
             console.log('readTitles', readTitles);
         }
+        prep();
         storeMathJax();
         readTitles();
     }, []);
@@ -111,12 +118,20 @@ export default function TestResult() {
 
     const makeDocs = async (userInfo, survey, questions, questionEle) => {
         console.log('makeDocs');
-        setQuestionPreview({rendering: RenderQuestionPrint(questions.question, null, null),
-                            userInfo: userInfo})
-        setSurveyPreview({rendering: <SurveyPreview content={survey} />, 
-                          userInfo: userInfo})
-
+        setQuestionPreview({
+            rendering: RenderQuestionPrint(questions.question, null, null),
+            userInfo: userInfo
+        })
+        setSurveyPreview({
+            rendering: <SurveyPreview content={survey} />,
+            userInfo: userInfo
+        })
         setMakePdf(true);
+    }
+
+
+    if (!isAdmin(session)) {
+        router.push('/');
     }
 
     return (
@@ -228,10 +243,10 @@ export default function TestResult() {
                         {questionPreview.rendering}
                     </div>
                     <div id='surveyPdf'
-                        style={{ position: 'absolute', right: '-9999px' }}> 
+                        style={{ position: 'absolute', right: '-9999px' }}>
                         {surveyPreview.rendering}
                     </div>
- 
+
                 </div >)
             }
         </div >);
