@@ -3,7 +3,7 @@ import { useRef, useState, useEffect, Fragment } from 'react';
 import { insertQuestionDb } from '@/lib/db';
 import { getLevelDb } from '@/lib/db';
 import Image from 'next/image';
-import { renderQuestionWithAnswer } from '@/app/common/renderQuestion';
+import { renderQuestionWithAnswer } from '@/app/component/renderQuestion';
 
 
 function previewSingleQuestion(question, changeAnswerFn) {

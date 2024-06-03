@@ -10,6 +10,7 @@ export function isLogIn(session) {
     console.log('notLogin', notLogin)
     return !notLogin;
 }
+
 export function isAdmin(session) {
     console.log('session', session)
     return session && session.isAdmin;

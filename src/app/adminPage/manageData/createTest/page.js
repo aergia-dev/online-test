@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { saveTestDb, getLevelQuestionsDB, getLevelDb, deleteQuestiondb } from '@/lib/db'
-import { renderQuestionWithAnswer } from '@/app/common/renderQuestion';
+import { renderQuestionWithAnswer } from '@/app/component/renderQuestion';
 import { DeleteConfirmDialog } from '@/app/component/confirmDialog';
 
 export default function CreateTest({ props }) {

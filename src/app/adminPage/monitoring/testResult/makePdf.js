@@ -3,7 +3,7 @@
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import ReactDOMServer from 'react-dom/server'
-import { RenderQuestionPrint } from "@/app/common/renderQuestion";
+import { RenderQuestionPrint } from "@/app/component/renderQuestion";
 import SurveyPreview from "@/app/component/surveyPreview";
 
 async function ttt(testFn, tt) {
@@ -282,7 +282,7 @@ export async function makeSurveyPdf(userInfo, survey) {
 // }
 
 export async function mqp(userInfo, element) {
-  const canvas = await html2canvas(element); //, 
+  const canvas = await html2canvas(element);  
     // { logging: true, allowTaint: true, useCORS: true });
   const imgData = canvas.toDataURL('image/png');
 

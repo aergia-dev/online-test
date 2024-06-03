@@ -7,7 +7,8 @@ import { makeQuestionPdf, makeSurveyPdf, mqp } from "./makePdf";
 import { MathJaxBaseContext, MathJaxContext, MathJax } from 'better-react-mathjax'
 import Script from "next/script";
 import Head from 'next/head';
-import { RenderQuestionPrint } from "@/app/common/renderQuestion";
+import { RenderQuestionPrint } from "@/app/component/renderQuestion";
+
 
 //     {testResult: 
 //         {title: '',
