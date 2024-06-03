@@ -3,23 +3,13 @@ import React, { Fragment } from 'react';
 import { MathJax, MathJaxContext, MathJaxBaseContext } from 'better-react-mathjax'
 
 function toStr(idx, input, isAnswer) {
-    let answerColor = null;
     let newInput = ''
 
-    console.log('idx, input, isAnswer', idx, input, isAnswer);
-
     if (null === isIncludeMathJax(input)) {
-        console.log('null', input);
         newInput = idx +'. ' + input; 
    } else {
-        console.log('not null', input);
         newInput = input.replace(/(\\\()/, `$1 ${idx}. `);
    }
-
-    console.log('###', input, newInput);
-
-    if (isAnswer)
-        answerColor = 'text-red-400'
 
     return (
         <MathJax>
@@ -174,10 +164,11 @@ export function RenderQuestionPrint(questions, markingAnswerMultiChoice, marking
 
     const renderSingleQ = ({ Quuid, Qtype, Qtext, Qimg, Qselection, Qanswer }, qIdx) => {
         const isMultChoice = Qtype === 'multChoice';
+        const imageScale = 0.5;
         return (<div className='border border-gray-300 border-2 px-2 py-2 space-y-4'
             key={Quuid}>
             <p key={Quuid + '-text'}>{qIdx + '. ' + Qtext}</p>
-            {Qimg.content !== null && <Image src={Qimg.content} width={Qimg.width} height={Qimg.height} alt='images' />}
+            {Qimg.content !== null && <Image src={Qimg.content} width={Qimg.width * imageScale} height={Qimg.height * imageScale} alt='images' />}
             {isMultChoice ?
                 (renderMultChoiceSelction(Quuid, Qselection, Qanswer))
                 :
