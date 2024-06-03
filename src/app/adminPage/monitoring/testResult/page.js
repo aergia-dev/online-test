@@ -27,6 +27,7 @@ export default function TestResult() {
     const questionPreviewRef = useRef('');
     const [qPreview, setQPreview] = useState('');
     const [isMathjaxReady, setIsMathjaxReady] = useState(false);
+    const [mathJaxTest, setmathJaxTest] = useState(null);
 
     useEffect(() => {
         const readTitles = async () => {
@@ -79,9 +80,17 @@ export default function TestResult() {
     }
 
     useEffect(() => {
+        const checkMathJax = async () => {
+            if (mathJaxTest) {
+                await mathJaxTest.typesetPromise();
+                setTimeout(() => mqp(null, document.getElementById('mathJaxContext'), 1000))
+
+                // await mqp(null, document.getElementById('questionPdf'));
+            }
+        }
+
         if (questionPreview) {
-            // mqp(null, document.querySelector('#questionPdf'));
-            setTimeout(() => mqp(null, document.getElementById('questionPdf')), 5000);
+            checkMathJax();
         }
         else {
             console.log("questionPreview is null");
@@ -89,32 +98,17 @@ export default function TestResult() {
 
     }, [questionPreview])
 
-    // useEffect(() => {
-    //     const aaaa = async () => {
-    //         if (window.MathJax) {
-    //             // await window.MathJax.typesetPromise();
-    //             // setIsMathjax`Ready(t);
-
-    //         mqp(null, questionRef.current);
-    //         }
-    //         else {console.log("????????????????/")}
-    //     };
-
-    //     if (isMathjaxReady) {
-    //         aaaa();
-    //     }
-    //     else {
-    //         console.log("isMathjaxReady is false")
-    //     }
-
-    // }, [isMathjaxReady]);
-
     useEffect(() => {
         const checkMathJax = async () => {
             if (window.MathJax) {
-                await window.MathJax.typesetPromise();
+                setmathJaxTest(window.MathJax);
+                //await window.MathJax.typesetPromise();
                 // setIsMathjaxReady(t);
+                console.log('############', window.MathJax);
             }
+            else {
+                console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxx");
+            } 
         };
         checkMathJax();
     }, []);
@@ -128,10 +122,7 @@ export default function TestResult() {
 
     return (
         <div className='mx-auto m-8 space-y-8'>
-
-            <Script src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js'
-                strategy='beforeInteractive' />
-            <div className='flex justify-center'>
+           <div className='flex justify-center'>
                 <DeleteConfirmDialog msg={dialogMsg}
                     isOpen={isDialogOpen}
                     onCancel={() => setIsDialogOpen(false)}

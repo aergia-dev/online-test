@@ -282,17 +282,11 @@ export async function makeSurveyPdf(userInfo, survey) {
 // }
 
 export async function mqp(userInfo, element) {
-  console.log("1", document.getElementById('questionPdf'))
-  console.log("2", element)
-
-  // .forEach(el =>
-  //   el.style.setProperty("display", "none", "important"));
-
-  const canvas = await html2canvas(element, { logging: true, allowTaint: true, useCORS: true });
+  const canvas = await html2canvas(element); //, 
+    // { logging: true, allowTaint: true, useCORS: true });
   const imgData = canvas.toDataURL('image/png');
 
   var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-  // here is the most important part because if you dont replace you will get a DOM 18 exception.
   window.location.href = image;
 
   const pdf = new jsPDF('p', 'mm', 'a4');

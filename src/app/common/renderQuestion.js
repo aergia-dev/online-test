@@ -2,17 +2,36 @@ import Image from 'next/image';
 import React, { Fragment } from 'react';
 import { MathJax, MathJaxContext, MathJaxBaseContext } from 'better-react-mathjax'
 
-function toStr(input, isAnswer) {
+function toStr(idx, input, isAnswer) {
     let answerColor = null;
+    let newInput = ''
+
+    console.log('idx, input, isAnswer', idx, input, isAnswer);
+
+    if (null === isIncludeMathJax(input)) {
+        console.log('null', input);
+        newInput = idx +'. ' + input; 
+   } else {
+        console.log('not null', input);
+        newInput = input.replace(/(\\\()/, `$1 ${idx}. `);
+   }
+
+    console.log('###', input, newInput);
 
     if (isAnswer)
         answerColor = 'text-red-400'
 
     return (
         <MathJax>
-            {input}
+            {newInput}
         </MathJax>
     );
+}
+
+function isIncludeMathJax(str) {
+    const regex = /\\\(.+\\\)/;
+    console.log('regex', str, regex.exec(str));
+    return regex.exec(str);
 }
 
 export function renderQuestionWithAnswer(questions, onClickQuestion, markingAnswerMultiChoice, markingAnswerEassay) {
@@ -22,13 +41,13 @@ export function renderQuestionWithAnswer(questions, onClickQuestion, markingAnsw
                 return (<div className='text-red-400 pl-8'
                     key={Quuid + "-" + selectionIdx + '-selection'}
                     onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx + 1) }}>
-                    {toStr(selectionIdx + 1 + '. ' + item, true)}
+                    {toStr(selectionIdx + 1,  item, true)}
                 </div>)
             }
             else {
                 return (<div className='pl-8' key={Quuid + "-" + selectionIdx + '-selection'}
                     onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx + 1) }}>
-                    {toStr(selectionIdx + 1 + '. ' + item, false)}
+                    {toStr(selectionIdx + 1, item, false)}
                 </div>)
             }
         }))
@@ -82,13 +101,13 @@ export function renderQuestionForUser(questions, markingAnswerMultiChoice, marki
                 return (<p className='text-red-400'
                     key={Quuid + "-" + selectionIdx + '-selection'}
                     onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx) }}>
-                    {toStr(selectionIdx + 1 + '. ' + item)}
+                    {toStr(selectionIdx + 1,  item, true)}
                 </p>)
             }
             else {
                 return (<p key={Quuid + "-" + selectionIdx + '-selection'}
                     onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx) }}>
-                    {toStr(selectionIdx + 1 + '. ' + item)}
+                    {toStr(selectionIdx + 1,  item, true)}
                 </p>)
             }
         }))
@@ -132,13 +151,13 @@ export function RenderQuestionPrint(questions, markingAnswerMultiChoice, marking
                     return (<p className='text-red-400'
                         key={Quuid + "-" + selectionIdx + '-selection'}
                         onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx) }}>
-                        {toStr(selectionIdx + 1 + '. ' + item)}
+                        {toStr(selectionIdx + 1,  item, true)}
                     </p>)
                 }
                 else {
                     return (<p key={Quuid + "-" + selectionIdx + '-selection'}
                         onClick={() => { markingAnswerMultiChoice && markingAnswerMultiChoice(Quuid, selectionIdx) }}>
-                        {toStr(selectionIdx + 1 + '. ' + item)}
+                        {toStr(selectionIdx + 1,  item, true)}
                     </p>)
                 }
             })}
@@ -168,20 +187,15 @@ export function RenderQuestionPrint(questions, markingAnswerMultiChoice, marking
     }
 
     const mathJaxConfig = {
-        loader: { load: ['input/tex', 'output/chtml'] },
+        loader: { load: ['input/TeX', 'output/SVG'] },
         startup: {
             typeset: true,
-            //         pageReady: () => {
-            //             return window.MathJax.startup.defaultPageReady().then(() => {
-            //               alert('MathJax initial typesetting complete');
-            //             });
-            //    },
             tex: {
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
                 displayMath: [['$$', '$$'], ['\\[', '\\]']],
                 processEscapes: true,
             },
-            svg: {
+            chtml: {
                 scale: 1,                      // global scaling factor for all expressions
                 minScale: .5,                  // smallest scaling factor to use
                 mtextInheritFont: false,       // true to make mtext elements use surrounding font
@@ -191,7 +205,21 @@ export function RenderQuestionPrint(questions, markingAnswerMultiChoice, marking
                 exFactor: .5,                  // default size of ex in em units
                 displayAlign: 'center',        // default for indentalign when set to 'auto'
                 displayIndent: '0',            // default for indentshift when set to 'auto'
-                fontCache: 'local',            // or 'global' or 'none'
+                matchFontHeight: true,         // true to match ex-height of surrounding font
+                fontURL: '[mathjax]/components/output/chtml/fonts/woff-v2',   // The URL where the fonts are found
+                adaptiveCSS: true              // true means only produce CSS that is used in the processed equations
+            },
+            svg: {
+                scale: 1,                      // global scaling factor for all expressions
+                minScale: 0.5,                  // smallest scaling factor to use
+                mtextInheritFont: false,       // true to make mtext elements use surrounding font
+                merrorInheritFont: true,       // true to make merror text use surrounding font
+                mathmlSpacing: true, //false,          // true for MathML spacing rules, false for TeX rules
+                skipAttributes: {},            // RFDa and other attributes NOT to copy to the output
+                exFactor: .1,                  // default size of ex in em units
+                displayAlign: 'auto',        // default for indentalign when set to 'auto'
+                displayIndent: '4',            // default for indentshift when set to 'auto'
+                fontCache: 'global',            // or 'global' or 'none'
                 localID: null,                 // ID to use for local font cache (for single equation processing)
                 internalSpeechTitles: true,    // insert <title> tags with speech content
                 titleID: 0                     // initial id number to use for aria-labeledby titles
@@ -202,7 +230,7 @@ export function RenderQuestionPrint(questions, markingAnswerMultiChoice, marking
     return (
         <div id='mathJaxContext'>
             <MathJaxContext
-                version={2}
+                version={3}
                 config={mathJaxConfig} >
                 <div style={{ width: '210mm', height: '297mm', padding: '20mm' }}>
                     {questions && questions.map((question, idx) => (renderSingleQ(question, idx + 1)))}
