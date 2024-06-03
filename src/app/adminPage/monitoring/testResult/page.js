@@ -3,10 +3,11 @@ import { getAllTestResultTitlesDb, getAllTestResultDb, deleteTitleDb, deleteUser
 import { useRef, useState, useEffect, useContext } from "react"
 import makeSurveyResult from "./makeSurveyResult/makeSurveyResult";
 import { DeleteConfirmDialog } from "@/app/component/confirmDialog";
-import { makeQuestionPdf, makeSurveyPdf, mqp } from "./makePdf";
-import { MathJaxBaseContext, MathJaxContext, MathJax } from 'better-react-mathjax'
-import Script from "next/script";
-import Head from 'next/head';
+import SurveyPreview from "@/app/component/surveyPreview";
+import { makeQuestionPdf, makeSurveyPdf } from "./makePdf";
+// import { MathJaxBaseContext, MathJaxContext, MathJax } from 'better-react-mathjax'
+// import Script from "next/script";
+// import Head from 'next/head';
 import { RenderQuestionPrint } from "@/app/component/renderQuestion";
 
 
@@ -20,23 +21,31 @@ export default function TestResult() {
     const [selectedTitle, setSelectedTitle] = useState();
     const [isDropdownOpened, setIsDropdownOpened] = useState();
     const [testResult, setTestResult] = useState();
-    const questionRef = useRef();
-    const [questionPreview, setQuestionPreview] = useState(null);
+    const [questionPreview, setQuestionPreview] = useState({rendering: null, userInfo: null});
+    const [surveyPreview, setSurveyPreview] = useState({rendering: null, userInfo: null});
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [dialogMsg, setDialogMsg] = useState(null);
     const [dialogOnDeleteFn, setDialogOnDeleteFn] = useState(null);
     const questionPreviewRef = useRef('');
-    const [qPreview, setQPreview] = useState('');
-    const [isMathjaxReady, setIsMathjaxReady] = useState(false);
     const [mathJaxTest, setmathJaxTest] = useState(null);
+    const [ makePdf, setMakePdf] = useState(false);
 
     useEffect(() => {
+        const storeMathJax = async () => {
+            if (window.MathJax) {
+                setmathJaxTest(window.MathJax);
+            }
+            else {
+                console.log("mathjax is not loaded");
+            }
+        };
+
         const readTitles = async () => {
             const readTitles = await getAllTestResultTitlesDb();
             setTitles(readTitles);
             console.log('readTitles', readTitles);
         }
-
+        storeMathJax();
         readTitles();
     }, []);
 
@@ -81,49 +90,38 @@ export default function TestResult() {
     }
 
     useEffect(() => {
-        const checkMathJax = async () => {
+        const makeIt = async () => {
             if (mathJaxTest) {
                 await mathJaxTest.typesetPromise();
-                setTimeout(() => mqp(null, document.getElementById('mathJaxContext'), 1000))
-
-                // await mqp(null, document.getElementById('questionPdf'));
+                await makeQuestionPdf(questionPreview.userInfo, document.getElementById('questionPdf'));
+                await makeSurveyPdf(surveyPreview.userInfo, document.getElementById('surveyPdf'));
             }
         }
 
-        if (questionPreview) {
-            checkMathJax();
+        if (makePdf) {
+            makeIt();
         }
         else {
-            console.log("questionPreview is null");
+            console.log("makePdf is false");
         }
 
-    }, [questionPreview])
+        setMakePdf(false);
+    }, [makePdf])
 
-    useEffect(() => {
-        const checkMathJax = async () => {
-            if (window.MathJax) {
-                setmathJaxTest(window.MathJax);
-                //await window.MathJax.typesetPromise();
-                // setIsMathjaxReady(t);
-                console.log('############', window.MathJax);
-            }
-            else {
-                console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxx");
-            } 
-        };
-        checkMathJax();
-    }, []);
 
     const makeDocs = async (userInfo, survey, questions, questionEle) => {
         console.log('makeDocs');
-        setQuestionPreview(RenderQuestionPrint(questions.question, null, null))
-        // await makeQuestionPdf(userInfo, questions);
-        // await makeSurveyPdf(userInfo, survey)
+        setQuestionPreview({rendering: RenderQuestionPrint(questions.question, null, null),
+                            userInfo: userInfo})
+        setSurveyPreview({rendering: <SurveyPreview content={survey} />, 
+                          userInfo: userInfo})
+
+        setMakePdf(true);
     }
 
     return (
         <div className='mx-auto m-8 space-y-8'>
-           <div className='flex justify-center'>
+            <div className='flex justify-center'>
                 <DeleteConfirmDialog msg={dialogMsg}
                     isOpen={isDialogOpen}
                     onCancel={() => setIsDialogOpen(false)}
@@ -226,10 +224,14 @@ export default function TestResult() {
                     </div>
 
                     <div id='questionPdf'
-                        // style={{ position: 'absolute', left: '-9999px' }}
-                        ref={questionRef}>
-                        {questionPreview}
+                        style={{ position: 'absolute', left: '-9999px' }}>
+                        {questionPreview.rendering}
                     </div>
+                    <div id='surveyPdf'
+                        style={{ position: 'absolute', right: '-9999px' }}> 
+                        {surveyPreview.rendering}
+                    </div>
+ 
                 </div >)
             }
         </div >);

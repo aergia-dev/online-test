@@ -6,101 +6,88 @@ import ReactDOMServer from 'react-dom/server'
 import { RenderQuestionPrint } from "@/app/component/renderQuestion";
 import SurveyPreview from "@/app/component/surveyPreview";
 
-async function ttt(testFn, tt) {
+// async function testFn(tt) {
+//   const tempDiv = document.createElement('div');
+//   tempDiv.style.width = '210mm';
+//   tempDiv.style.height = '297mm';
+//   tempDiv.style.padding = '20mm';
+//   tempDiv.style.transform = 'scale(0.5)';
 
-  if (window.MathJax) {
-    await window.MathJax.typesetPromise();
-    alert('@@@@@@@@@@@@@@@@2 MathJax rendering complete');
-    testFn(tt);
-  } else {
-    console.error('MathJax not loaded');
-  }
+//   // const htmlString = ReactDOMServer.renderToStaticMarkup(tt);
+//   const htmlString = ReactDOMServer.renderToStaticMarkup(tt);
+//   tempDiv.innerHTML = tt;
+//   document.body.appendChild(tempDiv);
 
-  console.log('ddoc', window.document);
-}
+//   const canvas = await html2canvas(tempDiv);
+//   const imgData = canvas.toDataURL("image/png");
+//   const pdf = new jsPDF('p', 'mm', 'a4');
+//   const pdfWidth = pdf.internal.pageSize.getWidth();
+//   const pdfHeight = pdf.internal.pageSize.getHeight();
+//   const imgProps = pdf.getImageProperties(imgData);
 
-async function testFn(tt) {
-  const tempDiv = document.createElement('div');
-  tempDiv.style.width = '210mm';
-  tempDiv.style.height = '297mm';
-  tempDiv.style.padding = '20mm';
-  tempDiv.style.transform = 'scale(0.5)';
+//   console.log('img width,height', imgProps.width, imgProps.height);
+//   console.log('pdf width,height', pdfWidth, pdfHeight);
 
-  // const htmlString = ReactDOMServer.renderToStaticMarkup(tt);
-  const htmlString = ReactDOMServer.renderToStaticMarkup(tt);
-  tempDiv.innerHTML = tt;
-  document.body.appendChild(tempDiv);
+//   const scaleFactor = Math.min(pdfWidth / imgProps.width, pdfHeight / imgProps.height) * 0.5;
+//   const newImgWidth = imgProps.width * scaleFactor;
+//   const newImgHeight = imgProps.height * scaleFactor;
 
-  const canvas = await html2canvas(tempDiv);
-  const imgData = canvas.toDataURL("image/png");
-  const pdf = new jsPDF('p', 'mm', 'a4');
-  const pdfWidth = pdf.internal.pageSize.getWidth();
-  const pdfHeight = pdf.internal.pageSize.getHeight();
-  const imgProps = pdf.getImageProperties(imgData);
+//   const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-  console.log('img width,height', imgProps.width, imgProps.height);
-  console.log('pdf width,height', pdfWidth, pdfHeight);
+//   let heightLeft = imgHeight;
+//   let position = 0;
 
-  const scaleFactor = Math.min(pdfWidth / imgProps.width, pdfHeight / imgProps.height) * 0.5;
-  const newImgWidth = imgProps.width * scaleFactor;
-  const newImgHeight = imgProps.height * scaleFactor;
+//   pdf.addImage(imgData, 'PNG', 0, position, newImgWidth, newImgHeight);
+//   heightLeft -= pdfHeight;
+//   const fileName = 'question'; //userInfo.userName;
+//   pdf.save(fileName + '.pdf');
 
-  const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
+// }
 
-  let heightLeft = imgHeight;
-  let position = 0;
+// export async function makeQuestionPdf(userInfo, question) {
+//   console.log('makeQuestionPdf', question)
+//   console.log('window', window)
+//   console.log('window.MathJax', window.MathJax)
 
-  pdf.addImage(imgData, 'PNG', 0, position, newImgWidth, newImgHeight);
-  heightLeft -= pdfHeight;
-  const fileName = 'question'; //userInfo.userName;
-  pdf.save(fileName + '.pdf');
+//   const tempDiv = document.createElement('div');
+//   tempDiv.style.width = '210mm';
+//   tempDiv.style.height = '297mm';
+//   tempDiv.style.padding = '20mm';
+//   tempDiv.style.transform = 'scale(0.5)';
 
-}
+//   const content = RenderQuestionPrint(question.question, null, null, testFn);
+//   // ttt(testFn, tt);
+//   // testFn(tt);
 
-export async function makeQuestionPdf(userInfo, question) {
-  console.log('makeQuestionPdf', question)
-  console.log('window', window)
-  console.log('window.MathJax', window.MathJax)
+//   await window.MathJax.typesetPromise();
 
-  const tempDiv = document.createElement('div');
-  tempDiv.style.width = '210mm';
-  tempDiv.style.height = '297mm';
-  tempDiv.style.padding = '20mm';
-  tempDiv.style.transform = 'scale(0.5)';
+//   const htmlString = ReactDOMServer.renderToStaticMarkup(content);
+//   tempDiv.innerHTML = htmlString;
+//   document.body.appendChild(tempDiv);
+//   const canvas = await html2canvas(tempDiv);
+//   const imgData = canvas.toDataURL('image/png');
 
-  const content = RenderQuestionPrint(question.question, null, null, testFn);
-  // ttt(testFn, tt);
-  // testFn(tt);
+//   const pdf = new jsPDF('p', 'mm', 'a4');
+//   const pdfWidth = pdf.internal.pageSize.getWidth();
+//   const pdfHeight = pdf.internal.pageSize.getHeight();
+//   const imgProps = pdf.getImageProperties(imgData);
 
-  await window.MathJax.typesetPromise();
+//   console.log('img width,height', imgProps.width, imgProps.height);
+//   console.log('pdf width,height', pdfWidth, pdfHeight);
 
-  const htmlString = ReactDOMServer.renderToStaticMarkup(content);
-  tempDiv.innerHTML = htmlString;
-  document.body.appendChild(tempDiv);
-  const canvas = await html2canvas(tempDiv);
-  const imgData = canvas.toDataURL('image/png');
+//   const scaleFactor = Math.min(pdfWidth / imgProps.width, pdfHeight / imgProps.height) * 0.5;
+//   const newImgWidth = imgProps.width * scaleFactor;
+//   const newImgHeight = imgProps.height * scaleFactor;
 
-  const pdf = new jsPDF('p', 'mm', 'a4');
-  const pdfWidth = pdf.internal.pageSize.getWidth();
-  const pdfHeight = pdf.internal.pageSize.getHeight();
-  const imgProps = pdf.getImageProperties(imgData);
+//   const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-  console.log('img width,height', imgProps.width, imgProps.height);
-  console.log('pdf width,height', pdfWidth, pdfHeight);
+//   let heightLeft = imgHeight;
+//   let position = 0;
 
-  const scaleFactor = Math.min(pdfWidth / imgProps.width, pdfHeight / imgProps.height) * 0.5;
-  const newImgWidth = imgProps.width * scaleFactor;
-  const newImgHeight = imgProps.height * scaleFactor;
-
-  const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-  let heightLeft = imgHeight;
-  let position = 0;
-
-  pdf.addImage(imgData, 'PNG', 0, position, newImgWidth, newImgHeight);
-  heightLeft -= pdfHeight;
-  const fileName = 'question'; //userInfo.userName;
-  pdf.save(fileName + '.pdf');
+//   pdf.addImage(imgData, 'PNG', 0, position, newImgWidth, newImgHeight);
+//   heightLeft -= pdfHeight;
+//   const fileName = 'question'; //userInfo.userName;
+//   pdf.save(fileName + '.pdf');
 
 
 
@@ -127,46 +114,8 @@ export async function makeQuestionPdf(userInfo, question) {
   // 임시 DOM 요소 제거
   // document.body.removeChild(tempDiv);
 
-}
+// }
 
-
-export async function makeSurveyPdf(userInfo, survey) {
-  console.log('makeSurveyPdf', makeSurveyPdf)
-
-  const tempDiv = document.createElement('div');
-  const htmlString = ReactDOMServer.renderToStaticMarkup(<SurveyPreview content={survey} />);
-  tempDiv.innerHTML = htmlString;
-  document.body.appendChild(tempDiv);
-
-  const canvas = await html2canvas(tempDiv);
-  const imgData = canvas.toDataURL('image/png');
-
-  const pdf = new jsPDF('p', 'mm', 'a4');
-  const pdfWidth = pdf.internal.pageSize.getWidth();
-  const pdfHeight = pdf.internal.pageSize.getHeight();
-  const imgProps = pdf.getImageProperties(imgData);
-  console.log('img width,height', imgProps.width, imgProps.height);
-  const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-  let heightLeft = imgHeight;
-  let position = 0;
-
-  pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
-  heightLeft -= pdfHeight;
-
-  while (heightLeft >= 0) {
-    position -= pdfHeight;
-    pdf.addPage();
-    pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
-    heightLeft -= pdfHeight;
-  }
-
-
-  const fileName = 'survey'; //userInfo.userName;
-  pdf.save(fileName + '.pdf');
-
-  // document.body.removeChild(tempDiv);
-}
 
 
 // export function makeQuestionPreview(userInfo, questions, answer) {
@@ -281,21 +230,17 @@ export async function makeSurveyPdf(userInfo, survey) {
 
 // }
 
-export async function mqp(userInfo, element) {
+export async function makeQuestionPdf(userInfo, element) {
   const canvas = await html2canvas(element);  
-    // { logging: true, allowTaint: true, useCORS: true });
   const imgData = canvas.toDataURL('image/png');
 
-  var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-  window.location.href = image;
+  // var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+  // window.location.href = image;
 
   const pdf = new jsPDF('p', 'mm', 'a4');
   const pdfWidth = pdf.internal.pageSize.getWidth();
   const pdfHeight = pdf.internal.pageSize.getHeight();
   const imgProps = pdf.getImageProperties(imgData);
-
-  console.log('img width,height', imgProps.width, imgProps.height);
-  console.log('pdf width,height', pdfWidth, pdfHeight);
 
   const scaleFactor = Math.min(pdfWidth / imgProps.width, pdfHeight / imgProps.height) * 0.5;
   const newImgWidth = imgProps.width * scaleFactor;
@@ -308,7 +253,42 @@ export async function mqp(userInfo, element) {
 
   pdf.addImage(imgData, 'PNG', 0, position, newImgWidth, newImgHeight);
   heightLeft -= pdfHeight;
-  const fileName = 'question'; //userInfo.userName;
+  const fileName =  '시험지_' + userInfo.userName + '-' + userInfo.userId + '-' + userInfo.userAffiliation;
   pdf.save(fileName + '.pdf');
 }
+
+export async function makeSurveyPdf(userInfo, element) {
+  console.log('makeSurveyPdf');
+  console.log('userinfo', userInfo);
+  const canvas = await html2canvas(element);
+  const imgData = canvas.toDataURL('image/png');
+
+  const pdf = new jsPDF('p', 'mm', 'a4');
+  const pdfWidth = pdf.internal.pageSize.getWidth();
+  const pdfHeight = pdf.internal.pageSize.getHeight();
+  const imgProps = pdf.getImageProperties(imgData);
+
+  // console.log('img width,height', imgProps.width, imgProps.height);
+  const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+  let heightLeft = imgHeight;
+  let position = 0;
+
+  pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
+  heightLeft -= pdfHeight;
+
+  while (heightLeft >= 0) {
+    position -= pdfHeight;
+    pdf.addPage();
+    pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
+    heightLeft -= pdfHeight;
+  }
+
+
+  const fileName =  '섦문지_' + userInfo.userName + '-' + userInfo.userId + '-' + userInfo.userAffiliation;
+  pdf.save(fileName + '.pdf');
+
+}
+
+
 
