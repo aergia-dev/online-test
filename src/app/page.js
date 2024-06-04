@@ -1,32 +1,34 @@
-// 'use client'
+'use client'
+import { LoginForm, ShowLoginInfo } from './loginPage/login';
+import { getSession } from './loginPage/action';
+import { useEffect, useState } from 'react';
 
-// import Link from 'next/link';
-import LoginForm from './login/page';
+export default function MainPage() {
+  const [session, setSession] = useState(null);
 
-export default function loginPage() {
-  // const [session, setSession] = useState(); 
+  useEffect(() => {
+    const bringSession = async () => {
+      try {
+        const s = await getSession()
+        console.log(s);
+        setSession(s);
+      } catch (e) {
+        console.log('err getSession()', e);
+      }
+    };
+    bringSession();
+  }, []);
 
-  // const router = useRouter();
-
-  // useEffect(() => {
-  // getSession().then(session => {
-  //   console.log("action  - session", session);
-  //   // setSession(session);
-  //   // return 11;
-  //   router.push('/pages/user');
-  // }).catch(error => {
-  //   console.error(error);
-  // });
-
-  // }, []);
-
-
-  // if (session?.isLoggedIn) {
-  //   if (session.isAdmin)
-  //     redirect('/pages/admin');
-  //   else
-  //     redirect('/pages/user');
-  // }
-  // else
-  return <LoginForm />
+  if (session === null)
+    return <div>loading..</div>
+  else {
+    return (
+      <div className='flex items-center h-screen justify-center'>
+        {session.clientId ?
+          (<ShowLoginInfo session={session} setSession={setSession} />)
+          :
+          (<LoginForm setSession={setSession} />)}
+      </div>
+    );
+  }
 }
